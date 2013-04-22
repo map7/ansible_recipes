@@ -1,0 +1,6 @@
+---
+- name: Update APT package cache
+  action: apt update_cache=yes
+
+- name: Run apt-get upgrade
+  action: command apt-get upgrade

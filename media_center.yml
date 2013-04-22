@@ -3,5 +3,6 @@
   user: map7
 
   tasks:
+    - include: common/tasks/system.yml
     - include: common/tasks/xbmc.yml
     - include: common/tasks/nvidia.yml
