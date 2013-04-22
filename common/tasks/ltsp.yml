@@ -20,6 +20,15 @@
 - name: Build thin client
   command: ltsp-build-client creates=/opt/ltsp/i386
 
+- name: Copy helper program over
+  copy: src=common/files/ltsp-chroot dest=/usr/local/bin/ltsp-chroot mode=0755
+
+# Add items to the chroot section
+
+# Add desktop
+# - name: Add lxde
+#   command: 
+
 
 
 # Do last
