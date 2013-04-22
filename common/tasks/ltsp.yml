@@ -25,15 +25,15 @@
 
 # Add items to the chroot section
 
-# Add desktop
-- name: Convert thin-client to fat-client by installing a desktop environment
-  command: ltsp-chroot 'apt-get install lxde -y'
+# # Add desktop (not working correctly yet)
+# - name: Convert thin-client to fat-client by installing a desktop environment
+#   command: ltsp-chroot 'apt-get install lxde -y'
 
 
 
 # Do last
 - name: Update image
-  command: ltsp-update-image creates=/opt/ltsp/images/i386.img
+  command: ltsp-update-image
 
 - name: Create ssh keys
   command: ltsp-update-sshkeys
