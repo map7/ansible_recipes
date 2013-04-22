@@ -1,0 +1,9 @@
+---
+- hosts: ltsp_thin
+  user: map7
+
+  tasks:
+    - include: common/tasks/system.yml
+    - include: common/tasks/ltsp.yml
+    - include: common/tasks/ltsp-fat-client.yml
+    - include: common/tasks/ltsp-build.yml

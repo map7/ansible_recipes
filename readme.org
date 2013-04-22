@@ -30,3 +30,13 @@ Now you can run with this command (on the server)
 ** Check environment variables
 
 : ansible <target ip> -m setup
+
+** Available configurations
+
+| media_center | Installs XBMC with LTSP (fat-clients) |
+| ltsp_thin    | Thin client server                    |
+| ltsp_fat     | Fat client server                     |
+
+** Future configurations
+
+| rails_server | |
