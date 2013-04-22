@@ -1,0 +1,7 @@
+---
+- hosts: xbmc
+  user: map7
+
+  tasks:
+    - include: common/tasks/xbmc.yml
+    - include: common/tasks/nvidia.yml

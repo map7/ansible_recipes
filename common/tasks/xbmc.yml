@@ -1,0 +1,9 @@
+---
+- name: Install add-apt-repository
+  apt: pkg=python-software-properties state=installed
+
+- name: Add multimedia testing repository
+  apt_repository: repo='deb http://www.deb-multimedia.org testing main non-free'
+
+- name: Install latest xbmc
+  apt: pkg=xbmc state=installed force=yes
