@@ -13,3 +13,7 @@
   
 - name: Build thin client
   command: ltsp-build-client creates=/opt/ltsp/i386
+
+- name: Copy lts.conf config accross
+  copy: src=common/files/lts.conf dest=/opt/ltsp/i386/etc/lts.conf
+  
