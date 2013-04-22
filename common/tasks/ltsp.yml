@@ -1,0 +1,15 @@
+---
+#
+# LTSP - setup a Linux Terminal Server for PXE boot
+#
+- name: Install LTSP
+  apt: pkg=ltsp-server
+
+- name: Make config dir
+  command: mkdir /etc/ltsp creates=/etc/ltsp
+
+- name: Copy LTSP configuration accross
+  copy: src=common/files/ltsp-build-client.conf dest=/etc/ltsp/ltsp-build-client.conf
+  
+- name: Build thin client
+  command: ltsp-build-client creates=/opt/ltsp/i386

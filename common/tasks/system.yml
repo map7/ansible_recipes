@@ -17,3 +17,5 @@
 - name: Install vim
   apt: pkg=vim
 
+- name: SSH server
+  apt: pkg=openssh-server
