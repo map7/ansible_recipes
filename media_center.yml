@@ -6,3 +6,6 @@
     - include: common/tasks/system.yml
     - include: common/tasks/xbmc.yml
     - include: common/tasks/nvidia.yml
+    - include: common/tasks/ltsp.yml
+    - include: common/tasks/ltsp-fat-client.yml
+    - include: common/tasks/ltsp-build.yml

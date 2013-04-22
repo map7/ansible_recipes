@@ -23,17 +23,3 @@
 - name: Copy helper program over
   copy: src=common/files/ltsp-chroot dest=/usr/local/bin/ltsp-chroot mode=0755
 
-# Add items to the chroot section
-
-# Add desktop (must use aptitude so it sets the configuration correctly)
-- name: Convert thin-client to fat-client by installing a desktop environment
-  command: ltsp-chroot 'aptitude install lxde -y'
-
-
-
-# Do last
-- name: Update image
-  command: ltsp-update-image
-
-- name: Create ssh keys
-  command: ltsp-update-sshkeys

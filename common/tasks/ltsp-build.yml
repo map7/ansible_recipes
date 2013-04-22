@@ -1,0 +1,8 @@
+#
+# Build the LTSP client
+#
+- name: Update image
+  command: ltsp-update-image
+
+- name: Create ssh keys
+  command: ltsp-update-sshkeys
