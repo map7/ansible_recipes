@@ -26,8 +26,8 @@
 # Add items to the chroot section
 
 # Add desktop
-# - name: Add lxde
-#   command: 
+- name: Convert thin-client to fat-client by installing a desktop environment
+  command: ltsp-chroot 'apt-get install lxde -y'
 
 
 
