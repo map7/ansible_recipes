@@ -3,7 +3,7 @@
 # LTSP - setup a Linux Terminal Server for PXE boot
 #
 - name: Install LTSP
-  apt: pkg=ltsp-server
+  action: apt pkg=ltsp-server
 
 - name: Make config dir
   command: mkdir /etc/ltsp creates=/etc/ltsp

@@ -4,6 +4,7 @@
 
 - name: Add multimedia testing repository
   apt_repository: repo='deb http://www.deb-multimedia.org testing main non-free'
+  when_string: $ansible_distribution == "Debian"
 
 - name: Install latest xbmc
   apt: pkg=xbmc state=installed force=yes

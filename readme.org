@@ -27,3 +27,6 @@ Now you can run with this command (on the server)
 | -K | ask for sudo password |
 | -v | verbose               |
 
+** Check environment variables
+
+: ansible <target ip> -m setup
