@@ -1,0 +1,29 @@
+* Ansible Recipes
+
+** Client prep
+
+Install Debian 7 into virtual box (name: debian7)
+
+Create passwordless access (server to client)
+: ssh-copy-id <user>@<target ip>
+
+Add your user to the 'sudo' group within /etc/groups
+
+** Server prep
+
+Install on my desktop Ubuntu system (not the server you are trying to configure).
+: sudo apt-add-repository ppa:rquillo/ansible
+: sudo apt-get update                        
+: sudo apt-get install ansible               
+
+Add target's IP to /etc/ansible/hosts file under the top ungrouped section
+EG:
+: 192.168.0.100
+
+** Running
+Now you can run with this command (on the server)
+: ansible-playbook media_center.yml -s -K -v
+| -s | sudo                  |
+| -K | ask for sudo password |
+| -v | verbose               |
+
