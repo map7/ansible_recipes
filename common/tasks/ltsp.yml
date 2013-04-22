@@ -7,6 +7,12 @@
 
 - name: Make config dir
   command: mkdir /etc/ltsp creates=/etc/ltsp
+  
+- name: Copy exports to server
+  copy: src=common/files/exports dest=/etc/exports
+  
+- name: Restart nfs server
+  command: invoke-rc.d nfs-kernel-server restart
 
 - name: Copy LTSP configuration accross
   copy: src=common/files/ltsp-build-client.conf dest=/etc/ltsp/ltsp-build-client.conf
@@ -14,6 +20,11 @@
 - name: Build thin client
   command: ltsp-build-client creates=/opt/ltsp/i386
 
-- name: Copy lts.conf config accross
-  copy: src=common/files/lts.conf dest=/opt/ltsp/i386/etc/lts.conf
-  
+
+
+# Do last
+- name: Update image
+  command: ltsp-update-image creates=/opt/ltsp/images/i386.img
+
+- name: Create ssh keys
+  command: ltsp-update-sshkeys
