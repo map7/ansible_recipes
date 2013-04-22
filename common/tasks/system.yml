@@ -1,6 +1,19 @@
 ---
+#
+# System related tasks and tools
+#
 - name: Update APT package cache
   action: apt update_cache=yes
 
 - name: Run apt-get upgrade
   action: command apt-get upgrade
+
+- name: Install htop
+  apt: pkg=htop
+
+- name: Install screen
+  apt: pkg=screen
+
+- name: Install vim
+  apt: pkg=vim
+
