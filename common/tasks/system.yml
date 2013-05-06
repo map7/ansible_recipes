@@ -6,7 +6,7 @@
   action: apt update_cache=yes
 
 - name: Run apt-get upgrade
-  action: command apt-get upgrade --force-yes -y
+  apt: update_cache=yes force=yes
 
 - name: Install htop
   apt: pkg=htop
@@ -15,7 +15,7 @@
   apt: pkg=screen
 
 - name: Install vim
-  apt: pkg=vim
+  apt: pkg=vim force=yes
 
 - name: SSH server
   apt: pkg=openssh-server
