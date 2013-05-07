@@ -4,3 +4,13 @@
 - name: Convert thin-client to fat-client by installing a desktop environment
   command: ltsp-chroot 'aptitude install lxde -y'
 
+# Add XBMC
+- name: Install add-apt-repository
+  command: ltsp-chroot 'aptitude install python-software-properties -y'
+
+# - name: Add multimedia testing repository
+#   apt_repository: repo='deb http://www.deb-multimedia.org testing main non-free'
+#   when_string: $ansible_distribution == "Debian"
+
+# - name: Install latest xbmc
+#   apt: pkg=xbmc state=installed force=yes

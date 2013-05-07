@@ -2,6 +2,10 @@
 #
 # System related tasks and tools
 #
+
+- name: Remove cdrom source
+  command: /bin/sed -i 's/^deb cdrom/#deb cdrom/g' /etc/apt/sources.list
+
 - name: Update APT package cache
   action: apt update_cache=yes
 
@@ -19,3 +23,9 @@
 
 - name: SSH server
   apt: pkg=openssh-server
+
+- name: Remote support
+  apt: pkg=remmina
+  apt: pkg=remmina-plugin-nx
+  apt: pkg=remmina-plugin-vnc
+

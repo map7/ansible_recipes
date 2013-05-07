@@ -3,22 +3,24 @@
 # LTSP - setup a Linux Terminal Server for PXE boot
 #
 - name: Install LTSP
-  action: apt pkg=ltsp-server
+  apt: pkg=ltsp-server force=yes
 
+- name: Install epoptes
+  apt: pkg=epoptes
+
+- name: Add $user to epoptes
+  user: name=$user groups=epoptes
+  
 - name: Make config dir
   command: mkdir /etc/ltsp creates=/etc/ltsp
   
-- name: Copy exports to server
-  copy: src=common/files/exports dest=/etc/exports
-  
-- name: Restart nfs server
-  command: invoke-rc.d nfs-kernel-server restart
-
 - name: Copy LTSP configuration accross
   copy: src=common/files/ltsp-build-client.conf dest=/etc/ltsp/ltsp-build-client.conf
   
+# Sometimes there are some errors, but these can be safely ignored
 - name: Build thin client
-  command: ltsp-build-client creates=/opt/ltsp/i386
+  action: command ltsp-build-client creates=/opt/ltsp/i386
+  ignore_errors: yes
 
 - name: Copy helper program over
   copy: src=common/files/ltsp-chroot dest=/usr/local/bin/ltsp-chroot mode=0755
