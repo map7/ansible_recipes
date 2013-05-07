@@ -2,8 +2,10 @@
 - hosts: xbmc
   user: map7
 
+  # Tasks for XBMC are put in a specific order
   tasks:
     - include: common/tasks/system.yml
+    - include: common/tasks/office.yml      
     - include: common/tasks/xbmc.yml
     - include: common/tasks/nvidia.yml
     - include: common/tasks/ltsp.yml

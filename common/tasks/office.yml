@@ -1,0 +1,53 @@
+---
+#
+# Main office applications
+#
+
+- name: Install office applications
+  action: apt pkg=$item state=installed force=yes
+  with_items:
+    - libreoffice
+    - pdfshuffler
+    - inkscape
+    - gimp
+    - keepassx
+    - gobby
+    - xchat
+    - gwakeonlan
+    - ktorrent
+    - wireshark
+    - xchm
+    - gparted
+    - audacity
+    - filezilla
+    - chromium
+    - flashplugin-nonfree
+    - wine
+    - winetricks
+
+- name: Install Debian specific applications
+  action: apt pkg=$item state=installed
+  when_string: $ansible_distribution == "Ubuntu"
+  with_items:
+    - firefox
+    - thunderbird
+
+- name: Install Debian specific applications
+  action: apt pkg=$item state=installed
+  when_string: $ansible_distribution == "Debian"
+  with_items:
+    - iceweasel
+    - icedove
+  
+- name: Install programming tools
+  action: apt pkg=$item state=installed force=yes
+  with_items:
+    - emacs
+    - vim
+    - giggle
+    - git
+    - gitg
+    - ghex
+    - geany
+    - pgadmin3
+    

@@ -8,9 +8,13 @@
 - name: Install add-apt-repository
   command: ltsp-chroot 'aptitude install python-software-properties -y'
 
-# - name: Add multimedia testing repository
-#   apt_repository: repo='deb http://www.deb-multimedia.org testing main non-free'
-#   when_string: $ansible_distribution == "Debian"
+- name: Add multimedia testing repository
+  command: cp /etc/apt/sources.list /opt/ltsp/i386/etc/apt/sources.list
+  when_string: $ansible_distribution == "Debian"
 
-# - name: Install latest xbmc
-#   apt: pkg=xbmc state=installed force=yes
+- name: Update repo for chroot
+  command: ltsp-chroot 'apt-get update'
+  
+# Had to use apt-get as I couldn't get aptitude to install without questions
+- name: Install latest xbmc
+  command: ltsp-chroot 'apt-get install --force-yes -y xbmc'
