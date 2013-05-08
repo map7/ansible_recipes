@@ -2,7 +2,10 @@
 #
 # Emacs installer & config
 #
-
+# References
+# http://www.plusastra.com/2012/11/installing-emacs-24-on-debian-wheezy.html
+# http://www.emacswiki.org/emacs-es/EmacsSnapshotAndDebian
+#
 - name: Install git
   apt: pkg=git-core
 

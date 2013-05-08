@@ -1,0 +1,38 @@
+---
+#
+# Installs the latest libreoffice
+#
+
+- name: Remove old libreoffice
+  action: apt pkg=$item state=removed purge=yes
+  with_items:
+    - libreoffice
+    - libreoffice-base
+    - libreoffice-base-core
+    - libreoffice-calc
+    - libreoffice-common
+    - libreoffice-core
+    - libreoffice-draw
+    - libreoffice-emailmerge
+    - libreoffice-evolution
+    - libreoffice-filter-binfilter
+    - libreoffice-filter-mobiledev
+    - libreoffice-gnome
+    - libreoffice-gtk
+    - libreoffice-impress
+    - libreoffice-java-common 
+    - libreoffice-math
+    - libreoffice-writer
+
+- name: Download libreoffice 4.0.2 debian 64bit version
+  get_url: url=http://download.documentfoundation.org/libreoffice/stable/4.0.2/deb/x86_64/LibreOffice_4.0.2_Linux_x86-64_deb.tar.gz dest=/tmp
+
+- name: Untar libreoffice
+  command: tar xvf LibreOffice_4.0.2_Linux_x86-64_deb.tar.gz chdir=/tmp creates=/tmp/LibreOffice_4.0.2.2_Linux_x86-64_deb
+
+- name: Install libreoffice 4
+  shell: /usr/bin/dpkg -i /tmp/LibreOffice_4.0.2.2_Linux_x86-64_deb/DEBS/*.deb creates=/opt/libreoffice4.0
+
+- name: Install libreoffice 4 menus
+  shell: /usr/bin/dpkg -i /tmp/LibreOffice_4.0.2.2_Linux_x86-64_deb/DEBS/desktop-integration/*.deb
+  

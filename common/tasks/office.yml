@@ -3,10 +3,12 @@
 # Main office applications
 #
 
+- include: common/tasks/libreoffice.yml
+- include: common/tasks/emacs.yml
+  
 - name: Install office applications
   action: apt pkg=$item state=installed force=yes
   with_items:
-    - libreoffice
     - pdfshuffler
     - inkscape
     - gimp
@@ -52,5 +54,4 @@
     - geany
     - pgadmin3
 
-- include: common/tasks/emacs.yml
 
