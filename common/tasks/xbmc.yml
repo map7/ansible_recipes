@@ -1,4 +1,7 @@
 ---
+#
+# XBMC install
+#
 - name: Install add-apt-repository
   apt: pkg=python-software-properties state=installed
 
@@ -7,4 +10,4 @@
   when_string: $ansible_distribution == "Debian"
 
 - name: Install latest xbmc
-  apt: pkg=xbmc state=installed force=yes
+  apt: pkg=xbmc state=installed force=yes update_cache=yes

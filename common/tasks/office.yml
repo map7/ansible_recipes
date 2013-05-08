@@ -11,6 +11,7 @@
     - inkscape
     - gimp
     - keepassx
+    - password-gorilla
     - gobby
     - xchat
     - gwakeonlan
@@ -21,9 +22,10 @@
     - audacity
     - filezilla
     - chromium
-    - flashplugin-nonfree
     - wine
-    - winetricks
+    - simple-scan
+    - gnome-do
+    - gkrellm
 
 - name: Install Debian specific applications
   action: apt pkg=$item state=installed
@@ -42,7 +44,6 @@
 - name: Install programming tools
   action: apt pkg=$item state=installed force=yes
   with_items:
-    - emacs
     - vim
     - giggle
     - git
@@ -50,4 +51,6 @@
     - ghex
     - geany
     - pgadmin3
-    
+
+- include: common/tasks/emacs.yml
+

@@ -1,0 +1,43 @@
+---
+#
+# Emacs installer & config
+#
+
+- name: Install git
+  apt: pkg=git-core
+
+- name: Install emacs graphics libraries
+  action: apt pkg=$item state=installed
+  with_items:
+    - libxaw7-dev
+    - libxpm-dev
+    - libpng12-dev
+    - libtiff5-dev
+    - libgif-dev
+    - libjpeg8-dev
+    - libgtk2.0-dev
+    - libncurses5-dev
+
+- name: Install GNU-Autotools
+  action: apt pkg=$item state=installed
+  with_items:
+    - autoconf
+    - automake
+
+- name: Clone repository
+  command: git clone --depth 1 git://git.sv.gnu.org/emacs.git /tmp/emacs creates=/tmp/emacs
+
+- name: Generate emacs config
+  action: command ./autogen.sh chdir=/tmp/emacs creates=/tmp/emacs/configure
+
+- name: Run emacs configure
+  action: command ./configure --prefix=/opt/emacs24 chdir=/tmp/emacs creates=/tmp/emacs/Makefile
+
+- name: Compile emacs24
+  command: make chdir=/tmp/emacs creates=/tmp/emacs/src/emacs
+
+- name: Install emacs24
+  command: make install chdir=/tmp/emacs creates=/opt/emacs24/bin/emacs
+
+- name: Link emacs24
+  command: ln -s /opt/emacs24/bin/emacs /usr/local/bin/emacs creates=/usr/local/bin/emacs
