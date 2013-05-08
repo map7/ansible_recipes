@@ -1,4 +1,7 @@
 * Ansible Recipes
+** Version tested
+
+Written for ansible 1.1
 
 ** Client prep
 
@@ -8,6 +11,9 @@ Create passwordless access (server to client)
 : ssh-copy-id <user>@<target ip>
 
 Add your user to the 'sudo' group within /etc/groups
+
+Don't ask for a password when using sudo, *risky*
+: %sudo   ALL = NOPASSWD: ALL
 
 ** Server prep
 
@@ -22,8 +28,7 @@ EG:
 
 ** Running
 Now you can run with this command (on the server)
-: ansible-playbook media_center.yml -s -K -v
-| -s | sudo                  |
+: ansible-playbook media_center.yml -K -v
 | -K | ask for sudo password |
 | -v | verbose               |
 
