@@ -1,6 +1,6 @@
 ---
 #
-# Oracle Java Runtime Environment install 7.17
+# Oracle Java Runtime Environment install
 #
 
 - name: Remove openjdk
