@@ -1,0 +1,23 @@
+---
+#
+# Install dropbox without the need for nautilus
+#
+
+## Method 1: Download as per dropbox. This doesn't work as it repeats a message on the commandline
+# - name: Install 64bit version of Dropbox
+#   command: wget "https://www.dropbox.com/download?plat=$dropbox_platform" -O /tmp/install_dropbox.tar.gz
+
+# - name: Unpack
+#   shell: cd ~ && tar xzf /tmp/install_dropbox.tar.gz 
+ 
+## Method 2: Download a script & start the daemon to install dropbox. This also just flashes up a link for the user
+# - name: Download script version of Dropbox
+#   get_url: url="https://www.dropbox.com/download?dl=packages/dropbox.py" dest=/tmp/dropbox.py mode=550
+
+# - name: Install
+#   shell: /tmp/dropbox.py start -i
+
+# Method 3: Install via nautilus. This works and gives the user the ability to opt in to Dropbox if they want.
+# Only problem is you have to use nautilus
+- name: Install nautilus-dropbox
+  apt: pkg=nautilus-dropbox

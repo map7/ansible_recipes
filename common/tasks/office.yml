@@ -8,7 +8,8 @@
 - include: common/tasks/java.yml
 - include: common/tasks/libreoffice.yml
 - include: common/tasks/emacs.yml
-
+- include: common/tasks/dropbox.yml
+  
 - name: Install office applications
   action: apt pkg=$item state=installed force=yes
   with_items:
@@ -62,6 +63,4 @@
 
 - name: Install virtualbox
   apt: pkg=virtualbox-ose
-
-
 
