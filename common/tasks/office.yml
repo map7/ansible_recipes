@@ -3,6 +3,7 @@
 # Main office applications
 #
 
+- include: common/tasks/add_repositories.yml
 - include: common/tasks/libreoffice.yml
 - include: common/tasks/emacs.yml
   
@@ -54,4 +55,5 @@
     - geany
     - pgadmin3
 
-
+- name: Install flash
+  apt: pkg=flashplugin-nonfree
