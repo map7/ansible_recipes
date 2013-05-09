@@ -1,6 +1,11 @@
 ---
 - hosts: ltsp_thin
   user: map7
+  sudo: yes
+  vars_files:
+    - "vars/defaults.yml"
+    - "vars/$ansible_distribution-$ansible_architecture.yml"
+    - "vars/$ansible_distribution.yml"
 
   tasks:
     - include: common/tasks/system.yml

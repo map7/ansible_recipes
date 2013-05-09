@@ -4,9 +4,11 @@
 #
 
 - include: common/tasks/add_repositories.yml
+
+- include: common/tasks/java.yml
 - include: common/tasks/libreoffice.yml
 - include: common/tasks/emacs.yml
-  
+
 - name: Install office applications
   action: apt pkg=$item state=installed force=yes
   with_items:
@@ -57,3 +59,9 @@
 
 - name: Install flash
   apt: pkg=flashplugin-nonfree
+
+- name: Install virtualbox
+  apt: pkg=virtualbox-ose
+
+
+

@@ -1,0 +1,9 @@
+---
+#
+# Oracle Java Runtime Environment install 7.17
+#
+
+# - name: Download JRE
+#   command: wget http://download.oracle.com/otn/java/jdk/7u17-b02/jre-7u17-linux-x64.tar.gz chdir=/tmp
+
+
