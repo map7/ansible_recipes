@@ -3,7 +3,33 @@
 # Oracle Java Runtime Environment install 7.17
 #
 
-# - name: Download JRE
-#   command: wget http://download.oracle.com/otn/java/jdk/7u17-b02/jre-7u17-linux-x64.tar.gz chdir=/tmp
+- name: Remove openjdk
+  action: apt pkg='openjdk-6-jre' state=absent
+  action: apt pkg='openjdk-6-jre-headless' state=absent
+  action: apt pkg='openjdk-6-jre-lib' state=absent
 
+- name: Install wget package (Debian based)
+  action: apt pkg='wget' state=installed
+  only_if: "'$ansible_pkg_mgr' == 'apt'"
 
+- name: Copy download JDK7 script
+  copy: src=common/files/download-jdk7.sh dest=/tmp mode=0555
+
+- name: Download JDK7
+  action: command creates=${jvm_folder}/jdk1.7.0 chdir=${jvm_folder} /tmp/download-jdk7.sh $jdk_archive
+
+- name: Unpack/Install JDK7
+  action: command creates=${jvm_folder}/jdk1.7.0 chdir=${jvm_folder} tar zxf ${jvm_folder}/$jdk_archive --owner=root
+  register: jdk_installed # Store the result into a variable for use later
+  only_if: "'$ansible_pkg_mgr' == 'apt'"
+
+- name: Set java link
+  action: command update-alternatives --install /usr/bin/java java ${jvm_folder}/jdk1.7.0/bin/java 1
+  when_set: $jdk_installed
+
+- name: Set jar link
+  action: command update-alternatives --install /usr/bin/jar jar ${jvm_folder}/jdk1.7.0/bin/jar 1
+  when_set: $jdk_installed
+
+- name: Remove JDK7 archive
+  file: path=${jvm_folder}/$jdk_archive state=absent
