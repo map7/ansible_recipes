@@ -5,11 +5,7 @@
 # https://support.skype.com/en/faq/FA12120/getting-started-with-skype-for-linux#2.2
 #
 
-- name: Add multiarch
-  command: dpkg --add-architecture i386
-  
-- name: Update APT package cache
-  action: apt update_cache=yes
+- include: common/tasks/multiarch.yml
 
 - name: Download skype
   command: wget -O /tmp/skype-install.deb http://www.skype.com/go/getskype-linux-deb-32 creates=/usr/bin/skype
