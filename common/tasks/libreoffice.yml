@@ -25,14 +25,17 @@
     - libreoffice-writer
 
 - name: Download libreoffice 4.0.2 debian 64bit version
-  get_url: url=http://download.documentfoundation.org/libreoffice/stable/4.0.2/deb/x86_64/LibreOffice_4.0.2_Linux_x86-64_deb.tar.gz dest=/tmp
+  command: wget http://download.documentfoundation.org/libreoffice/stable/4.0.2/deb/x86_64/LibreOffice_4.0.2_Linux_x86-64_deb.tar.gz chdir=/tmp creates=/opt/libreoffice4.0
+
 
 - name: Untar libreoffice
-  command: tar xvf LibreOffice_4.0.2_Linux_x86-64_deb.tar.gz chdir=/tmp creates=/tmp/LibreOffice_4.0.2.2_Linux_x86-64_deb
+  command: tar xvf LibreOffice_4.0.2_Linux_x86-64_deb.tar.gz chdir=/tmp creates=/opt/libreoffice4.0
 
 - name: Install libreoffice 4
   shell: /usr/bin/dpkg -i /tmp/LibreOffice_4.0.2.2_Linux_x86-64_deb/DEBS/*.deb creates=/opt/libreoffice4.0
 
 - name: Install libreoffice 4 menus
-  shell: /usr/bin/dpkg -i /tmp/LibreOffice_4.0.2.2_Linux_x86-64_deb/DEBS/desktop-integration/*.deb
+  shell: /usr/bin/dpkg -i /tmp/LibreOffice_4.0.2.2_Linux_x86-64_deb/DEBS/desktop-integration/*.deb creates=/opt/libreoffice4.0
   
+- name: clean up temp
+  shell: rm -fr /tmp/LibreOffice_4.0* creates=/opt/libreoffice4.0
