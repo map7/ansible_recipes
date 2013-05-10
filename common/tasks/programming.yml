@@ -1,0 +1,17 @@
+---
+#
+# Programming tools and configuration
+#  
+
+- include: common/tasks/emacs.yml
+
+- name: Install programming tools
+  action: apt pkg=$item state=installed force=yes
+  with_items:
+    - vim
+    - giggle
+    - git
+    - gitg
+    - ghex
+    - geany
+    - pgadmin3

@@ -7,7 +7,6 @@
 
 - include: common/tasks/java.yml
 - include: common/tasks/libreoffice.yml
-- include: common/tasks/emacs.yml
 - include: common/tasks/dropbox.yml
 - include: common/tasks/skype.yml
   
@@ -47,17 +46,6 @@
   with_items:
     - iceweasel
     - icedove
-  
-- name: Install programming tools
-  action: apt pkg=$item state=installed force=yes
-  with_items:
-    - vim
-    - giggle
-    - git
-    - gitg
-    - ghex
-    - geany
-    - pgadmin3
 
 - name: Install flash
   apt: pkg=flashplugin-nonfree
