@@ -11,25 +11,18 @@
   sudo: yes
   vars:
     main_user: xbmc
+    password: $1$SomeSalt$nbQMcEVhuIZWc9xDaQOs70
   vars_files:
     - "vars/defaults.yml"
     - "vars/$ansible_distribution-$ansible_architecture.yml"
     - "vars/$ansible_distribution.yml"
 
+
   # Tasks for XBMC are put in a specific order
   tasks:
-    - include: common/tasks/system.yml
-    - include: common/tasks/office.yml      
-    - include: common/tasks/xbmc.yml
-    - include: common/tasks/nvidia.yml
-    - include: common/tasks/ltsp.yml
-    - include: common/tasks/ltsp-fat-client.yml
-    - include: common/tasks/ltsp-build.yml
-    
-
     # Add xbmc user
-    - name: Add main xbmc user
-      user: name=$main_user groups='epoptes,sudo,vboxusers'
+    - name: Add $main_user user
+      user: name=$main_user password=$password groups='epoptes,sudo,vboxusers' shell=/bin/bash
 
     # Autologin
     - name: Set Automatic login
@@ -47,3 +40,14 @@
         backrefs=yes
         line="AutomaticLogin=$main_user"
         state=present
+
+
+    - include: common/tasks/system.yml
+    - include: common/tasks/office.yml      
+    - include: common/tasks/xbmc.yml
+    - include: common/tasks/nvidia.yml
+    - include: common/tasks/ltsp.yml
+    - include: common/tasks/ltsp-fat-client.yml
+    - include: common/tasks/ltsp-build.yml
+    
+
