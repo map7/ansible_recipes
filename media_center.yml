@@ -26,17 +26,24 @@
     - include: common/tasks/ltsp-fat-client.yml
     - include: common/tasks/ltsp-build.yml
     
+
+    # Add xbmc user
+    - name: Add main xbmc user
+      user: name=$main_user groups='epoptes,sudo,vboxusers'
+
     # Autologin
     - name: Set Automatic login
       lineinfile:
         dest=/etc/gdm3/daemon.conf
         regexp="^#.*AutomaticLoginEnable.*"
-        insertafter="^[daemon]"
+        backrefs=yes
         line="AutomaticLoginEnable=true"
         state=present
+
+    - name: Set Automatic login user
       lineinfile:
         dest=/etc/gdm3/daemon.conf
-        regexp="^#.*AutomaticLogin.*"
-        insertafter="^AutomaticLoginEnable.*"
+        regexp="^#.*AutomaticLogin = user1"
+        backrefs=yes
         line="AutomaticLogin=$main_user"
         state=present
