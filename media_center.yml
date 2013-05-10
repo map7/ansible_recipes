@@ -9,6 +9,8 @@
 - hosts: xbmc
   user: map7
   sudo: yes
+  vars:
+    main_user: xbmc
   vars_files:
     - "vars/defaults.yml"
     - "vars/$ansible_distribution-$ansible_architecture.yml"
@@ -23,3 +25,18 @@
     - include: common/tasks/ltsp.yml
     - include: common/tasks/ltsp-fat-client.yml
     - include: common/tasks/ltsp-build.yml
+    
+    # Autologin
+    - name: Set Automatic login
+      lineinfile:
+        dest=/etc/gdm3/daemon.conf
+        regexp="^#.*AutomaticLoginEnable.*"
+        insertafter="^[daemon]"
+        line="AutomaticLoginEnable=true"
+        state=present
+      lineinfile:
+        dest=/etc/gdm3/daemon.conf
+        regexp="^#.*AutomaticLogin.*"
+        insertafter="^AutomaticLoginEnable.*"
+        line="AutomaticLogin=$main_user"
+        state=present
