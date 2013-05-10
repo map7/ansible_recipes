@@ -15,6 +15,9 @@
 - name: SSH server
   apt: pkg=openssh-server
 
+- name: Install ZSH
+  apt: pkg=zsh
+
 - name: Remote support
   apt: pkg=remmina
   apt: pkg=remmina-plugin-nx
