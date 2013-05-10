@@ -42,3 +42,6 @@
 
 - name: Install ruby 1.9.3
   action: command su $main_user -c "/home/$main_user/.rbenv/bin/rbenv install 1.9.3-p392" creates=/home/xbmc/.rbenv/versions/1.9.3-p392
+
+- name: Select latest ruby
+  action: command su $main_user -c "/home/$main_user/.rbenv/bin/rbenv global 1.9.3-p392"
