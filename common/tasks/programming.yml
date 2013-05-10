@@ -15,3 +15,30 @@
     - ghex
     - geany
     - pgadmin3
+
+
+- name: Install rbenv
+  git: repo=git://github.com/sstephenson/rbenv.git dest=/home/$main_user/.rbenv
+
+- name: Install rbenv plugin ruby-build
+  git: repo=https://github.com/sstephenson/ruby-build.git dest=/home/$main_user/.rbenv/plugins/ruby-build
+
+- name: Set permissions
+  action: command chown -R $main_user /home/$main_user
+
+- name: Add rbenv to Bash profile
+  lineinfile:
+    dest=/home/$main_user/.bashrc
+    regexp='HOME/.rbenv'
+    line='export PATH="$HOME/.rbenv/bin:$PATH"'
+    state=present    
+
+- name: Add rbenv to Bash profile
+  lineinfile:
+    dest=/home/$main_user/.bashrc
+    regexp='rbenv init'
+    line='eval "$(rbenv init -)"'
+    state=present    
+
+- name: Install ruby 1.9.3
+  action: command su $main_user -c "/home/$main_user/.rbenv/bin/rbenv install 1.9.3-p392" creates=/home/xbmc/.rbenv/versions/1.9.3-p392
