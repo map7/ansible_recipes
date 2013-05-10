@@ -1,0 +1,7 @@
+---
+#
+# Install Codeweavers crossover linux
+#
+#
+
+- include: common/tasks/multiarch.yml
