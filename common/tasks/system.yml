@@ -16,10 +16,12 @@
   apt: pkg=openssh-server
 
 - name: Install ZSH
-  apt: pkg=zsh
+  apt: pkg=zsh force=yes
 
 - name: Remote support
   apt: pkg=remmina
   apt: pkg=remmina-plugin-nx
   apt: pkg=remmina-plugin-vnc
 
+- name: Install expect for some installation scripts
+  apt: pkg=expect force=yes
