@@ -4,6 +4,8 @@
 #  
 
 - include: common/tasks/emacs.yml
+- include: common/tasks/rbenv.yml
+- include: common/tasks/node.yml
 
 - name: Install programming tools
   action: apt pkg=$item state=installed force=yes
@@ -16,104 +18,9 @@
     - geany
     - pgadmin3
 
-#
-# Install rbenv locally for user xbmc
-#
-# - name: Install rbenv
-#   git: repo=git://github.com/sstephenson/rbenv.git dest=/home/$main_user/.rbenv
-
-# - name: Install rbenv plugin ruby-build
-#   git: repo=https://github.com/sstephenson/ruby-build.git dest=/home/$main_user/.rbenv/plugins/ruby-build
-
-# - name: Set permissions
-#   action: command chown -R $main_user /home/$main_user
-
-# - name: Add rbenv to Bash profile
-#   lineinfile:
-#     dest=/home/$main_user/.bashrc
-#     regexp='HOME/.rbenv'
-#     line='export PATH="$HOME/.rbenv/bin:$PATH"'
-#     state=present    
-
-# - name: Add rbenv to Bash profile
-#   lineinfile:
-#     dest=/home/$main_user/.bashrc
-#     regexp='rbenv init'
-#     line='eval "$(rbenv init -)"'
-#     state=present    
-
-# - name: Install ruby 1.9.3
-#   action: command su $main_user -c "/home/$main_user/.rbenv/bin/rbenv install 1.9.3-p392" creates=/home/xbmc/.rbenv/versions/1.9.3-p392
-
-# - name: Select latest ruby
-#   action: command su $main_user -c "/home/$main_user/.rbenv/bin/rbenv global 1.9.3-p392"
-
-
-
-
-
-
-#
-# Install rbenv globally
-# Ref:
-#   http://blakewilliams.me/blog/4-system-wide-rbenv-install
-#   http://www.vxnick.com/blog/2012/04/setting-up-rbenv-globally/
-
-- name: Install rbenv
-  git: repo=git://github.com/sstephenson/rbenv.git dest=/usr/local/rbenv
-
-- name: Install rbenv plugin ruby-build
-  git: repo=https://github.com/sstephenson/ruby-build.git dest=/usr/local/rbenv/plugins/ruby-build
-
-- name: Add rbenv ROOT to Bash profile
-  lineinfile:
-    dest=/etc/profile
-    regexp='RBENV_ROOT=/usr/local/rbenv'
-    line='export RBENV_ROOT=/usr/local/rbenv'
-    state=present    
-
-- name: Add rbenv PATH to Bash profile
-  lineinfile:
-    dest=/etc/profile
-    regexp='PATH="$RBENV_ROOT"'
-    line='export PATH="$RBENV_ROOT/bin:$PATH"'
-    state=present    
-
-- name: Add rbenv init to Bash profile
-  lineinfile:
-    dest=/etc/profile
-    regexp='rbenv init'
-    line='eval "$(rbenv init -)"'
-    state=present    
-
-- name: Install ruby-build
-  action: command /usr/local/rbenv/plugins/ruby-build/install.sh chdir=/usr/local/rbenv/plugins/ruby-build
-
-- name: Add all users to staff group
-  action: command bash -c "for user in `ls /home`; do usermod -a -G staff $user; done"
-
-# The following command installed correctly.
-# sudo ruby-build 1.9.3-p392 /usr/local/rbenv/versions/1.9.3-p392
-#
-- name: Install ruby 1.9.3
-  action: command bash -c "ruby-build 1.9.3-p392 /usr/local/rbenv/versions/1.9.3-p392"
-
-- name: Chgrp settings
-  action: command chmod -R g+rwxXs /usr/local/rbenv
-
-- name: Set group to staff for /usr/local/rbenv
-  action: command chgrp -R staff /usr/local/rbenv
-
-- name: Set the default ruby to 1.9.3-p392
-  action: command bash -c "/usr/local/rbenv/bin/rbenv global 1.9.3-p392"
-  environment:
-    RBENV_ROOT: /usr/local/rbenv
-
-- name: Link gem so we can get to it easy
-  command: ln -s /usr/local/rbenv/shims/gem /usr/local/bin/gem
-
 - name: Install cheat
   gem: name=cheat state=present
 
-# - name: Install rails
+- name: Install rails
+  gem: name=rails state=present
   

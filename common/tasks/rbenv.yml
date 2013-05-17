@@ -1,0 +1,75 @@
+---
+#
+# Install rbenv globally & latest ruby version
+# Ref:
+#   http://blakewilliams.me/blog/4-system-wide-rbenv-install
+#   http://www.vxnick.com/blog/2012/04/setting-up-rbenv-globally/
+
+- name: Install rbenv
+  git: repo=git://github.com/sstephenson/rbenv.git dest=/usr/local/rbenv
+
+- name: Install rbenv plugin ruby-build
+  git: repo=https://github.com/sstephenson/ruby-build.git dest=/usr/local/rbenv/plugins/ruby-build
+
+- name: Add rbenv ROOT to Bash profile
+  lineinfile:
+    dest=/etc/profile
+    regexp='RBENV_ROOT=/usr/local/rbenv'
+    line='export RBENV_ROOT=/usr/local/rbenv'
+    state=present    
+
+- name: Add rbenv PATH to Bash profile
+  lineinfile:
+    dest=/etc/profile
+    regexp='PATH="$RBENV_ROOT"'
+    line='export PATH="$RBENV_ROOT/bin:$PATH"'
+    state=present    
+
+- name: Add rbenv init to Bash profile
+  lineinfile:
+    dest=/etc/profile
+    regexp='rbenv init'
+    line='eval "$(rbenv init -)"'
+    state=present    
+
+- name: Install ruby-build
+  action: command /usr/local/rbenv/plugins/ruby-build/install.sh chdir=/usr/local/rbenv/plugins/ruby-build
+
+- name: Add all users to staff group
+  action: command bash -c "for user in `ls /home`; do usermod -a -G staff $user; done"
+
+# The following command installed correctly.
+# sudo ruby-build 1.9.3-p392 /usr/local/rbenv/versions/1.9.3-p392
+#
+
+- name: Install dependencies
+  action: apt pkg=$item state=installed force=yes
+  with_items:
+    - build-essential
+    - zlib1g-dev
+    - libssl-dev
+    - openssl
+    - libreadline-dev 
+    - sqlite3
+    - libsqlite3-dev 
+    - libxml2-dev 
+    - curl
+    - wget
+    - git-core
+
+- name: Install ruby 1.9.3
+  action: command bash -c "ruby-build 1.9.3-p392 /usr/local/rbenv/versions/1.9.3-p392 --with-openssl-dir=/usr/local"
+
+- name: Chgrp settings
+  action: command chmod -R g+rwxXs /usr/local/rbenv
+
+- name: Set group to staff for /usr/local/rbenv
+  action: command chgrp -R staff /usr/local/rbenv
+
+- name: Set the default ruby to 1.9.3-p392
+  action: command bash -c "/usr/local/rbenv/bin/rbenv global 1.9.3-p392"
+  environment:
+    RBENV_ROOT: /usr/local/rbenv
+
+- name: Link gem so we can get to it easy
+  command: ln -s /usr/local/rbenv/shims/gem /usr/local/bin/gem

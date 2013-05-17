@@ -1,0 +1,18 @@
+---
+#
+# NodeJS installation
+#
+
+- name: Install dependencies
+  action: apt pkg=$item state=installed force=yes
+  with_items:
+    - build-essential
+    - libssl-dev
+    - openssl
+    - curl
+
+- name: Download node from github
+  git: repo=https://github.com/joyent/node.git dest=/tmp/node
+
+- name: Configure
+  action: command ./configure --openssl-libpath=/usr/lib/ssl chdir=/tmp/node
