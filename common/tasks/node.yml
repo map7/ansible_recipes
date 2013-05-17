@@ -15,4 +15,10 @@
   git: repo=https://github.com/joyent/node.git dest=/tmp/node
 
 - name: Configure
-  action: command ./configure --openssl-libpath=/usr/lib/ssl chdir=/tmp/node
+  action: command ./configure --openssl-libpath=/usr/lib/ssl chdir=/tmp/node creates=/usr/local/bin/node
+
+- name: Compile
+  action: command make chdir=/tmp/node creates=/usr/local/bin/node
+
+- name: Install
+  action: command make install chdir=/tmp/node creates=/usr/local/bin/node
