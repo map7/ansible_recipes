@@ -17,7 +17,6 @@
     - "vars/$ansible_distribution-$ansible_architecture.yml"
     - "vars/$ansible_distribution.yml"
 
-
   # Tasks for XBMC are put in a specific order
   tasks:
     # Add xbmc user
@@ -41,10 +40,9 @@
         line="AutomaticLogin=$main_user"
         state=present
 
-
     - include: common/tasks/system.yml
-    - include: common/tasks/programming.yml
     - include: common/tasks/office.yml      
+    - include: common/tasks/programming.yml
     - include: common/tasks/xbmc.yml
     - include: common/tasks/nvidia.yml
     - include: common/tasks/ltsp.yml

@@ -1,4 +1,7 @@
 ---
+#
+# Build a basic LTSP fat client system. 
+#
 - hosts: ltsp_thin
   user: map7
   sudo: yes

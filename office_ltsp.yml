@@ -1,4 +1,11 @@
 ---
+#
+# Office system
+#
+# My office system which runs thin clients and is setup for these firms Accountants, Lawyers, Real Estate &
+# Programmers. It uses thin clients and the server has nvidia graphics cards.
+#
+
 - hosts: ltsp_thin
   user: map7
   sudo: yes
@@ -15,3 +22,4 @@
     - include: common/tasks/programming.yml 
     - include: common/tasks/ltsp.yml
     - include: common/tasks/ltsp-build.yml
+    - include: common/tasks/nvidia.yml
