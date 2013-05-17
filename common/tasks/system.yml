@@ -3,25 +3,26 @@
 # System related tasks and tools
 #
 
-- name: Install htop
-  apt: pkg=htop
-
-- name: Install screen
-  apt: pkg=screen
-
-- name: Install vim
-  apt: pkg=vim force=yes
-
-- name: SSH server
-  apt: pkg=openssh-server
-
-- name: Install ZSH
-  apt: pkg=zsh force=yes
+- name: Install system tools
+  action: apt pkg=$item state=installed force=yes
+  with_items:
+    - htop
+    - screen
+    - vim
+    - openssh-server
+    - zsh
+    - sysstat
+    - mutt
+    - mc
+    - nethogs
+    - apt-file
 
 - name: Remote support
-  apt: pkg=remmina
-  apt: pkg=remmina-plugin-nx
-  apt: pkg=remmina-plugin-vnc
+  action: apt pkg=$item state=installed force=yes
+  with_items:
+    - remmina
+    - remmina-plugin-nx
+    - remmina-plugin-vnc
 
 - name: Install expect for some installation scripts
   apt: pkg=expect force=yes
