@@ -34,13 +34,13 @@
   action: command ./autogen.sh chdir=/tmp/emacs creates=/tmp/emacs/configure
 
 - name: Run emacs configure
-  action: command ./configure --prefix=/opt/emacs24 chdir=/tmp/emacs creates=/tmp/emacs/Makefile
+  action: command ./configure --prefix=/opt/emacs24 chdir=/tmp/emacs creates=/usr/local/bin/emacs
 
 - name: Compile emacs24
-  command: make chdir=/tmp/emacs creates=/tmp/emacs/src/emacs
+  command: make chdir=/tmp/emacs creates=/usr/local/bin/emacs
 
 - name: Install emacs24
-  command: make install chdir=/tmp/emacs creates=/opt/emacs24/bin/emacs
+  command: make install chdir=/tmp/emacs creates=/usr/local/bin/emacs
 
 - name: Link emacs24
   command: ln -s /opt/emacs24/bin/emacs /usr/local/bin/emacs creates=/usr/local/bin/emacs
