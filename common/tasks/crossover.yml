@@ -4,4 +4,4 @@
 #
 #
 
-- include: common/tasks/multiarch.yml
+- include: common/tasks/add_multiarch.yml
