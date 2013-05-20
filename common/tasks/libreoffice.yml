@@ -40,7 +40,7 @@
   shell: /usr/bin/dpkg -i /tmp/libreoffice/DEBS/*.deb creates=/opt/libreoffice4.0
 
 - name: Install libreoffice 4 menus
-  shell: /usr/bin/dpkg -i /tmp/libreoffice/DEBS/desktop-integration/*.deb creates=/opt/libreoffice4.0
+  shell: /usr/bin/dpkg -i /tmp/libreoffice/DEBS/desktop-integration/*.deb
   
 - name: clean up temp
   shell: rm -fr /tmp/libreoffice creates=/opt/libreoffice4.0
