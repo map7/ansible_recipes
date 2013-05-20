@@ -4,7 +4,7 @@
 #
 - name: Install add-apt-repository
   apt: pkg=python-software-properties state=installed
-
+    
 - name: Add multimedia testing repository
   apt_repository: repo='deb http://www.deb-multimedia.org testing main non-free'
   when_string: $ansible_distribution == "Debian"
@@ -22,13 +22,7 @@
 # As a workaround to this issue I copy over a script which uses 'expect' and answers the question automatically.
 
 - name: Copy over script to run
-  copy: src=common/files/install_mythtv-database.sh dest=/tmp mode=0550
-
-- name: Install Mythtv-database
-  action: command /tmp/install_mythtv-database.sh  
+  copy: src=common/files/install_mythtv-backend.sh dest=/tmp mode=0550
 
 - name: Install Mythtv-backend
-  apt: pkg=mythtv-backend state=installed force=yes
-  environment:
-    DEBIAN_FRONTEND: noninteractive
-
+  action: command /tmp/install_mythtv-backend.sh  
