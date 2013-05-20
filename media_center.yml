@@ -21,7 +21,9 @@
   tasks:
     # Add xbmc user
     - name: Add $main_user user
-      user: name=$main_user password=$password groups='epoptes,sudo,vboxusers' shell=/bin/bash
+      user: name=$main_user password=$password groups='sudo' shell=/bin/bash
+
+      # Add main user to epoptes & vboxusers in suitable include files
 
     # Autologin
     - name: Set Automatic login
