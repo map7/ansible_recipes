@@ -9,7 +9,6 @@
   action: apt pkg=$item state=installed force=yes
   with_items:
     - htop
-    - gkrellm
     - screen
     - vim
     - openssh-server
