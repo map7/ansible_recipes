@@ -21,14 +21,14 @@
 - name: Add rbenv PATH to Bash profile
   lineinfile:
     dest=/etc/profile
-    regexp='PATH="$RBENV_ROOT"'
+    regexp='PATH="$RBENV_ROOT".*'
     line='export PATH="$RBENV_ROOT/bin:$PATH"'
     state=present    
 
 - name: Add rbenv init to Bash profile
   lineinfile:
     dest=/etc/profile
-    regexp='rbenv init'
+    regexp='eval "$(rbenv init -)"'
     line='eval "$(rbenv init -)"'
     state=present    
 
@@ -58,7 +58,7 @@
     - git-core
 
 - name: Install ruby 1.9.3
-  action: command bash -c "ruby-build 1.9.3-p392 /usr/local/rbenv/versions/1.9.3-p392 --with-openssl-dir=/usr/local"
+  action: command bash -c "ruby-build 1.9.3-p392 /usr/local/rbenv/versions/1.9.3-p392 --with-openssl-dir=/usr/local" creates=/usr/local/rbenv/shims/ruby
 
 - name: Chgrp settings
   action: command chmod -R g+rwxXs /usr/local/rbenv
@@ -71,5 +71,11 @@
   environment:
     RBENV_ROOT: /usr/local/rbenv
 
+- name: Initialise rbenv
+  action: command bash -c "/usr/local/rbenv/bin/rbenv rehash" creates=/usr/local/rbenv/shims/ruby
+  environment:
+    RBENV_ROOT: /usr/local/rbenv
+
 - name: Link gem so we can get to it easy
-  command: ln -s /usr/local/rbenv/shims/gem /usr/local/bin/gem
+  command: ln -s /usr/local/rbenv/shims/gem /usr/local/bin/gem creates=/usr/local/bin/gem
+
