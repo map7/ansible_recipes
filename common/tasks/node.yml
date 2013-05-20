@@ -14,11 +14,11 @@
 - name: Download node from github
   git: repo=https://github.com/joyent/node.git dest=/tmp/node
 
-- name: Configure
+- name: Configure node
   action: command ./configure --openssl-libpath=/usr/lib/ssl chdir=/tmp/node creates=/usr/local/bin/node
 
-- name: Compile
+- name: Compile node
   action: command make chdir=/tmp/node creates=/usr/local/bin/node
 
-- name: Install
+- name: Install node
   action: command make install chdir=/tmp/node creates=/usr/local/bin/node
