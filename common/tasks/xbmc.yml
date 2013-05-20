@@ -25,4 +25,4 @@
   copy: src=common/files/install_mythtv-backend.sh dest=/tmp mode=0550
 
 - name: Install Mythtv-backend
-  action: command /tmp/install_mythtv-backend.sh  
+  action: command /tmp/install_mythtv-backend.sh creates=/usr/bin/mythbackend
