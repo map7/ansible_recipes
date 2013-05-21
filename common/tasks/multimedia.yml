@@ -8,8 +8,8 @@
 - name: Install DVD lib
   apt: pkg=libdvdcss2 state=installed
 
-- name: Install W32 codecs
-  apt: pkg=w32codecs state=installed
+- name: Install W64 codecs
+  apt: pkg=w64codecs state=installed
 
 - name: Install mplayer
   apt: pkg=mplayer state=installed
