@@ -2,6 +2,8 @@
 #
 # Programming tools and configuration
 #  
+- name: Install git
+  apt: pkg=git state=installed
 
 - include: common/tasks/emacs.yml
 - include: common/tasks/rbenv.yml
@@ -12,7 +14,6 @@
   with_items:
     - vim
     - giggle
-    - git
     - gitg
     - ghex
     - geany
