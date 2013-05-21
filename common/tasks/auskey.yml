@@ -1,0 +1,15 @@
+---
+#
+# AUSkey install
+#
+# http://auskey.itmaze.com.au/how-to/auskey-under-linux
+#
+
+- name: Download AUSkey software
+  command: wget https://www.auskey.abr.gov.au/plugin/AUSkey_software_for_Linux.zip chdir=/tmp
+
+- name: Unzip AUSkey software
+  command: unzip AUSkey_software_for_Linux.zip chdir=/tmp
+
+# - name: Copy jars
+  
