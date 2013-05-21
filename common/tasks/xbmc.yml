@@ -26,3 +26,5 @@
 
 - name: Install Mythtv-backend
   action: command /tmp/install_mythtv-backend.sh creates=/usr/bin/mythbackend
+
+- include: common/tasks/multimedia.yml
