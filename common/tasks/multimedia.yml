@@ -8,9 +8,6 @@
 - name: Install DVD lib
   apt: pkg=libdvdcss2 state=installed
 
-- name: Install libdvdread3
-  command: sh install-css.sh chdir=/usr/share/doc/libdvdread3/examples
-
 - name: Install W32 codecs
   apt: pkg=w32codecs state=installed
 
