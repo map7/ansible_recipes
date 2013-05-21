@@ -9,7 +9,7 @@
   apt: pkg=epoptes
 
 - name: Add $user to epoptes
-  user: name=$user groups=epoptes
+  action: command bash -c "for user in `ls /home`; do usermod -a -G epoptes $user; done"
   
 - name: Make config dir
   command: mkdir /etc/ltsp creates=/etc/ltsp
