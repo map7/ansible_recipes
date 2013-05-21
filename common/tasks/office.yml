@@ -14,16 +14,17 @@
   action: apt pkg=$item state=installed force=yes
   with_items:
     - pdfshuffler
+    - xchm
+    - okular           # PDF reader of choice
     - inkscape
     - gimp
     - keepassx
-    - password-gorilla
-    - gobby
+    - password-gorilla # Getting replaced by keepassx
+    - gobby            # Collab. text editor
     - xchat
-    - gwakeonlan
+    - gwakeonlan       # Turning computers on around the office
     - ktorrent
     - wireshark
-    - xchm
     - gparted
     - audacity
     - filezilla
@@ -32,7 +33,22 @@
     - simple-scan
     - gnome-do
     - gkrellm
+    - hotot            # twitter client
+    - backintime-gnome # Backup
 
+- name: Install compression tools
+  action: apt pkg=$item state=installed force=yes
+  with_items:
+    - unzip
+    - zip
+    - p7zip
+    - gzip
+    - pbzip2
+    - bzip2
+    - mscompress
+    - xz-utils
+    - dar
+    
 - name: Install Debian specific applications
   action: apt pkg=$item state=installed
   when_string: $ansible_distribution == "Ubuntu"
