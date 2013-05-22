@@ -19,7 +19,7 @@
   copy: src=common/files/download-jdk7.sh dest=/tmp mode=0555
 
 - name: Download JDK7
-  action: command creates=${jvm_folder}/jdk1.7.0 chdir=${jvm_folder} /tmp/download-jdk7.sh $jdk_archive
+  action: command /tmp/download-jdk7.sh $jdk_archive chdir=${jvm_folder} creates=${jvm_folder}/jdk1.7.0
 
 - name: Unpack/Install JDK7
   action: command creates=${jvm_folder}/jdk1.7.0 chdir=${jvm_folder} tar zxf ${jvm_folder}/$jdk_archive --owner=root
@@ -34,3 +34,12 @@
 
 - name: Remove JDK7 archive
   file: path=${jvm_folder}/$jdk_archive state=absent
+
+- name: Install iceweasel java plugin
+  command: ln -s /opt/jdk1.7.0/jre/lib/amd64/libnpjp2.so chdir=/usr/lib/mozilla/plugins creates=/usr/lib/mozilla/plugins/libnpjp2.so
+
+- name: Unzip security UnlimitedJCEPolicyJDK7.zip
+  command: unzip -u UnlimitedJCEPolicyJDK7.zip chdir=/tmp
+
+- name: Copy over security
+  shell: bash -c "cp /tmp/UnlimitedJCEPolicy/* /opt/jdk1.7.0/jre/lib/security/" creates=/opt/jdk1.7.0/jre/lib/security/README.txt

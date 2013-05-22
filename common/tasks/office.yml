@@ -5,7 +5,7 @@
 
 - include: common/tasks/add_repositories.yml
 
-- include: common/tasks/java.yml
+- include: common/tasks/java6.yml
 - include: common/tasks/libreoffice.yml
 - include: common/tasks/dropbox.yml
 - include: common/tasks/skype.yml

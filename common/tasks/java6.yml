@@ -1,0 +1,42 @@
+---
+#
+# Oracle Java 6 Runtime Environment install (AUSkey requirement)
+#
+
+- name: Remove openjdk
+  action: apt pkg=$item state=absent
+  with_items:
+    - openjdk-6-jre
+    - openjdk-6-jre-headless
+    - openjdk-6-jre-lib
+    - openjdk-7-jre
+    - openjdk-7-jre-headless
+    - openjdk-7-jre-lib
+
+- name: Install wget package (Debian based)
+  action: apt pkg='wget' state=installed
+  only_if: "'$ansible_pkg_mgr' == 'apt'"
+
+- name: Copy download JDK6 script
+  copy: src=common/files/download-jdk6.sh dest=/tmp mode=0555
+
+- name: Download JDK6
+  action: command /tmp/download-jdk6.sh $jdk_archive chdir=${jvm_folder} creates=${jvm_folder}/jdk1.6.0
+
+# - name: Unpack/Install JDK6
+#   action: command creates=${jvm_folder}/jdk1.6.0 chdir=${jvm_folder} tar zxf ${jvm_folder}/$jdk_archive --owner=root
+#   register: jdk_installed # Store the result into a variable for use later
+#   only_if: "'$ansible_pkg_mgr' == 'apt'"
+
+# - name: Set java link
+#   action: command update-alternatives --install /usr/bin/java java ${jvm_folder}/jdk1.6.0/bin/java 1065
+
+# - name: Set jar link
+#   action: command update-alternatives --install /usr/bin/jar jar ${jvm_folder}/jdk1.6.0/bin/jar 1065
+
+# - name: Remove JDK6 archive
+#   file: path=${jvm_folder}/$jdk_archive state=absent
+
+# - name: Install iceweasel java plugin
+#   command: ln -s /opt/jdk1.6.0/jre/lib/amd64/libnpjp2.so chdir=/usr/lib/mozilla/plugins creates=/usr/lib/mozilla/plugins/libnpjp2.so
+
