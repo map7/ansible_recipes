@@ -1,7 +1,4 @@
 ---
-- name: Add non-free & contrib repositories 
-  apt_repository: repo='deb ftp://ftp.iinet.net.au/debian/debian/ testing contrib non-free'
-
 - name: update repository
   apt: update_cache=yes
 
