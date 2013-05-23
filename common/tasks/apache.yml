@@ -1,0 +1,21 @@
+---
+#
+# Apache 2 installation
+#
+
+- name: Install Apache2
+  apt: pkg=apache2 state=installed
+
+- name: Install Passenger
+  action: command bash -c "/usr/local/bin/gem install passenger" creates=/usr/local/rbenv/shims/passenger
+
+- name: Install required packages
+  action: apt pkg=$item
+  with_items:
+    - libcurl4-openssl-dev
+    - apache2-prefork-dev
+    - libapr1-dev
+    - libaprutil1-dev
+
+- name: Install Passenger apache2 module
+  action: command /usr/local/rbenv/shims/passenger-install-apache2-module -a creates=/usr/local/rbenv/versions/$ruby_version/lib/ruby/gems/1.9.1/gems/passenger-4.0.2/libout/apache2/mod_passenger.so
