@@ -54,7 +54,7 @@
   action: command bash -c "for user in `ls /home`; do usermod -a -G staff $user; done"
 
 - name: Install ruby 1.9.3
-  action: command bash -c "ruby-build 1.9.3-p392 /usr/local/rbenv/versions/1.9.3-p392 --with-openssl-dir=/usr/local" creates=/usr/local/rbenv/shims/ruby
+  action: command bash -c "ruby-build $ruby_version /usr/local/rbenv/versions/$ruby_version --with-openssl-dir=/usr/local" creates=/usr/local/rbenv/shims/ruby
 
 - name: Chgrp settings
   action: command chmod -R g+rwxXs /usr/local/rbenv
@@ -63,7 +63,7 @@
   action: command chgrp -R staff /usr/local/rbenv
 
 - name: Set the default ruby to 1.9.3-p392
-  action: command bash -c "/usr/local/rbenv/bin/rbenv global 1.9.3-p392"
+  action: command bash -c "/usr/local/rbenv/bin/rbenv global $ruby_version"
   environment:
     RBENV_ROOT: /usr/local/rbenv
 
