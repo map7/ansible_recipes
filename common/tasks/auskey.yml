@@ -4,12 +4,22 @@
 #
 # http://auskey.itmaze.com.au/how-to/auskey-under-linux
 #
+# For AUSkey to work you must have your date set correctly. We should call update time via internet in here.
+#
+# AUSkey does work with Oracle Java 1.7
+#
 
 - name: Download AUSkey software
-  command: wget https://www.auskey.abr.gov.au/plugin/AUSkey_software_for_Linux.zip chdir=/tmp
+  command: wget https://www.auskey.abr.gov.au/plugin/AUSkey_software_for_Linux.zip chdir=/tmp creates=/opt/jdk1.7.0/jre/lib/ext/activation.jar
 
 - name: Unzip AUSkey software
-  command: unzip AUSkey_software_for_Linux.zip chdir=/tmp
+  command: unzip -u AUSkey_software_for_Linux.zip chdir=/tmp creates=/opt/jdk1.7.0/jre/lib/ext/activation.jar
 
-# - name: Copy jars
-  
+- name: Copy jars
+  shell: bash -c "cp -v /tmp/ABR_PKG/component/*.jar /opt/jdk1.7.0/jre/lib/ext" creates=/opt/jdk1.7.0/jre/lib/ext/activation.jar
+
+- name: Set permissions
+  shell: bash -c "chmod -R a+rw /opt/jdk1.7.0/jre/lib/ext" 
+
+- name: Copy log4j properties to every user
+  action: command bash -c "for user in `ls /home`; do mkdir /home/$user/AUSkey; cp -n /tmp/ABR_PKG/component/log4j.properties /home/$user/AUSkey; chown -R $user /home/$user/AUSkey; chmod o+rw /home/$user/AUSkey/log4j.properties; done"
