@@ -32,6 +32,12 @@ Now you can run with this command (on the server)
 | -K | ask for sudo password |
 | -v | verbose               |
 
+** Custom variables
+
+Create your custom variables in vars/custom.yml (this is ignored in the repository)
+Place it at the bottom of your vars list to override the defaults I've set.
+
+
 ** Check environment variables
 
 : ansible <target ip> -m setup
