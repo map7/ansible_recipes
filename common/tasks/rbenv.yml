@@ -4,7 +4,10 @@
 # Ref:
 #   http://blakewilliams.me/blog/4-system-wide-rbenv-install
 #   http://www.vxnick.com/blog/2012/04/setting-up-rbenv-globally/
-
+#
+# Note: The root user doesn't have access to ruby/rbenv/gems/rails but this does not
+# stop passenger from running.
+#
 - name: Install dependencies
   action: apt pkg=$item state=installed force=yes
   with_items:
