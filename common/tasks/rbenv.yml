@@ -36,14 +36,14 @@
 - name: Add rbenv PATH to Bash profile
   lineinfile:
     dest=/etc/profile
-    regexp='PATH="$RBENV_ROOT".*'
+    regexp="RBENV_ROOT\/bin"
     line='export PATH="$RBENV_ROOT/bin:$PATH"'
     state=present    
 
 - name: Add rbenv init to Bash profile
   lineinfile:
     dest=/etc/profile
-    regexp='eval "$(rbenv init -)"'
+    regexp='rbenv init -'
     line='eval "$(rbenv init -)"'
     state=present    
 
