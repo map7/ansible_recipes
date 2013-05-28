@@ -11,5 +11,5 @@
     - libpq-dev
 
 - name: Create postgresql user
-  postgresql_user: user=$db_user password=$db_passwd role_attr_flags=CREATEDB,NOSUPERUSER
+  postgresql_user: user=$db_user password=$db_passwd role_attr_flags=CREATEDB,SUPERUSER
   sudo_user: postgres
