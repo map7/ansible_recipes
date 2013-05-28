@@ -26,3 +26,6 @@
 
 - name: Copy over example file for rails project config
   copy: src=common/files/rails_project dest=/etc/apache2/sites-enabled mode=0644 force=no
+
+- name: Remove the default setup
+  file: path=/etc/apache2/sites-enabled/000-default state=absent 
