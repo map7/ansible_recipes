@@ -20,10 +20,6 @@
 - name: Install Passenger apache2 module
   action: command /usr/local/rbenv/shims/passenger-install-apache2-module -a creates=/usr/local/rbenv/versions/$ruby_version/lib/ruby/gems/1.9.1/gems/passenger-$passenger_version/libout/apache2/mod_passenger.so
 
-
-#
-# Change this to a template and call in the ruby version
-#
 - name: Add the passenger module to the apache2 config
   template: src=common/templates/passenger.load.j2 dest=/etc/apache2/mods-enabled/passenger.load mode=0644
   notify: restart apache
