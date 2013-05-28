@@ -1,0 +1,6 @@
+---
+#
+# Install PostgreSQL
+#
+- name: Install postgresql
+  apt: pkg=postgresql force=yes state=installed
