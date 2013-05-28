@@ -1,0 +1,30 @@
+# Set the size as 2 for 256MB VPS - How many Rack processes to start
+# If you plan on running delayed_job then set this to 1 or up the memory to 512MB.
+PassengerMaxPoolSize #{node[:passenger][:max_pool_size]}
+#
+# Single project
+#
+# <VirtualHost *:80>
+#    ServerName www.yourhost.com
+#    # !!! Be sure to point DocumentRoot to 'public'!
+#    DocumentRoot /srv/project/current/public    
+#    <Directory /srv/project/current/public>
+#       # This relaxes Apache security settings.
+#       AllowOverride all
+#       # MultiViews must be turned off.
+#       Options -MultiViews
+#    </Directory>
+# </VirtualHost>
+#
+# Multiple projects 
+#
+# Link your app from /srv/<app>/current/public to /var/www/<app>
+# EG: ln -s /srv/pub.co/current/public /var/www/pub.co
+#
+# <VirtualHost *:80>
+#         ServerName localhost
+#         DocumentRoot /var/www
+#         RailsBaseURI /<app1>
+#         RailsBaseURI /<app2>
+#         RailsBaseURI /<app3>
+# </VirtualHost>
