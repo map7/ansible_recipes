@@ -2,6 +2,8 @@
 #
 # Install dropbox without the need for nautilus
 #
+# Requires: add_respoitories.yml
+#
 
 ## Method 1: Download as per dropbox. This doesn't work as it repeats a message on the commandline
 # - name: Install 64bit version of Dropbox
@@ -19,11 +21,14 @@
 
 # Method 3: Install via nautilus. This works and gives the user the ability to opt in to Dropbox if they want.
 # Only problem is you have to use nautilus
-- name: Add dropbox repository
-  apt_repository: repo="deb http://linux.dropbox.com/debian wheezy main"
+# - name: Add dropbox repository
+#   apt_repository: repo="deb http://linux.dropbox.com/debian wheezy main"
+# - name: Add dropbox keyserver
+#   shell: apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
 
-- name: Add dropbox keyserver
-  shell: apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
-
+#
+# Requires contrib & non-free
+#
 - name: Install nautilus-dropbox
-  apt: pkg=dropbox update_cache=yes
+  apt: pkg=nautilus-dropbox update_cache=yes
+
