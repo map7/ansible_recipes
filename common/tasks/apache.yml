@@ -2,6 +2,8 @@
 #
 # Apache 2 installation
 #
+# Requires: rbenv.yml
+#
 
 - name: Install Apache2
   apt: pkg=apache2 state=installed
