@@ -15,6 +15,7 @@
     - "vars/defaults.yml"
     - "vars/$ansible_distribution-$ansible_architecture.yml"
     - "vars/$ansible_distribution.yml"
+    - "vars/custom.yml"
 
   tasks:
     - include: common/tasks/system.yml
