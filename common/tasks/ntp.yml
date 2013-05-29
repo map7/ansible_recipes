@@ -2,9 +2,13 @@
 #
 # Setup network time client for setting the time on your machine
 #
-
+# http://www.massimilianomarini.com/12/04/2012/how-install-and-setup-ntpdate-debian
+#
 - name: Install ntpdate to set time
-  apt: pkg=ntpdate force=yes
+  apt: pkg=$item force=yes
+  with_items:
+    - ntpdate
+    - ntp
 
 - name: Enter ntp_server before other servers
   lineinfile:
@@ -12,6 +16,17 @@
     regexp="^server $custom_ntp_server"
     insertbefore="^server 0"
     line="server $custom_ntp_server"
+  only_if: "'$custom_ntp_server' != ''"
+
+- name: Stop ntp
+  service: name=ntp state=stopped
+  only_if: "'$custom_ntp_server' != ''"
 
 - name: Update time
   command: /usr/sbin/ntpdate-debian
+  only_if: "'$custom_ntp_server' != ''"
+
+- name: Stop ntp
+  service: name=ntp state=started
+  only_if: "'$custom_ntp_server' != ''"
+
