@@ -2,6 +2,7 @@
 #
 # Override these settings in custom.yml
 #
+locale: "en_AU.UTF-8"
 jvm_folder: "/opt"
 ruby_version: "1.9.3-p392"
 passenger_version: "4.0.3"
