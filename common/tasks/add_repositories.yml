@@ -5,8 +5,8 @@
 - name: Remove cdrom source
   command: /bin/sed -i 's/^deb cdrom/#deb cdrom/g' /etc/apt/sources.list
 
-- name: Add multimedia testing repository
-  apt_repository: repo='deb http://www.deb-multimedia.org testing main non-free'
+- name: Add multimedia wheezy repository
+  apt_repository: repo='deb http://www.deb-multimedia.org wheezy main non-free'
   when_string: $ansible_distribution == "Debian"
 
 - name: Add contrib & non-free to main
