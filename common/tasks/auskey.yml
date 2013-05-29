@@ -8,7 +8,8 @@
 #
 # AUSkey does work with Oracle Java 1.7
 #
-
+# Requires: java.yml
+#
 - name: Download AUSkey software
   command: wget https://www.auskey.abr.gov.au/plugin/AUSkey_software_for_Linux.zip chdir=/tmp creates=/opt/jdk1.7.0/jre/lib/ext/activation.jar
 
