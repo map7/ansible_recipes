@@ -1,0 +1,17 @@
+---
+#
+# Setup network time client for setting the time on your machine
+#
+
+- name: Install ntpdate to set time
+  apt: pkg=ntpdate force=yes
+
+- name: Enter ntp_server before other servers
+  lineinfile:
+    dest=/etc/ntp.conf
+    regexp="^server $custom_ntp_server"
+    insertbefore="^server 0"
+    line="server $custom_ntp_server"
+
+- name: Update time
+  command: /usr/sbin/ntpdate-debian
