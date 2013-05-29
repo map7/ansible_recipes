@@ -9,7 +9,7 @@
   apt: pkg=apache2 state=installed
 
 - name: Install Passenger
-  action: command bash -c "/usr/local/bin/gem install passenger" creates=/usr/local/rbenv/shims/passenger
+  action: command bash -c "/usr/local/bin/gem install --version=$passenger_version passenger" creates=/usr/local/rbenv/shims/passenger
 
 - name: Install required packages
   action: apt pkg=$item
@@ -31,3 +31,6 @@
 
 - name: Remove the default setup
   file: path=/etc/apache2/sites-enabled/000-default state=absent 
+
+- name: Set permissions on shims dir
+  command: chmod g+w /usr/local/rbenv/shims
