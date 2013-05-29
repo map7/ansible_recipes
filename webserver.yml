@@ -21,3 +21,6 @@
     - include: common/tasks/rails.yml
     - include: common/tasks/apache.yml
     - include: common/tasks/postgresql.yml
+
+  handlers:
+    - include: common/handlers/handlers.yml
