@@ -8,3 +8,4 @@ ruby_version: "1.9.3-p392"
 passenger_version: "4.0.3"
 db_user: 'vps'       # This should be the same as your user
 db_passwd: 'secret'  # Change this to something more secure
+custom_ntp_server: ''
