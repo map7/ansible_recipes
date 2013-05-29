@@ -1,0 +1,15 @@
+---
+#
+# Install Ruby on Rails and other recommended gems
+#
+# This will be used on servers so keep this list of extra gems to a minimum.
+#
+# Requires: rbenv.yml
+# 
+
+# You cannot use the gem module as the path will not pick it up if you have just installed rbenv
+- name: Install rbenv-rehash
+  action: command bash -c "/usr/local/bin/gem install rbenv-rehash" creates=/usr/local/rbenv/shims/rbenv-rehash
+
+- name: Install rails
+  action: command bash -c "/usr/local/bin/gem install rails" creates=/usr/local/rbenv/shims/rails

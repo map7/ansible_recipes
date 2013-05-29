@@ -8,6 +8,7 @@
 - include: common/tasks/emacs.yml
 - include: common/tasks/rbenv.yml
 - include: common/tasks/node.yml
+- include: common/tasks/rails.yml
 
 - name: Install programming tools
   action: apt pkg=$item state=installed force=yes
@@ -19,13 +20,8 @@
     - geany
     - pgadmin3
 
-# You cannot use the gem module as the path will not pick it up if you have just installed rbenv
-- name: Install rbenv-rehash
-  action: command bash -c "/usr/local/bin/gem install rbenv-rehash" creates=/usr/local/rbenv/shims/rbenv-rehash
 
 - name: Install cheat
   action: command bash -c "/usr/local/bin/gem install cheat" creates=/usr/local/rbenv/shims/cheat
 
-- name: Install rails
-  action: command bash -c "/usr/local/bin/gem install rails" creates=/usr/local/rbenv/shims/rails
   
