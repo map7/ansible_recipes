@@ -5,10 +5,10 @@
 - name: Install git
   apt: pkg=git state=installed
 
-- include: common/tasks/emacs.yml
-- include: common/tasks/rbenv.yml
-- include: common/tasks/node.yml
-- include: common/tasks/rails.yml
+- include: emacs.yml
+- include: rbenv.yml
+- include: node.yml
+- include: rails.yml
 
 - name: Install programming tools
   action: apt pkg=$item state=installed force=yes

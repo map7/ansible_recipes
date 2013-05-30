@@ -3,12 +3,12 @@
 # Main office applications
 #
 
-- include: common/tasks/add_repositories.yml
+- include: add_repositories.yml
 
-- include: common/tasks/java.yml
-- include: common/tasks/libreoffice.yml
-- include: common/tasks/dropbox.yml
-- include: common/tasks/skype.yml
+- include: java.yml
+- include: libreoffice.yml
+- include: dropbox.yml
+- include: skype.yml
   
 - name: Install office applications
   action: apt pkg=$item state=installed force=yes

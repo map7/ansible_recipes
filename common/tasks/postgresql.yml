@@ -21,5 +21,8 @@
   postgresql_user: user=$db_user password=$db_passwd role_attr_flags=CREATEDB,SUPERUSER
   sudo_user: postgres
 
-
-
+- name: Install nice postgresql tools
+  action: apt pkg=$item force=yes state=installed
+  with_items:
+    - pgadmin3
+    - phppgadmin

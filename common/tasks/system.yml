@@ -3,7 +3,7 @@
 # System related tasks and tools
 #
 
-- include: common/tasks/add_repositories.yml
+- include: add_repositories.yml
   
 - name: Install system tools
   action: apt pkg=$item state=installed force=yes

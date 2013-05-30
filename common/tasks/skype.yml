@@ -5,7 +5,7 @@
 # https://support.skype.com/en/faq/FA12120/getting-started-with-skype-for-linux#2.2
 #
 
-- include: common/tasks/add_multiarch.yml
+- include: add_multiarch.yml
 
 - name: Download skype
   command: wget -O /tmp/skype-install.deb http://www.skype.com/go/getskype-linux-deb-32 creates=/usr/bin/skype
