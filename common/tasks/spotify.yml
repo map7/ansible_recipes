@@ -1,0 +1,32 @@
+---
+#
+# Install spotify
+#
+# You might want to look at other clients
+#  https://github.com/tomahawk-player/tomahawk with plugin
+#  http://despotify.sourceforge.net/ 
+#
+
+- name: Add spotify repo
+  apt_repository: repo='deb http://repository.spotify.com stable non-free'
+
+- name: Add spotify key
+  command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 94558F59
+
+#
+# After this hack was installed my Debian 7 system rebooted. This is not a solution
+#
+# - name: Download libssl 0.9.8 as spotify is hard coded to this version
+#   get_url: url="http://ftp.au.debian.org/debian/pool/main/o/openssl/$spotify_lib" dest=/tmp
+
+# - name: Install libssl 0.9.8
+#   command: dpkg -i /tmp/$spotify_lib creates=/usr/lib/libssl.so.0.9.8
+
+#
+# Verion 0.9.0.133 requires libssl 0.9.8
+#
+# As of 30/05/13 - People are suggesting a new version which will work with libssl 1.0.0 will come soon
+#
+# - name: Install spotify
+#   apt: pkg=spotify-client force=yes update_cache=yes
+
