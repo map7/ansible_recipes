@@ -3,7 +3,25 @@
 
 Written for ansible 1.2
 
-** Client prep
+** Source (Your development box)
+
+Ansible 1.2
+: git clone https://github.com/ansible/ansible.git
+: cd ansible
+: sudo make install 
+(Make sure you do not have any other ansible installed through your systems package manager).
+
+Ansible 1.1
+Install on my desktop Ubuntu system (not the server you are trying to configure).
+: sudo apt-add-repository ppa:rquillo/ansible
+: sudo apt-get update                        
+: sudo apt-get install ansible               
+
+Add target's IP to /etc/ansible/hosts file under the top ungrouped section
+EG:
+: 192.168.0.100
+
+** Target (Server in need of configuration)
 
 Install Debian 7 into virtual box (name: debian7)
 
@@ -14,17 +32,6 @@ Add your user to the 'sudo' group within /etc/groups
 
 Don't ask for a password when using sudo, *risky*
 : %sudo   ALL = NOPASSWD: ALL
-
-** Server prep
-
-Install on my desktop Ubuntu system (not the server you are trying to configure).
-: sudo apt-add-repository ppa:rquillo/ansible
-: sudo apt-get update                        
-: sudo apt-get install ansible               
-
-Add target's IP to /etc/ansible/hosts file under the top ungrouped section
-EG:
-: 192.168.0.100
 
 ** Running
 Now you can run with this command (on the server)
