@@ -17,6 +17,7 @@
     - xchm
     - okular           # PDF reader of choice
     - inkscape
+    - krita
     - gimp
     - keepassx
     - password-gorilla # Getting replaced by keepassx
@@ -35,7 +36,7 @@
     - gkrellm
     - hotot            # twitter client
     - backintime-gnome # Backup
-
+      
 - name: Install compression tools
   action: apt pkg=$item state=installed force=yes
   with_items:
