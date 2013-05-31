@@ -2,9 +2,12 @@
 #
 # Add commonly used repositories
 #
+- name: Add python-software-properties
+  apt: pkg=python-software-properties force=yes update_cache=yes state=installed
+
 - name: Remove cdrom source
   command: /bin/sed -i 's/^deb cdrom/#deb cdrom/g' /etc/apt/sources.list
-
+  
 - name: Add multimedia wheezy repository
   apt_repository: repo='deb http://www.deb-multimedia.org wheezy main non-free'
   when_string: $ansible_distribution == "Debian"
