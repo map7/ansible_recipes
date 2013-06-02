@@ -3,13 +3,16 @@
 # Oracle Java Runtime Environment install
 #
 
-- name: Remove openjdk
-  action: apt pkg='openjdk-6-jre' state=absent
-  action: apt pkg='openjdk-6-jre-headless' state=absent
-  action: apt pkg='openjdk-6-jre-lib' state=absent
-  action: apt pkg='openjdk-7-jre' state=absent
-  action: apt pkg='openjdk-7-jre-headless' state=absent
-  action: apt pkg='openjdk-7-jre-lib' state=absent
+- name: Remove openjdk & icedtea plugins
+  action: apt pkg=$item state=absent
+  with_items:
+    - openjdk-6-jre
+    - openjdk-6-jre-headless
+    - openjdk-6-jre-lib
+    - openjdk-7-jre
+    - openjdk-7-jre-headless
+    - openjdk-7-jre-lib
+    - icedtea-6-plugin
 
 - name: Install wget package (Debian based)
   action: apt pkg='wget' state=installed
