@@ -28,3 +28,53 @@
   action: command /tmp/install_mythtv-backend.sh creates=/usr/bin/mythbackend
 
 - include: multimedia.yml
+
+#
+# Setup shared XBMC library
+#
+
+# Setting up MySQL for shared library
+- name: Install MySQL 5.5
+  apt: pkg=mysql-server-5.5 force=yes state=installed
+
+- name: Change the bind-address to servers static IP
+  lineinfile:
+    dest=/etc/mysql/my.cnf
+    regexp="bind-address.*=.*127.0.0.1"
+    backrefs=yes
+    line="bind-address = {{ ansible_default_ipv4['address'] }}"
+    backup=yes
+    state=present
+  notify: restart mysql
+  
+- name: Install python mysql module
+  apt: pkg=python-mysqldb force=yes state=installed
+  
+- name: Create mysql user 'xbmc'
+  mysql_user: name=xbmc password=xbmc priv=*.*:ALL state=present
+  
+
+# Setting up XBMC for shared library
+- name: Create a storage1 directory for your first storage drive.
+  file: path=/media/storage1 owner=$main_user group=$main_user mode=777 state=directory 
+  
+- name: Add /media/storage1 to NFS exports
+  lineinfile:
+    dest=/etc/exports
+    regexp="/media/storage1"
+    line="/media/storage1 *(rw,insecure)"
+  notify: reload nfs
+  
+- name: Create settings dir for main user
+  file: path=/home/$main_user/.xbmc owner=$main_user group=$main_user state=directory
+  
+- name: Create settings dir for main user
+  file: path=/home/$main_user/.xbmc/userdata owner=$main_user group=$main_user state=directory
+  
+# This advancedsettings.xml file should be copied to the userdata dir of every XBMC install you want to sync with  
+- name: Create an advancedsettings.xml file
+  template:
+    src=common/templates/advancedsettings.xml.j2
+    dest=/home/$main_user/.xbmc/userdata/advancedsettings.xml mode=0644 force=no
+  tags: focus
+
