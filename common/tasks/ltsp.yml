@@ -22,6 +22,16 @@
   action: command ltsp-build-client creates=/opt/ltsp/i386
   ignore_errors: yes
 
+# Debian recommends we run LTSP in NFS mode, not NBD mode
+- name: Add LTSP to exports
+  lineinfile:
+    dest=/etc/exports
+    regexp="^/opt/ltsp"
+    line="/opt/ltsp *(ro,no_root_squash,async,no_subtree_check)"
+    backup=yes
+    state=present
+  notify: reload nfs
+
 - name: Copy helper program over
   copy: src=common/files/ltsp-chroot dest=/usr/local/bin/ltsp-chroot mode=0755
 
