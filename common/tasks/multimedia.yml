@@ -16,3 +16,6 @@
 
 - name: Install vlc
   apt: pkg=vlc state=installed
+
+- name: Install Handbrake (DVD ripper & video transcoder)
+  apt: pkg=handbrake-gtk state=installed
