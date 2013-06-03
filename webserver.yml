@@ -3,7 +3,7 @@
 # Webserver for running Ruby on Rails with postgresql & node.
 #
 
-- hosts: webserver
+- hosts: webservers
   user: map7
   sudo: yes
   vars:
