@@ -6,7 +6,7 @@
 # Programmers. It uses thin clients and the server has nvidia graphics cards.
 #
 
-- hosts: ltsp_thin
+- hosts: office
   user: map7
   sudo: yes
   vars:
