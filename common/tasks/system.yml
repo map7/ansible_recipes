@@ -33,5 +33,3 @@
 - name: Install expect for some installation scripts
   apt: pkg=expect force=yes
 
-
-  

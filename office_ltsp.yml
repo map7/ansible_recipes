@@ -25,3 +25,8 @@
     - include: common/tasks/ltsp.yml
     - include: common/tasks/ltsp-build.yml
     - include: common/tasks/nvidia.yml
+
+    - name: Install LVM tools
+      apt: pkg=system-config-lvm state=installed
+
+    
