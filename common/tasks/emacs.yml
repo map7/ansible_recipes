@@ -37,7 +37,7 @@
   action: command ./configure --prefix=/opt/emacs24 chdir=/tmp/emacs creates=/usr/local/bin/emacs
 
 - name: Compile emacs24
-  command: make chdir=/tmp/emacs creates=/usr/local/bin/emacs
+  command: make -j $ansible_processor_cores chdir=/tmp/emacs creates=/usr/local/bin/emacs
 
 - name: Install emacs24
   command: make install chdir=/tmp/emacs creates=/usr/local/bin/emacs
