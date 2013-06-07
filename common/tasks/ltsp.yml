@@ -8,11 +8,9 @@
 - name: Install epoptes
   apt: pkg=epoptes
 
-- name: Add $user to epoptes
-  action: command bash -c "for user in `ls /home`; do usermod -a -G epoptes $user; done"
-  
-- name: Make config dir
-  command: mkdir /etc/ltsp creates=/etc/ltsp
+# You should add this manually to only trusted people
+# - name: Add $user to epoptes
+#   action: command bash -c "for user in `ls /home`; do usermod -a -G epoptes $user; done"
   
 - name: Copy LTSP configuration accross
   copy: src=common/files/ltsp-build-client.conf dest=/etc/ltsp/ltsp-build-client.conf
@@ -31,7 +29,7 @@
     backup=yes
     state=present
   notify: reload nfs
-
+  
 - name: Copy helper program over
   copy: src=common/files/ltsp-chroot dest=/usr/local/bin/ltsp-chroot mode=0755
 
