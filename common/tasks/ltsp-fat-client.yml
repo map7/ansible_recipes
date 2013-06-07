@@ -1,3 +1,25 @@
+---
+#
+# LTSP fat clients, 
+#
+# Mostly used in multimedia streaming devices as they demand a lot from the server so
+# we like to put this media processing onto the clients.
+#
+
+# Some must-have stuff
+# This should be done manually for fat clients
+# LATE_PACKAGES="
+# 		less
+# 		nano
+# 		aptitude
+# 		man
+# 		nfs-client
+# 		ssh
+# 		epoptes-client
+# 		lirc
+# 		cifs-utils
+# "
+
 # Add items to the chroot section
 
 # Add desktop (must use aptitude so it sets the configuration correctly)
