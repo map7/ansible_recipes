@@ -9,6 +9,7 @@
 - include: libreoffice.yml
 - include: dropbox.yml
 - include: skype.yml
+- include: mozilla.yml
   
 - name: Install office applications
   action: apt pkg=$item state=installed force=yes
@@ -49,20 +50,6 @@
     - mscompress
     - xz-utils
     - dar
-    
-- name: Install Debian specific applications
-  action: apt pkg=$item state=installed
-  when_string: $ansible_distribution == "Ubuntu"
-  with_items:
-    - firefox
-    - thunderbird
-
-- name: Install Debian specific applications
-  action: apt pkg=$item state=installed
-  when_string: $ansible_distribution == "Debian"
-  with_items:
-    - iceweasel
-    - icedove
 
 - name: Install flash
   apt: pkg=flashplugin-nonfree

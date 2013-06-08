@@ -1,0 +1,32 @@
+---
+#
+# Install thunderbird for all distros
+#
+- name: Remove icedove
+  apt: pkg=$item state=absent
+  when_string: $ansible_distribution == "Debian"
+  with_items:
+    - icedove
+    - iceweasel
+  
+- name: Add mozilla build repo
+  apt_repository: repo='deb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main'
+  when_string: $ansible_distribution == "Debian"
+  
+- name: Add mozilla build key
+  command: apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C1289A29
+  when_string: $ansible_distribution == "Debian"
+
+- name: Install mozilla apps through normal repo
+  action: apt pkg=$item state=installed
+  when_string: $ansible_distribution == "Ubuntu"
+  with_items:
+    - thunderbird
+    - firefox
+
+- name: Install mozilla apps through build
+  action: apt pkg=$item state=installed
+  when_string: $ansible_distribution == "Debian"
+  with_items:
+    - thunderbird-mozilla-build
+    - firefox-mozilla-build
