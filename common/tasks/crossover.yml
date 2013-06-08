@@ -8,7 +8,7 @@
 - name: Install dependencies for crossover
   apt: pkg=$item force=yes state=installed
   with_items:
-    - libc-i386
+    - libc6-i386
     - ia32-libs
     - lib32gcc1
     - lib32nss-mdns
