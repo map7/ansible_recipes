@@ -20,6 +20,8 @@
   tasks:
     - include: common/tasks/system.yml
     - include: common/tasks/office.yml
+    - include: common/tasks/ntp.yml
+    - include: common/tasks/crossover.yml 
     - include: common/tasks/auskey.yml
     - include: common/tasks/programming.yml 
     - include: common/tasks/ltsp.yml
@@ -29,4 +31,8 @@
     - name: Install LVM tools
       apt: pkg=system-config-lvm state=installed
 
-    
+    - name: Install samba
+      apt: pkg=cifs-utils state=installed
+
+  handlers:
+    - include: common/handlers/handlers.yml    
