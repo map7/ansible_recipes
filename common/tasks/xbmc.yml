@@ -76,5 +76,4 @@
   template:
     src=common/templates/advancedsettings.xml.j2
     dest=/home/$main_user/.xbmc/userdata/advancedsettings.xml mode=0644 force=no
-  tags: focus
 
