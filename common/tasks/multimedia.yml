@@ -22,3 +22,6 @@
 
 - name: Install miro
   apt: pkg=miro state=installed
+
+- name: Install mdp controller
+  apt: pkg=sonata state=installed

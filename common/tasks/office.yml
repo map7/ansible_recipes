@@ -20,7 +20,7 @@
     - inkscape
     - krita
     - gimp
-    - gthumb2          # Picture viewer & basic editor
+    - gthumb          # Picture viewer & basic editor
     - keepassx
     - password-gorilla # Getting replaced by keepassx
     - gobby            # Collab. text editor
@@ -38,6 +38,7 @@
     - gkrellm
     - hotot            # twitter client
     - backintime-gnome # Backup
+    - gcalctool
       
 - name: Install compression tools
   action: apt pkg=$item state=installed force=yes
