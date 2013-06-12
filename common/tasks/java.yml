@@ -39,7 +39,7 @@
   command: ln -s /opt/jdk1.7.0/jre/lib/amd64/libnpjp2.so chdir=/usr/lib/mozilla/plugins creates=/usr/lib/mozilla/plugins/libnpjp2.so
 
 - name: Unzip security UnlimitedJCEPolicyJDK7.zip
-  command: unzip -u UnlimitedJCEPolicyJDK7.zip chdir=/tmp
+  command: unzip -u UnlimitedJCEPolicyJDK7.zip chdir=/tmp creates=/opt/jdk1.7.0/jre/lib/security/README.txt
 
 - name: Copy over security
   shell: bash -c "cp /tmp/UnlimitedJCEPolicy/* /opt/jdk1.7.0/jre/lib/security/" creates=/opt/jdk1.7.0/jre/lib/security/README.txt
