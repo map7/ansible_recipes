@@ -21,13 +21,14 @@
     - include: common/tasks/system.yml
     - include: common/tasks/office.yml
     - include: common/tasks/ntp.yml
-    - include: common/tasks/crossover.yml 
+    - include: common/tasks/crossover.yml # Dependencies only
     - include: common/tasks/auskey.yml
     - include: common/tasks/programming.yml 
     - include: common/tasks/ltsp.yml
     - include: common/tasks/ltsp-build.yml
-    - include: common/tasks/nvidia.yml
-
+    - include: common/tasks/nvidia.yml 
+    - include: common/tasks/multimedia.yml
+      
     - name: Install LVM tools
       apt: pkg=system-config-lvm state=installed
 
