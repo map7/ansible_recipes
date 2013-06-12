@@ -1,7 +1,15 @@
 ---
-- name: update repository
-  apt: update_cache=yes
 
+# - name: Install nvidia
+#   apt: pkg=libvdpau1 state=installed
+#   apt: pkg=nvidia-vdpau-driver state=installed
+
+
+# installed nvidia-xconfig nvidia-glx
 - name: Install nvidia
-  apt: pkg=libvdpau1 state=installed
-  apt: pkg=nvidia-vdpau-driver state=installed
+  apt: pkg=nvidia-xconfig state=installed
+  apt: pkg=nvidia-glx state=installed
+  
+# ran 'sudo nvidia-xconfig' to create a xorg file & it loads
+- name: Setup nvidia
+  command: nvidia-xconfig
