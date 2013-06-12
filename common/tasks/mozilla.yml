@@ -10,7 +10,10 @@
     - iceweasel
   
 - name: Add mozilla build repo
-  apt_repository: repo='deb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main'
+  lineinfile:
+    dest=/etc/apt/sources.list
+    regexp='deb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main'
+    line='deb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main'
   when_string: $ansible_distribution == "Debian"
   
 - name: Add mozilla build key
