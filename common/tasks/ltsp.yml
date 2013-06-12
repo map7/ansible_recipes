@@ -36,3 +36,20 @@
 - name: Copy helper program over
   copy: src=common/files/ltsp-chroot dest=/usr/local/bin/ltsp-chroot mode=0755
 
+- name: Copy over standard lts.conf config file
+  copy: src=common/files/lts.conf dest=/var/lib/tftpboot/ltsp/i386/lts.conf
+
+
+#
+# Pulseaudio fixes
+#
+- name: Copy asound.conf
+  copy: src=common/files/asound.conf dest=/etc/asound.conf backup=yes
+
+- name: WORKAROUND - Copy Pulseaudio startup file
+  copy: src="common/files/PulseAudio load module.desktop" dest="/tmp/PulseAudio load module.desktop"
+  
+- name: WORKAROUND - Load module-suspend-on-idle in users startup
+  action: command bash -c "for user in `ls /home`; do cp '/tmp/PulseAudio load module.desktop' /home/$user/.config/autostart; done"
+  ignore_errors: yes
+  
