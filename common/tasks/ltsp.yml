@@ -39,6 +39,11 @@
 - name: Copy over standard lts.conf config file
   copy: src=common/files/lts.conf dest=/var/lib/tftpboot/ltsp/i386/lts.conf
 
+#
+# Work around for network manager to work with tftpd
+#
+- name: Copy over tftp startup script
+  copy: src=common/files/tftpd-hpa dest=/etc/network/if-up.d/tftpd-hpa mode=755
 
 #
 # Pulseaudio fixes
