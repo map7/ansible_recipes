@@ -1,0 +1,5 @@
+---
+jdk_archive: jdk-7-linux-x64.tar.gz
+jdk6_archive: jdk-6u43-linux-x64.bin
+dropbox_platform: lnx.x86_64
+libreoffice_download: "http://download.documentfoundation.org/libreoffice/stable/4.0.3/deb/x86_64/LibreOffice_4.0.3_Linux_x86-64_deb.tar.gz"
