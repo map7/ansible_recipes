@@ -36,9 +36,10 @@
     - simple-scan
     - gnome-do
     - gkrellm
-    - hotot            # twitter client
     - backintime-gnome # Backup
+    - fsarchiver       # Backup system tool
     - gcalctool
+    - file-roller      # Better integration with nautilus
       
 - name: Install compression tools
   action: apt pkg=$item state=installed force=yes
