@@ -10,3 +10,6 @@
 
 - name: reload nfs
   action: command invoke-rc.d nfs-kernel-server restart
+
+- name: restart ssh
+  action: service name=ssh state=restarted
