@@ -4,7 +4,7 @@
 #
 locale: "en_AU.UTF-8"
 jvm_folder: "/opt"
-ruby_version: "1.9.3-p392"
+ruby_version: "1.9.3-p429"
 passenger_version: "4.0.3"
 db_user: 'vps'       # This should be the same as your user
 db_passwd: 'secret'  # Change this to something more secure
