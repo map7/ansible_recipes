@@ -5,14 +5,21 @@
 # Only works in NFS mode.
 #
 
-- name: Install LTSP
-  apt: pkg=ltsp-server force=yes
+- name: Install LTSP & related tools
+  apt: pkg=$item force=yes
+  with_items:
+    - ltsp-server
+    - ltspfs
 
 - name: Install epoptes
   apt: pkg=epoptes
 
 - name: Add $user to epoptes
   action: command bash -c "for user in `ls /home`; do usermod -a -G epoptes $user; done"
+  ignore_errors: yes
+  
+- name: Add $user to fuse group for local mounting
+  action: command bash -c "for user in `ls /home`; do usermod -a -G fuse $user; done"
   ignore_errors: yes
   
 - name: Copy LTSP configuration accross
@@ -58,3 +65,9 @@
   action: command bash -c "for user in `ls /home`; do cp '/tmp/PulseAudio load module.desktop' /home/$user/.config/autostart; done"
   ignore_errors: yes
   
+
+#
+# Copy over intel xorg settings to force HD resolution
+#
+- name: Copy intel_xorg.conf
+  copy: src=common/files/intel_xorg.conf dest=/opt/ltsp/i386/etc/X11
