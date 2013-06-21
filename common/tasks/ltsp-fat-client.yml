@@ -45,6 +45,7 @@
 # Works with my 'chroot' module, awaiting pull request before I use this.
 #
 # https://github.com/ansible/ansible/pull/3059
+#  - Not accepted as there is a runner for chroot, but I'm not convinced it works the same.
 #
 # - name: Install latest xbmc
 #   chroot: cmd='apt-get install --force-yes -y xbmc'

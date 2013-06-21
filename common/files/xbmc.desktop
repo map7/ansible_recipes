@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=xbmc
+Hidden=false
+X-GNOME-Autostart-enabled=true
+Name[en_AU]=xbmc
+Name=xbmc
+Comment[en_AU]=
+Comment=

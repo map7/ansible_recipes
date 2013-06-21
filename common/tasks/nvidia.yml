@@ -7,9 +7,11 @@
 
 # installed nvidia-xconfig nvidia-glx
 - name: Install nvidia
-  apt: pkg=nvidia-xconfig state=installed
-  apt: pkg=nvidia-glx state=installed
+  apt: pkg=$item state=installed
+  with_items:
+    - nvidia-xconfig
+    - nvidia-glx
   
 # ran 'sudo nvidia-xconfig' to create a xorg file & it loads
-- name: Setup nvidia
-  command: nvidia-xconfig
+# - name: Setup nvidia
+#   command: nvidia-xconfig

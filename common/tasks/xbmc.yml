@@ -13,6 +13,10 @@
   apt: pkg=xbmc state=installed force=yes update_cache=yes 
 
 #
+# The XBMC fat clients are setup in ltsp-fat-client.yml
+#
+
+#
 # Install PVR backend (mythtv)
 #
 
@@ -76,4 +80,13 @@
   template:
     src=common/templates/advancedsettings.xml.j2
     dest=/home/$main_user/.xbmc/userdata/advancedsettings.xml mode=0644 force=no
+
+# Autostart xbmc for xbmc user
+- name: Setup xbmc autostart for xbmc user
+  copy:
+    src=common/files/xbmc.desktop
+    dest=/home/$main_user/.config/autostart
+    owner=$main_user
+    group=$main_user
+    mode=644
 
