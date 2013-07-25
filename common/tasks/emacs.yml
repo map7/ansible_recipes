@@ -45,3 +45,5 @@
 - name: Link emacs24
   command: ln -s /opt/emacs24/bin/emacs /usr/local/bin/emacs creates=/usr/local/bin/emacs
 
+- name: Install window control
+  apt: pkg=wmctrl state=present

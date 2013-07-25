@@ -17,6 +17,9 @@
 - name: Install postgresql
   action: apt pkg=postgresql force=yes state=installed
 
+#
+# Postgresql create user
+#
 - name: Create postgresql user
   postgresql_user: user=$db_user password=$db_passwd role_attr_flags=CREATEDB,SUPERUSER
   sudo_user: postgres

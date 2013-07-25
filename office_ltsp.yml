@@ -29,6 +29,8 @@
     - include: common/tasks/nvidia.yml 
     - include: common/tasks/multimedia.yml
     - include: common/tasks/x2go.yml
+    - include: common/tasks/postgresql.yml
+    - include: common/tasks/samba.yml
       
     - name: Install LVM tools
       apt: pkg=system-config-lvm state=installed
@@ -72,6 +74,18 @@
     - name: Install qtbindings
       action: command bash -c "/usr/local/bin/gem install qtbindings" creates=/usr/local/rbenv/shims/rbenv-rehash
 
+    #
+    # Extra rails projects requirements
+    # 
+    - name: Install libxslt-dev for nokogiri
+      apt: pkg=libxslt-dev state=present
+
+    - name: Install sphinx for searching
+      apt: pkg=sphinxsearch state=present
+
+    - name: Install wkhtmltopdf
+      apt: pkg=wkhtmltopdf state=present
+      tags: focus
 
   handlers:
     - include: common/handlers/handlers.yml    

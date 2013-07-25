@@ -15,6 +15,7 @@
   with_items:
     - vim
     - giggle
+    - tig
     - gitg
     - ghex
     - geany

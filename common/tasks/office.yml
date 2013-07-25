@@ -14,6 +14,7 @@
 - name: Install office applications
   action: apt pkg=$item state=installed force=yes
   with_items:
+    - xclip
     - pdfshuffler
     - xchm
     - okular           # PDF reader of choice
@@ -40,6 +41,7 @@
     - fsarchiver       # Backup system tool
     - gcalctool
     - file-roller      # Better integration with nautilus
+    - cheese           # camera shot
       
 - name: Install compression tools
   action: apt pkg=$item state=installed force=yes
