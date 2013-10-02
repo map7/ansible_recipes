@@ -57,8 +57,8 @@
   action: command bash -c "for user in `ls /home`; do usermod -a -G staff $user; done"
   ignore_errors: yes
   
-- name: Install ruby 1.9.3
-  action: command bash -c "ruby-build $ruby_version /usr/local/rbenv/versions/$ruby_version --with-openssl-dir=/usr/local" creates=/usr/local/rbenv/shims/ruby
+- name: Install ruby
+  action: command bash -c "ruby-build $ruby_version /usr/local/rbenv/versions/$ruby_version --with-openssl-dir=/usr/local" creates=/usr/local/rbenv/versions/$ruby_version
   environment:
     CONFIGURE_OPTS: "--enable-shared"
 

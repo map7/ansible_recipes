@@ -1,4 +1,4 @@
-LoadModule passenger_module /usr/local/rbenv/versions/{{ ruby_version }}/lib/ruby/gems/1.9.1/gems/passenger-{{ passenger_version }}/libout/apache2/mod_passenger.so
-PassengerRoot /usr/local/rbenv/versions/{{ ruby_version }}/lib/ruby/gems/1.9.1/gems/passenger-{{ passenger_version }}
+LoadModule passenger_module /usr/local/rbenv/versions/{{ ruby_version }}/lib/ruby/gems/{{ gems_version }}/gems/passenger-{{ passenger_version }}/libout/apache2/mod_passenger.so
+PassengerRoot /usr/local/rbenv/versions/{{ ruby_version }}/lib/ruby/gems/{{ gems_version }}/gems/passenger-{{ passenger_version }}
 PassengerDefaultRuby /usr/local/rbenv/versions/{{ ruby_version }}/bin/ruby
 

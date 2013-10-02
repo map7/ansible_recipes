@@ -9,10 +9,10 @@
 
 # You cannot use the gem module as the path will not pick it up if you have just installed rbenv
 - name: Install rbenv-rehash
-  action: command bash -c "/usr/local/bin/gem install rbenv-rehash" creates=/usr/local/rbenv/shims/rbenv-rehash
+  action: command bash -c "/usr/local/bin/gem install rbenv-rehash" creates=/usr/local/rbenv/versions/$ruby_version/bin/rbenv-rehash
 
 - name: Install rails
-  action: command bash -c "/usr/local/bin/gem install rails" creates=/usr/local/rbenv/shims/rails
+  action: command bash -c "/usr/local/bin/gem install rails" creates=/usr/local/rbenv/versions/$ruby_version/bin/rails
 
 #
 # Add phantomJS for testing
