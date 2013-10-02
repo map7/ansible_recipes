@@ -13,3 +13,10 @@
 
 - name: Install rails
   action: command bash -c "/usr/local/bin/gem install rails" creates=/usr/local/rbenv/shims/rails
+
+#
+# Add phantomJS for testing
+# 1. Download 64bit version
+# http://code.google.com/p/phantomjs/downloads/detail?name=phantomjs-1.8.1-linux-x86_64.tar.bz2&can=2&q=
+# 2. untar
+# 3. copy bin/phantomjs to /usr/local/bin

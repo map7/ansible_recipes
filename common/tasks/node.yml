@@ -22,3 +22,10 @@
 
 - name: Install node
   action: command make install chdir=/tmp/node creates=/usr/local/bin/node
+
+# 
+# Install coffee-script & coffeelint for emacs coffee development
+#
+# Ref: 
+#  http://www.coffeelint.org/#usage 
+#  
