@@ -25,5 +25,8 @@
     - name: Set permissions on /srv
       file: path=/srv owner=root group=www-data mode=0775 state=directory
 
+    - name: Add main user to www-data group
+      user: name=$main_user append=yes groups=www-data
+
   handlers:
     - include: common/handlers/handlers.yml
