@@ -21,6 +21,7 @@
     - include: common/tasks/rails.yml
     - include: common/tasks/apache.yml
     - include: common/tasks/postgresql.yml
+    - include: common/tasks/wkhtmltopdf.yml
 
     - name: Set permissions on /srv
       file: path=/srv owner=root group=www-data mode=0775 state=directory
