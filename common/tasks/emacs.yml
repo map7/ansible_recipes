@@ -33,6 +33,7 @@
   with_items:
     - autoconf
     - automake
+    - texinfo
 
 - name: Clone repository
   command: git clone --depth 1 git://git.sv.gnu.org/emacs.git /tmp/emacs creates=/tmp/emacs 
