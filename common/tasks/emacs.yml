@@ -27,20 +27,23 @@
     - autoconf
     - automake
 
-- name: Clone repository
-  command: git clone --depth 1 git://git.sv.gnu.org/emacs.git /tmp/emacs creates=/tmp/emacs 
+- name: Download latest stable release 24.3 from March 2013
+  command: wget http://gnu.mirror.uber.com.au/emacs/emacs-24.3.tar.gz chdir=/tmp creates=/usr/local/bin/emacs
+
+- name: Untar image
+  shell: tar xvf emacs-24.3.tar.gz chdir=/tmp creates=/usr/local/bin/emacs
 
 - name: Generate emacs config
-  action: command ./autogen.sh chdir=/tmp/emacs creates=/tmp/emacs/configure
+  action: command ./autogen.sh chdir=/tmp/emacs-24.3 creates=/tmp/emacs-24.3/configure
 
 - name: Run emacs configure
-  action: command ./configure --prefix=/opt/emacs24 chdir=/tmp/emacs creates=/usr/local/bin/emacs
+  action: command ./configure --prefix=/opt/emacs24 chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
 
 - name: Compile emacs24
-  command: make -j $ansible_processor_cores chdir=/tmp/emacs creates=/usr/local/bin/emacs
+  command: make -j $ansible_processor_cores chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
 
 - name: Install emacs24
-  command: make install chdir=/tmp/emacs creates=/usr/local/bin/emacs
+  command: make install chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
 
 - name: Link emacs24
   command: ln -s /opt/emacs24/bin/emacs /usr/local/bin/emacs creates=/usr/local/bin/emacs
