@@ -1,7 +1,16 @@
 ---
 #
-# Install Codeweavers crossover linux
-#
+# Install Dependencies for Codeweavers crossover linux
 #
 
 - include: add_multiarch.yml
+
+- name: Install dependencies for crossover
+  apt: pkg=$item force=yes state=installed
+  with_items:
+    - libc6-i386
+    - ia32-libs
+    - lib32gcc1
+    - lib32nss-mdns
+    - lib32z1
+    - lib32asound2

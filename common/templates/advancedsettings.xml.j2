@@ -1,0 +1,21 @@
+<advancedsettings>
+    <videodatabase>
+        <type>mysql</type>
+        <host>{{ ansible_default_ipv4['address'] }}</host>
+        <port>3306</port>
+        <user>xbmc</user>
+        <pass>xbmc</pass>
+    </videodatabase> 
+
+    <musicdatabase>
+        <type>mysql</type>
+        <host>{{ ansible_default_ipv4['address'] }}</host>
+        <port>3306</port>
+        <user>xbmc</user>
+        <pass>xbmc</pass>
+    </musicdatabase>
+
+     <videolibrary>
+          <importwatchedstate>true</importwatchedstate>
+     </videolibrary>
+</advancedsettings>

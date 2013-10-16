@@ -15,6 +15,7 @@
   with_items:
     - vim
     - giggle
+    - tig
     - gitg
     - ghex
     - geany
@@ -22,6 +23,6 @@
 
 
 - name: Install cheat
-  action: command bash -c "/usr/local/bin/gem install cheat" creates=/usr/local/rbenv/shims/cheat
+  action: command bash -c "/usr/local/bin/gem install cheat" creates=/usr/local/rbenv/versions/$ruby_version/bin/cheat
 
   

@@ -17,6 +17,7 @@
     - mutt
     - mc
     - nethogs
+    - ncdu
     - mosh # Awesome mobile ssh server/client
     - command-not-found # Package suggestion utility
 
@@ -33,5 +34,3 @@
 - name: Install expect for some installation scripts
   apt: pkg=expect force=yes
 
-
-  

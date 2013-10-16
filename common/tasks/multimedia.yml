@@ -16,3 +16,12 @@
 
 - name: Install vlc
   apt: pkg=vlc state=installed
+
+- name: Install Handbrake (DVD ripper & video transcoder)
+  apt: pkg=handbrake-gtk state=installed
+
+- name: Install miro
+  apt: pkg=miro state=installed
+
+- name: Install mdp controller
+  apt: pkg=sonata state=installed

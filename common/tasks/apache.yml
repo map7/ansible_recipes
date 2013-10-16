@@ -9,7 +9,7 @@
   apt: pkg=apache2 state=installed
 
 - name: Install Passenger
-  action: command bash -c "/usr/local/bin/gem install --version=$passenger_version passenger" creates=/usr/local/rbenv/shims/passenger
+  action: command bash -c "/usr/local/bin/gem install --version=$passenger_version passenger" creates=/usr/local/rbenv/versions/$ruby_version/bin/passenger
 
 - name: Install required packages
   action: apt pkg=$item
@@ -27,7 +27,7 @@
   notify: restart apache
 
 - name: Copy over example file for rails project config
-  copy: src=common/files/rails_project dest=/etc/apache2/sites-enabled mode=0644 force=no
+  copy: src=common/files/rails_project dest=/etc/apache2/sites-enabled/rails_project mode=0644 force=no
 
 - name: Remove the default setup
   file: path=/etc/apache2/sites-enabled/000-default state=absent 

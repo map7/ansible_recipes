@@ -6,6 +6,7 @@ Written for ansible 1.2
 ** Source (Your development box)
 
 Ansible 1.2
+: sudo apt-get install python-yaml python-jinja2 python-paramiko
 : git clone https://github.com/ansible/ansible.git
 : cd ansible
 : sudo make install 

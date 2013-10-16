@@ -2,17 +2,25 @@
 #
 # LTSP - setup a Linux Terminal Server for PXE boot
 #
-- name: Install LTSP
-  apt: pkg=ltsp-server force=yes
+# Only works in NFS mode.
+#
+
+- name: Install LTSP & related tools
+  apt: pkg=$item force=yes
+  with_items:
+    - ltsp-server
+    - ltspfs
 
 - name: Install epoptes
   apt: pkg=epoptes
 
 - name: Add $user to epoptes
   action: command bash -c "for user in `ls /home`; do usermod -a -G epoptes $user; done"
+  ignore_errors: yes
   
-- name: Make config dir
-  command: mkdir /etc/ltsp creates=/etc/ltsp
+- name: Add $user to fuse group for local mounting
+  action: command bash -c "for user in `ls /home`; do usermod -a -G fuse $user; done"
+  ignore_errors: yes
   
 - name: Copy LTSP configuration accross
   copy: src=common/files/ltsp-build-client.conf dest=/etc/ltsp/ltsp-build-client.conf
@@ -22,6 +30,44 @@
   action: command ltsp-build-client creates=/opt/ltsp/i386
   ignore_errors: yes
 
+# Debian recommends we run LTSP in NFS mode, not NBD mode
+- name: Add LTSP to exports
+  lineinfile:
+    dest=/etc/exports
+    regexp="^/opt/ltsp"
+    line="/opt/ltsp *(ro,no_root_squash,async,no_subtree_check)"
+    backup=yes
+    state=present
+  notify: reload nfs
+  
 - name: Copy helper program over
   copy: src=common/files/ltsp-chroot dest=/usr/local/bin/ltsp-chroot mode=0755
 
+- name: Copy over standard lts.conf config file
+  copy: src=common/files/lts.conf dest=/var/lib/tftpboot/ltsp/i386/lts.conf
+
+#
+# Work around for network manager to work with tftpd
+#
+- name: Copy over tftp startup script
+  copy: src=common/files/tftpd-hpa dest=/etc/network/if-up.d/tftpd-hpa mode=755
+
+#
+# Pulseaudio fixes
+#
+- name: Copy asound.conf
+  copy: src=common/files/asound.conf dest=/etc/asound.conf backup=yes
+
+- name: WORKAROUND - Copy Pulseaudio startup file
+  copy: src="common/files/PulseAudio load module.desktop" dest="/tmp/PulseAudio load module.desktop"
+  
+- name: WORKAROUND - Load module-suspend-on-idle in users startup
+  action: command bash -c "for user in `ls /home`; do cp '/tmp/PulseAudio load module.desktop' /home/$user/.config/autostart; done"
+  ignore_errors: yes
+  
+
+#
+# Copy over intel xorg settings to force HD resolution
+#
+- name: Copy intel_xorg.conf
+  copy: src=common/files/intel_xorg.conf dest=/opt/ltsp/i386/etc/X11

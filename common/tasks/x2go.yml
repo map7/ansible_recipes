@@ -1,0 +1,32 @@
+---
+#
+# X2Go allows remote access amoungst other things (PXE boot)
+#
+# I only use X2Go for remote access at the moment.
+#
+
+- name: Add X2Go key
+  command: apt-key adv --recv-keys --keyserver keys.gnupg.net E1F958385BFE2B6E
+
+- name: Add X2Go repository
+  apt_repository: repo='deb http://packages.x2go.org/debian wheezy main'
+
+- name: Install x2go-keyring
+  apt: pkg=x2go-keyring update_cache=yes state=present
+
+- name: Install x2goserver
+  apt: pkg=$item update_cache=yes state=present
+  with_items:
+    - x2goserver
+    - x2goserver-xsession
+    - x2goserver-fmbindings
+
+- name: Setup SSH to be compatible with x2go
+  lineinfile:
+    dest=/etc/ssh/sshd_config
+    backrefs=yes
+    regexp="^HostKey /etc/ssh/ssh_host_ecdsa_key"
+    line="#HostKey /etc/ssh/ssh_host_ecdsa_key"
+    backup=yes
+    state=present
+  notify: restart ssh

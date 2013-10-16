@@ -6,7 +6,7 @@
 # Programmers. It uses thin clients and the server has nvidia graphics cards.
 #
 
-- hosts: ltsp_thin
+- hosts: office
   user: map7
   sudo: yes
   vars:
@@ -20,8 +20,72 @@
   tasks:
     - include: common/tasks/system.yml
     - include: common/tasks/office.yml
+    - include: common/tasks/ntp.yml
+    - include: common/tasks/crossover.yml # Dependencies only
     - include: common/tasks/auskey.yml
     - include: common/tasks/programming.yml 
     - include: common/tasks/ltsp.yml
     - include: common/tasks/ltsp-build.yml
-    - include: common/tasks/nvidia.yml
+    - include: common/tasks/nvidia.yml 
+    - include: common/tasks/multimedia.yml
+    - include: common/tasks/x2go.yml
+    - include: common/tasks/postgresql.yml
+    - include: common/tasks/samba.yml
+      
+    - name: Install LVM tools
+      apt: pkg=system-config-lvm state=installed
+
+    - name: Install samba
+      apt: pkg=cifs-utils state=installed
+
+
+    # 
+    # Install ruby qt bindings (for front display screen)
+    #
+    - name: Install required libraries
+      apt: pkg=$items state=installed
+      with_items:
+        - cmake
+        - build-essential
+        - bison
+        - openssl
+        - libreadline5
+        - libreadline-dev
+        - curl
+        - git-core
+        - zlib1g
+        - zlib1g-dev
+        - libssl-dev
+        - vim
+        - libsqlite3-0
+        - libsqlite3-dev
+        - sqlite3
+        - libreadline5-dev
+        - libreadline6-dev
+        - libxml2-dev
+        - git-core
+        - subversion
+        - autoconf
+        - xorg-dev
+        - libgl1-mesa-dev
+        - libglu1-mesa-dev
+        - qtcreator        # Very large and could be done lighter I think
+    
+    - name: Install qtbindings
+      action: command bash -c "/usr/local/bin/gem install qtbindings" creates=/usr/local/rbenv/shims/rbenv-rehash
+
+    #
+    # Extra rails projects requirements
+    # 
+    - name: Install libxslt-dev for nokogiri
+      apt: pkg=libxslt-dev state=present
+
+    - name: Install sphinx for searching
+      apt: pkg=sphinxsearch state=present
+
+    - name: Install wkhtmltopdf
+      apt: pkg=wkhtmltopdf state=present
+      tags: focus
+
+  handlers:
+    - include: common/handlers/handlers.yml    

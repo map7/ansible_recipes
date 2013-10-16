@@ -9,7 +9,14 @@
 
 # You cannot use the gem module as the path will not pick it up if you have just installed rbenv
 - name: Install rbenv-rehash
-  action: command bash -c "/usr/local/bin/gem install rbenv-rehash" creates=/usr/local/rbenv/shims/rbenv-rehash
+  action: command bash -c "/usr/local/bin/gem install rbenv-rehash" creates=/usr/local/rbenv/versions/$ruby_version/bin/rbenv-rehash
 
 - name: Install rails
-  action: command bash -c "/usr/local/bin/gem install rails" creates=/usr/local/rbenv/shims/rails
+  action: command bash -c "/usr/local/bin/gem install rails" creates=/usr/local/rbenv/versions/$ruby_version/bin/rails
+
+#
+# Add phantomJS for testing
+# 1. Download 64bit version
+# http://code.google.com/p/phantomjs/downloads/detail?name=phantomjs-1.8.1-linux-x86_64.tar.bz2&can=2&q=
+# 2. untar
+# 3. copy bin/phantomjs to /usr/local/bin

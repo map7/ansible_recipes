@@ -1,0 +1,16 @@
+---
+#
+# HTML to PDF commandline tool
+#
+
+- name: Download wkhtmltopdf
+  command: wget $wkhtmltopdf_download chdir=/tmp creates=/usr/local/bin/wkhtmltopdf
+
+- name: Untar wkhtmltopdf
+  shell: tar xvf wkhtmltopdf*bz2 chdir=/tmp creates=/usr/local/bin/wkhtmltopdf
+
+- name: Remove tar
+  shell: rm -fr /tmp/wkhtmltopdf*bz2 creates=/usr/local/bin/wkhtmltopdf
+
+- name: Move to /usr/local/bin
+  shell: mv /tmp/wkhtmltopdf* /usr/local/bin/wkhtmltopdf creates=/usr/local/bin/wkhtmltopdf

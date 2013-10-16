@@ -9,21 +9,25 @@
 - include: libreoffice.yml
 - include: dropbox.yml
 - include: skype.yml
+- include: mozilla.yml
   
 - name: Install office applications
   action: apt pkg=$item state=installed force=yes
   with_items:
+    - xclip
     - pdfshuffler
     - xchm
-    - okular           # PDF reader of choice
+    - okular                    # PDF reader of choice
     - inkscape
+    - unetbootin                # Create USB bootable distros
     - krita
     - gimp
+    - gthumb                    # Picture viewer & basic editor
     - keepassx
-    - password-gorilla # Getting replaced by keepassx
-    - gobby            # Collab. text editor
+    - password-gorilla          # Getting replaced by keepassx
+    - gobby                     # Collab. text editor
     - xchat
-    - gwakeonlan       # Turning computers on around the office
+    - gwakeonlan                # Turn computers on around the office
     - ktorrent
     - wireshark
     - gparted
@@ -34,8 +38,11 @@
     - simple-scan
     - gnome-do
     - gkrellm
-    - hotot            # twitter client
-    - backintime-gnome # Backup
+    - backintime-gnome          # Backup
+    - fsarchiver                # Backup system tool
+    - gcalctool
+    - file-roller               # Better integration with nautilus
+    - cheese                    # camera shot
       
 - name: Install compression tools
   action: apt pkg=$item state=installed force=yes
@@ -49,20 +56,6 @@
     - mscompress
     - xz-utils
     - dar
-    
-- name: Install Debian specific applications
-  action: apt pkg=$item state=installed
-  when_string: $ansible_distribution == "Ubuntu"
-  with_items:
-    - firefox
-    - thunderbird
-
-- name: Install Debian specific applications
-  action: apt pkg=$item state=installed
-  when_string: $ansible_distribution == "Debian"
-  with_items:
-    - iceweasel
-    - icedove
 
 - name: Install flash
   apt: pkg=flashplugin-nonfree
