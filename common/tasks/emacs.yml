@@ -6,6 +6,13 @@
 # http://www.plusastra.com/2012/11/installing-emacs-24-on-debian-wheezy.html
 # http://www.emacswiki.org/emacs-es/EmacsSnapshotAndDebian
 #
+
+#
+# Add org-mode pdf export support (942MB of disk space required!)
+# Find a lighter alternative.
+#  - texlive-latex-base, texlive-latex-recommended, texlive-latex-extra
+#
+
 - name: Install git
   apt: pkg=git-core
 
