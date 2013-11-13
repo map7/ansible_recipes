@@ -10,3 +10,4 @@ passenger_version: "4.0.3"
 db_user: 'vps'       # This should be the same as your user
 db_passwd: 'secret'  # Change this to something more secure
 custom_ntp_server: ''
+xbmc_spotify: 'http://azkotoki.org/download-file/28/script-audio-spotimc-1-0-beta4'
