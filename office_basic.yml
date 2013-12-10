@@ -18,7 +18,7 @@
 
   tasks:
     - include: common/tasks/system.yml
-    # - include: common/tasks/office.yml
+    - include: common/tasks/office.yml
     # - include: common/tasks/ntp.yml
     # - include: common/tasks/multimedia.yml
     - include: common/tasks/x2go.yml
