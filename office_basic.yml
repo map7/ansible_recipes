@@ -1,0 +1,35 @@
+---
+#
+# Office system
+#
+# Basic office machine
+#
+
+- hosts: office-basic
+  user: map7
+  sudo: yes
+  vars:
+    main_user: map7
+  vars_files:
+    - "vars/defaults.yml"
+    - "vars/$ansible_distribution-$ansible_architecture.yml"
+    - "vars/$ansible_distribution.yml"
+    - "vars/custom.yml"
+
+  tasks:
+    - include: common/tasks/system.yml
+    # - include: common/tasks/office.yml
+    # - include: common/tasks/ntp.yml
+    # - include: common/tasks/multimedia.yml
+    # - include: common/tasks/x2go.yml
+    # - include: common/tasks/postgresql.yml
+    # - include: common/tasks/samba.yml
+      
+    # - name: Install LVM tools
+    #   apt: pkg=system-config-lvm state=installed
+
+    # - name: Install samba
+    #   apt: pkg=cifs-utils state=installed
+
+  handlers:
+    - include: common/handlers/handlers.yml    
