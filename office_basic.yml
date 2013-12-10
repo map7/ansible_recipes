@@ -28,8 +28,10 @@
     # - name: Install LVM tools
     #   apt: pkg=system-config-lvm state=installed
 
-    # - name: Install samba
-    #   apt: pkg=cifs-utils state=installed
+    - name: Install samba
+      apt: pkg=cifs-utils state=installed
+
+    
 
   handlers:
     - include: common/handlers/handlers.yml    

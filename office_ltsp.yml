@@ -19,6 +19,11 @@
 
   tasks:
     - include: common/tasks/system.yml
+    - include: common/tasks/java.yml
+    - include: common/tasks/libreoffice.yml
+    - include: common/tasks/dropbox.yml
+    - include: common/tasks/skype.yml
+    - include: common/tasks/mozilla.yml
     - include: common/tasks/office.yml
     - include: common/tasks/ntp.yml
     - include: common/tasks/crossover.yml # Dependencies only
