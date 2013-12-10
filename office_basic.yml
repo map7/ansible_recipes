@@ -21,7 +21,7 @@
     # - include: common/tasks/office.yml
     # - include: common/tasks/ntp.yml
     # - include: common/tasks/multimedia.yml
-    # - include: common/tasks/x2go.yml
+    - include: common/tasks/x2go.yml
     # - include: common/tasks/postgresql.yml
     # - include: common/tasks/samba.yml
       

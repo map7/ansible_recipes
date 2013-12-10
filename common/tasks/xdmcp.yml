@@ -1,0 +1,20 @@
+---
+#
+# Setup XDMCP access
+#
+# ie: XDMCP is getting phased out and you are better off using X2go with XFCE
+
+# MDM - removed XDMCP support in Linux Mint 16
+# Linux Mint 16
+- name: Enable XDMCP for mdm.conf
+  lineinfile:
+    dest=/etc/mdm/mdm.conf
+    regexp="^Enable"
+    insertafter="\[xdmcp\]"
+    line="Enable=true"
+  notify: restart mdm
+
+
+# Diag tool
+- name: Install xnest
+  apt: pkg=xnest

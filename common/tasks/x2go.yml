@@ -5,14 +5,23 @@
 # I only use X2Go for remote access at the moment.
 #
 
+- include: xdmcp.yml
+
 - name: Add X2Go key
   command: apt-key adv --recv-keys --keyserver keys.gnupg.net E1F958385BFE2B6E
+  when_string: $ansible_distribution == "Debian"
 
 - name: Add X2Go repository
   apt_repository: repo='deb http://packages.x2go.org/debian wheezy main'
+  when_string: $ansible_distribution == "Debian"
 
 - name: Install x2go-keyring
   apt: pkg=x2go-keyring update_cache=yes state=present
+  when_string: $ansible_distribution == "Debian"
+
+- name: Add X2Go repository for Ubuntu based distros
+  apt_repository: repo='ppa:x2go/stable'
+  when_string: $ansible_distribution == "Ubuntu" or $ansible_distribution == "Linuxmint"
 
 - name: Install x2goserver
   apt: pkg=$item update_cache=yes state=present
@@ -30,3 +39,4 @@
     backup=yes
     state=present
   notify: restart ssh
+  when_string: $ansible_distribution == "Debian"

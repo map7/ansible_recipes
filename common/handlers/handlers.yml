@@ -16,3 +16,6 @@
 
 - name: Update apt-get
   action: apt update_cache=yes  
+
+- name: restart mdm
+  action: service name=mdm state=restarted
