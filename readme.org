@@ -32,6 +32,7 @@ Create passwordless access (server to client)
 Add your user to the 'sudo' group within /etc/groups
 
 Don't ask for a password when using sudo, *risky*
+/etc/sudoers
 : %sudo   ALL = NOPASSWD: ALL
 
 ** Running
