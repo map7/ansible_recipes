@@ -16,7 +16,20 @@
 
 #
 # Add phantomJS for testing
-# 1. Download 64bit version
-# http://code.google.com/p/phantomjs/downloads/detail?name=phantomjs-1.8.1-linux-x86_64.tar.bz2&can=2&q=
-# 2. untar
-# 3. copy bin/phantomjs to /usr/local/bin
+# 1. Download $phantomjs_download
+- name: Download phantomjs
+  command: wget $phantomjs_download chdir=/tmp creates=/opt/phantomjs
+
+# 2. untar into /opt/phantomjs
+- name: Untar phantomjs
+  shell: tar xvf phantomjs*bz2 chdir=/tmp creates=/opt/phantomjs
+
+- name: Remove download
+  shell: rm -fr /tmp/phantomjs*bz2* creates=/opt/phantomjs
+
+- name: Move phantomjs download to /opt/phantomjs
+  shell: mv /tmp/phantomjs* /opt/phantomjs creates=/opt/phantomjs
+
+# 3. link /opt/phantomjs/bin/phantomjs to /usr/local/bin
+- name: Link phantomjs
+  command: ln -s /opt/phantomjs/bin/phantomjs /usr/local/bin/phantomjs creates=/usr/local/bin/phantomjs
