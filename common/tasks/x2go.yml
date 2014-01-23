@@ -7,19 +7,19 @@
 
 - name: Add X2Go key
   command: apt-key adv --recv-keys --keyserver keys.gnupg.net E1F958385BFE2B6E
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
 - name: Add X2Go repository
   apt_repository: repo='deb http://packages.x2go.org/debian wheezy main'
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
 - name: Install x2go-keyring
   apt: pkg=x2go-keyring update_cache=yes state=present
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
 - name: Add X2Go repository for Ubuntu based distros
   apt_repository: repo='ppa:x2go/stable' update_cache=yes
-  when_string: $ansible_distribution == "Ubuntu" or $ansible_distribution == "Linuxmint"
+  when: ansible_os_family == "Ubuntu" or ansible_os_family == "Linuxmint"
 
 - name: Install x2goserver
   apt: pkg=$item state=present
@@ -37,4 +37,4 @@
     backup=yes
     state=present
   notify: restart ssh
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"

@@ -4,7 +4,7 @@
 #
 - name: Add python-software-properties
   apt: pkg=python-software-properties force=yes update_cache=yes state=installed
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
 - name: Remove cdrom source
   lineinfile:
@@ -17,7 +17,7 @@
   
 - name: Add multimedia wheezy repository
   apt_repository: repo='deb http://www.deb-multimedia.org wheezy main non-free'
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to main
   lineinfile:
@@ -25,7 +25,7 @@
     backrefs=yes
     regexp='deb http://ftp.au.debian.org/debian/ wheezy main$'
     line='deb http://ftp.au.debian.org/debian/ wheezy main contrib non-free'
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to main src
   lineinfile:
@@ -33,7 +33,7 @@
     backrefs=yes
     regexp='deb-src http://ftp.au.debian.org/debian/ wheezy main$'
     line='deb-src http://ftp.au.debian.org/debian/ wheezy main contrib non-free'
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to security
   lineinfile:
@@ -41,7 +41,7 @@
     backrefs=yes
     regexp='deb http://security.debian.org/ wheezy/updates main$'
     line='deb http://security.debian.org/ wheezy/updates main contrib non-free'
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to security src
   lineinfile:
@@ -49,7 +49,7 @@
     backrefs=yes
     regexp='deb-src http://security.debian.org/ wheezy/updates main$'
     line='deb-src http://security.debian.org/ wheezy/updates main contrib non-free'
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to updates
   lineinfile:
@@ -57,7 +57,7 @@
     backrefs=yes
     regexp='deb http://ftp.au.debian.org/debian/ wheezy-updates main$'
     line='deb http://ftp.au.debian.org/debian/ wheezy-updates main contrib non-free'
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to updates
   lineinfile:
@@ -65,11 +65,11 @@
     backrefs=yes
     regexp='deb-src http://ftp.au.debian.org/debian/ wheezy-updates main$'
     line='deb-src http://ftp.au.debian.org/debian/ wheezy-updates main contrib non-free'
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
   
 # - name: Update APT package cache
 #   action: apt update_cache=yes
 
 - name: Add multimedia keyring
   apt: pkg=deb-multimedia-keyring force=yes
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"

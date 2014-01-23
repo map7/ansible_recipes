@@ -4,7 +4,7 @@
 #
 - name: Remove icedove
   apt: pkg=$item state=absent
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
   with_items:
     - icedove
     - iceweasel
@@ -14,22 +14,22 @@
     dest=/etc/apt/sources.list
     regexp='deb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main'
     line='deb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main'
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
   
 - name: Add mozilla build key
   command: apt-key adv --recv-keys --keyserver keyserver.ubuntu.com C1289A29
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
 - name: Install mozilla apps through normal repo
   action: apt pkg=$item update_cache=yes state=installed
-  when_string: $ansible_distribution == "Ubuntu"
+  when: ansible_os_family == "Ubuntu"
   with_items:
     - thunderbird
     - firefox
 
 - name: Install mozilla apps through build
   action: apt pkg=$item update_cache=yes state=installed
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
   with_items:
     - thunderbird-mozilla-build
     - firefox-mozilla-build

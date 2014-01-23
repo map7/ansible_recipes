@@ -50,9 +50,9 @@
 
 - name: Install flash
   apt: pkg=flashplugin-nonfree
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
 - name: Install virtualbox
   apt: pkg=virtualbox-ose
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
