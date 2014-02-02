@@ -20,6 +20,7 @@
     - ncdu
     - mosh # Awesome mobile ssh server/client
     - command-not-found # Package suggestion utility
+    - bwm-ng            # bandwidth monitor for network & disk
 
 - name: Update command-not-found
   action: command update-command-not-found
