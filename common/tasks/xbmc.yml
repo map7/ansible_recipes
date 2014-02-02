@@ -98,4 +98,4 @@
   shell: mkdir -p /home/$main_user/.xbmc/addons creates=/home/$main_user/.xbmc/addons/script.audio.spotimc
 
 - name: untar plugin
-  shell: tar xvf /tmp/script.audio_.spotimc-1.0-beta4.zip /home/$main_user/.xbmc/addons creates=/home/$main_user/.xbmc/addons/script.audio.spotimc
+  shell: tar xvf /tmp/script.audio_.spotimc-1.0-beta5.zip /home/$main_user/.xbmc/addons creates=/home/$main_user/.xbmc/addons/script.audio.spotimc
