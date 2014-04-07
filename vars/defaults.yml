@@ -4,9 +4,10 @@
 #
 locale: "en_AU.UTF-8"
 jvm_folder: "/opt"
-gems_version: "2.0.0"
-ruby_version: "2.0.0-p247"
-passenger_version: "4.0.3"
+gems_version: "2.1.0"
+ruby_version: "2.1.0"
+passenger_version: "4.0.37"
 db_user: 'vps'       # This should be the same as your user
 db_passwd: 'secret'  # Change this to something more secure
 custom_ntp_server: ''
+xbmc_spotify: 'http://azkotoki.org/download-file/28/script-audio-spotimc-1-0-beta5'

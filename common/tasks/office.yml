@@ -3,14 +3,6 @@
 # Main office applications
 #
 
-- include: add_repositories.yml
-
-- include: java.yml
-- include: libreoffice.yml
-- include: dropbox.yml
-- include: skype.yml
-- include: mozilla.yml
-  
 - name: Install office applications
   action: apt pkg=$item state=installed force=yes
   with_items:
@@ -33,14 +25,13 @@
     - gparted
     - audacity
     - filezilla
-    - chromium
+    - chromium-browser
     - wine
     - simple-scan
     - gnome-do
     - gkrellm
     - backintime-gnome          # Backup
     - fsarchiver                # Backup system tool
-    - gcalctool
     - file-roller               # Better integration with nautilus
     - cheese                    # camera shot
       
@@ -59,7 +50,9 @@
 
 - name: Install flash
   apt: pkg=flashplugin-nonfree
+  when: ansible_os_family == "Debian"
 
 - name: Install virtualbox
   apt: pkg=virtualbox-ose
+  when: ansible_os_family == "Debian"
 

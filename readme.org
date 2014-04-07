@@ -1,14 +1,22 @@
 * Ansible Recipes
 ** Version tested
 
-Written for ansible 1.2
+Written for ansible 1.5
 
 ** Source (Your development box)
+
+Ansible 1.5 (currently the HEAD branch when you clone).
+: sudo apt-get install python-yaml python-jinja2 python-paramiko
+: git clone https://github.com/ansible/ansible.git
+: cd ansible
+: sudo make install 
+(Make sure you do not have any other ansible installed through your systems package manager).
 
 Ansible 1.2
 : sudo apt-get install python-yaml python-jinja2 python-paramiko
 : git clone https://github.com/ansible/ansible.git
 : cd ansible
+: git checkout origin/release1.2.3
 : sudo make install 
 (Make sure you do not have any other ansible installed through your systems package manager).
 
@@ -32,6 +40,7 @@ Create passwordless access (server to client)
 Add your user to the 'sudo' group within /etc/groups
 
 Don't ask for a password when using sudo, *risky*
+/etc/sudoers
 : %sudo   ALL = NOPASSWD: ALL
 
 ** Running
@@ -57,3 +66,8 @@ Place it at the bottom of your vars list to override the defaults I've set.
 | ltsp_fat     | Fat client server                     |
 | webserver    | Ruby on Rails server                  |
 
+** TODO Update to 1.5
+
+- [ ] [[https://github.com/ansible/ansible/blob/devel/CHANGELOG.md][Look at changes from 1.2 to 1.5 and optimise]]
+
+- [ ] Update any 'cp' command to using the copy module. Since ansible 1.4 the copy module allows recursive copy.

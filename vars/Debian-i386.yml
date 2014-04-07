@@ -4,3 +4,4 @@ jdk6_archive: jdk-6u43-linux-i586.bin
 dropbox_platform: lnx.x86
 libreoffice_download: "http://download.documentfoundation.org/libreoffice/stable/4.0.3/deb/x86/LibreOffice_4.0.3_Linux_x86_deb.tar.gz"
 wkhtmltopdf_download: "http://code.google.com/p/wkhtmltopdf/downloads/detail?name=wkhtmltopdf-0.11.0_rc1-static-i386.tar.bz2&can=2&q="
+phantomjs_download: "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.6-linux-i686.tar.bz2"

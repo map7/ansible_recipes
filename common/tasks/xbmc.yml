@@ -7,7 +7,7 @@
     
 - name: Add multimedia testing repository
   apt_repository: repo='deb http://www.deb-multimedia.org testing main non-free'
-  when_string: $ansible_distribution == "Debian"
+  when: ansible_os_family == "Debian"
 
 - name: Install latest xbmc
   apt: pkg=xbmc state=installed force=yes update_cache=yes 
@@ -90,3 +90,12 @@
     group=$main_user
     mode=644
 
+# Add spotify plugin
+- name: Download plugin
+  command: wget $xbmc_spotify chdir=/tmp creates=/home/$main_user/.xbmc/addons/script.audio.spotimc
+
+- name: mkdir
+  shell: mkdir -p /home/$main_user/.xbmc/addons creates=/home/$main_user/.xbmc/addons/script.audio.spotimc
+
+- name: untar plugin
+  shell: tar xvf /tmp/script.audio_.spotimc-1.0-beta5.zip /home/$main_user/.xbmc/addons creates=/home/$main_user/.xbmc/addons/script.audio.spotimc

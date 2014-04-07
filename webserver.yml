@@ -29,5 +29,8 @@
     - name: Add main user to www-data group
       user: name=$main_user append=yes groups=www-data
 
+    - name: Install Sphinx
+      apt: pkg=sphinxsearch state=installed
+
   handlers:
     - include: common/handlers/handlers.yml
