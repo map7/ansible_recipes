@@ -1,0 +1,23 @@
+---
+#
+# Media center
+#
+# This builds a media center using XBMC & LTSP. At the end you should have the following
+# - Main server with XBMC and lots of software for work, rest and play
+# - Fat clients booting from the main server with XBMC and some software for basic browsing/email.
+#
+- hosts: ungrouped
+  user: bender
+  sudo: yes
+  vars_files:
+    - "vars/defaults.yml"
+    - "vars/$ansible_distribution-$ansible_architecture.yml"
+    - "vars/$ansible_distribution.yml"
+    - "vars/custom.yml"
+
+  # Tasks for XBMC are put in a specific order
+  tasks:
+    - include: common/tasks/libreoffice.yml
+    - include: common/tasks/java.yml
+    - include: common/tasks/auskey.yml
+
