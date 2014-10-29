@@ -4,6 +4,9 @@
 #
 
 - name: Install samba
+  apt: pkg=cifs-utils state=installed
+
+- name: Install samba
   apt: pkg=samba state=present
 
 - name: Install swat
