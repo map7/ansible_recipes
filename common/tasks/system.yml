@@ -15,12 +15,14 @@
     - zsh
     - sysstat
     - mutt
-    - mc
+    - mc                        # Midnight Commander
     - nethogs
-    - ncdu
-    - mosh # Awesome mobile ssh server/client
+    - ncdu              # Check disk usage per directory
+    - mosh              # Awesome mobile ssh server/client
     - command-not-found # Package suggestion utility
     - bwm-ng            # bandwidth monitor for network & disk
+    - safe-rm           # Stop people typing 'rm -fr /'
+    - molly-guard       # Save people from rebooting the wrong server.
 
 - name: Update command-not-found
   action: command update-command-not-found
