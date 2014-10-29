@@ -4,7 +4,7 @@
 #
 # This builds a media center using XBMC & LTSP. At the end you should have the following
 # - Main server with XBMC and lots of software for work, rest and play
-# - Fat clients booting from the main server with XBMC and some software for basic browsing/email.
+# - Fat clients booting from the main server with XBMC & some software for basic browsing/email.
 #
 - hosts: xbmc
   user: map7
@@ -27,6 +27,7 @@
       # Add main user to epoptes & vboxusers in suitable include files
 
     # Autologin
+    # Ubuntu
     - name: Set Automatic login
       lineinfile:
         dest=/etc/gdm3/daemon.conf
