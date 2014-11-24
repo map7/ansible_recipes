@@ -25,7 +25,7 @@
     - molly-guard       # Save people from rebooting the wrong server.
 
 - name: Update command-not-found
-  action: command update-command-not-found
+  action: command update-command-not-found creates=/var/cache/apt/apt-file
   when: ansible_os_family == "Debian"
 
 - name: Remote support
