@@ -29,6 +29,9 @@
 - name: Change permissions so that users can add node_modules
   file: path=/usr/local/lib/node_modules state=directory recurse=yes mode=2775
 
+- name: Set the main user as part of the staff group
+  user: name=$main_user group=staff
+
 # 
 # Install coffee-script & coffeelint for emacs coffee development
 #
