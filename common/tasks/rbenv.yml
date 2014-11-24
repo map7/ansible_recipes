@@ -53,8 +53,8 @@
 - name: Install ruby-build
   action: command /usr/local/rbenv/plugins/ruby-build/install.sh chdir=/usr/local/rbenv/plugins/ruby-build
 
-- name: Add all users to staff group
-  action: command bash -c "for user in `ls /home`; do usermod -a -G staff $user; done"
+- name: Add all users to developer group
+  action: command bash -c "for user in `ls /home`; do usermod -a -G developer $user; done"
   ignore_errors: yes
   
 - name: Install ruby
@@ -65,8 +65,8 @@
 - name: Chgrp settings
   action: command chmod -R g+rwxXs /usr/local/rbenv
 
-- name: Set group to staff for /usr/local/rbenv
-  action: command chgrp -R staff /usr/local/rbenv
+- name: Set group to developer for /usr/local/rbenv
+  action: command chgrp -R developer /usr/local/rbenv
 
 - name: Set the default ruby to $ruby_version
   action: command bash -c "/usr/local/rbenv/bin/rbenv global $ruby_version"

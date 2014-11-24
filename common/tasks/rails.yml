@@ -15,21 +15,14 @@
   action: command bash -c "/usr/local/bin/gem install rails" creates=/usr/local/rbenv/versions/$ruby_version/bin/rails
 
 #
-# Add phantomJS for testing
-# 1. Download $phantomjs_download
-- name: Download phantomjs
-  command: wget $phantomjs_download chdir=/tmp creates=/opt/phantomjs
+# Extra rails projects requirements
+# 
+- name: Install libxslt-dev for nokogiri
+  apt: pkg=libxslt-dev state=present
 
-# 2. untar into /opt/phantomjs
-- name: Untar phantomjs
-  shell: tar xvf phantomjs*bz2 chdir=/tmp creates=/opt/phantomjs
+- name: Install sphinx for searching
+  apt: pkg=sphinxsearch state=present
 
-- name: Remove download
-  shell: rm -fr /tmp/phantomjs*bz2* creates=/opt/phantomjs
-
-- name: Move phantomjs download to /opt/phantomjs
-  shell: mv /tmp/phantomjs* /opt/phantomjs creates=/opt/phantomjs
-
-# 3. link /opt/phantomjs/bin/phantomjs to /usr/local/bin
-- name: Link phantomjs
-  command: ln -s /opt/phantomjs/bin/phantomjs /usr/local/bin/phantomjs creates=/usr/local/bin/phantomjs
+- name: Install wkhtmltopdf
+  apt: pkg=wkhtmltopdf state=present
+  tags: focus

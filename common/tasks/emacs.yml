@@ -13,48 +13,53 @@
 #  - texlive-latex-base, texlive-latex-recommended, texlive-latex-extra
 #
 
-- name: Install git
-  apt: pkg=git-core
+- name: Install emacs
+  apt: name=emacs24
 
-- name: Install emacs graphics libraries
-  action: apt pkg=$item state=installed
-  with_items:
-    - libxaw7-dev
-    - libxpm-dev
-    - libpng12-dev
-    - libtiff5-dev
-    - libgif-dev
-    - libjpeg8-dev
-    - libgtk2.0-dev
-    - libncurses5-dev
+# OLD Way
 
-- name: Install GNU-Autotools
-  action: apt pkg=$item state=installed
-  with_items:
-    - autoconf
-    - automake
-    - texinfo
+# - name: Install git
+#   apt: pkg=git-core
 
-- name: Download latest stable release 24.3 from March 2013
-  command: wget http://gnu.mirror.uber.com.au/emacs/emacs-24.3.tar.gz chdir=/tmp creates=/usr/local/bin/emacs
+# - name: Install emacs graphics libraries
+#   action: apt pkg=$item state=installed
+#   with_items:
+#     - libxaw7-dev
+#     - libxpm-dev
+#     - libpng12-dev
+#     - libtiff5-dev
+#     - libgif-dev
+#     - libjpeg8-dev
+#     - libgtk2.0-dev
+#     - libncurses5-dev
 
-- name: Untar image
-  shell: tar xvf emacs-24.3.tar.gz chdir=/tmp creates=/usr/local/bin/emacs
+# - name: Install GNU-Autotools
+#   action: apt pkg=$item state=installed
+#   with_items:
+#     - autoconf
+#     - automake
+#     - texinfo
 
-- name: Generate emacs config
-  action: command ./autogen.sh chdir=/tmp/emacs-24.3 creates=/tmp/emacs-24.3/configure
+# - name: Download latest stable release 24.3 from March 2013
+#   command: wget http://gnu.mirror.uber.com.au/emacs/emacs-24.3.tar.gz chdir=/tmp creates=/usr/local/bin/emacs
 
-- name: Run emacs configure
-  action: command ./configure --prefix=/opt/emacs24 chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
+# - name: Untar image
+#   shell: tar xvf emacs-24.3.tar.gz chdir=/tmp creates=/usr/local/bin/emacs
 
-- name: Compile emacs24
-  command: make -j $ansible_processor_cores chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
+# - name: Generate emacs config
+#   action: command ./autogen.sh chdir=/tmp/emacs-24.3 creates=/tmp/emacs-24.3/configure
 
-- name: Install emacs24
-  command: make install chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
+# - name: Run emacs configure
+#   action: command ./configure --prefix=/opt/emacs24 chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
 
-- name: Link emacs24
-  command: ln -s /opt/emacs24/bin/emacs /usr/local/bin/emacs creates=/usr/local/bin/emacs
+# - name: Compile emacs24
+#   command: make -j $ansible_processor_cores chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
 
-- name: Install window control
-  apt: pkg=wmctrl state=present
+# - name: Install emacs24
+#   command: make install chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
+
+# - name: Link emacs24
+#   command: ln -s /opt/emacs24/bin/emacs /usr/local/bin/emacs creates=/usr/local/bin/emacs
+
+# - name: Install window control
+#   apt: pkg=wmctrl state=present
