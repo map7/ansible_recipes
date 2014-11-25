@@ -12,7 +12,7 @@
   action: command bash -c "/usr/local/bin/gem install --version=$passenger_version passenger" creates=/usr/local/rbenv/versions/$ruby_version/bin/passenger
 
 - name: Install required packages
-  action: apt pkg=$item
+  action: apt pkg={{ item }}
   with_items:
     - libcurl4-openssl-dev
     - apache2-prefork-dev

@@ -12,7 +12,7 @@
 - include: common/tasks/phantomjs.yml
      
 - name: Install programming tools
-  action: apt pkg=$item state=installed force=yes
+  action: apt pkg={{ item }} state=installed force=yes
   with_items:
     - vim
     - giggle

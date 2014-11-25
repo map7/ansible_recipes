@@ -4,7 +4,7 @@
 #
 
 - name: Remove old libreoffice
-  action: apt pkg=$item state=removed purge=yes
+  action: apt pkg={{ item }} state=removed purge=yes
   with_items:
     - libreoffice
     - libreoffice-base

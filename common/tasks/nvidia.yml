@@ -7,7 +7,7 @@
 
 # installed nvidia-xconfig nvidia-glx
 - name: Install nvidia
-  apt: pkg=$item state=installed
+  apt: pkg={{ item }} state=installed
   with_items:
     - nvidia-xconfig
     - nvidia-glx

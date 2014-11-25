@@ -4,7 +4,7 @@
 #
 
 - name: Remove openjdk & icedtea plugins
-  action: apt pkg=$item state=absent
+  action: apt pkg={{ item }} state=absent
   with_items:
     - openjdk-6-jre
     - openjdk-6-jre-headless
@@ -16,7 +16,7 @@
 
 - name: Install wget package (Debian based)
   action: apt pkg='wget' state=installed
-  only_if: "'$ansible_pkg_mgr' == 'apt'"
+  #only_if: "'$ansible_pkg_mgr' == 'apt'"
 
 - name: Copy download JDK7 script
   copy: src=common/files/download-jdk7.sh dest=/tmp mode=0555
@@ -27,7 +27,7 @@
 - name: Unpack/Install JDK7
   action: command creates=${jvm_folder}/jdk1.7.0 chdir=${jvm_folder} tar zxf ${jvm_folder}/$jdk_archive --owner=root
   register: jdk_installed # Store the result into a variable for use later
-  only_if: "'$ansible_pkg_mgr' == 'apt'"
+  #only_if: "'$ansible_pkg_mgr' == 'apt'"
 
 - name: Set java link
   action: command update-alternatives --install /usr/bin/java java ${jvm_folder}/jdk1.7.0/bin/java 1065

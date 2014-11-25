@@ -22,7 +22,7 @@
 #   apt: pkg=git-core
 
 # - name: Install emacs graphics libraries
-#   action: apt pkg=$item state=installed
+#   action: apt pkg={{ item }} state=installed
 #   with_items:
 #     - libxaw7-dev
 #     - libxpm-dev
@@ -34,7 +34,7 @@
 #     - libncurses5-dev
 
 # - name: Install GNU-Autotools
-#   action: apt pkg=$item state=installed
+#   action: apt pkg={{ item }} state=installed
 #   with_items:
 #     - autoconf
 #     - automake

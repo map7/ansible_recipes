@@ -6,7 +6,7 @@
 - include: add_repositories.yml
   
 - name: Install system tools
-  action: apt pkg=$item state=installed force=yes
+  action: apt pkg={{ item }} state=installed force=yes
   with_items:
     - htop
     - screen
@@ -29,7 +29,7 @@
   when: ansible_os_family == "Debian"
 
 - name: Remote support
-  action: apt pkg=$item state=installed force=yes
+  action: apt pkg={{ item }} state=installed force=yes
   with_items:
     - remmina
     - remmina-plugin-nx

@@ -9,7 +9,7 @@
 # stop passenger from running.
 #
 - name: Install dependencies
-  action: apt pkg=$item state=installed force=yes
+  action: apt pkg={{ item }} state=installed force=yes
   with_items:
     - build-essential
     - zlib1g-dev

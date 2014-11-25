@@ -4,7 +4,7 @@
 #
 
 - name: Install office applications
-  action: apt pkg=$item state=installed force=yes
+  action: apt pkg={{ item }} state=installed force=yes
   with_items:
     - xclip
     - pdfshuffler
@@ -36,7 +36,7 @@
     - cheese                    # camera shot
       
 - name: Install compression tools
-  action: apt pkg=$item state=installed force=yes
+  action: apt pkg={{ item }} state=installed force=yes
   with_items:
     - unzip
     - zip
