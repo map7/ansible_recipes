@@ -9,6 +9,7 @@ Ansible 1.8 (currently the HEAD branch when you clone).
 : sudo apt-get install python-yaml python-jinja2 python-paramiko
 : git clone https://github.com/ansible/ansible.git
 : cd ansible
+: git submodule update --init --recursive
 : sudo make install 
 (Make sure you do not have any other ansible installed through your systems package manager).
 
