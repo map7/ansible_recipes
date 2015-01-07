@@ -25,10 +25,9 @@
     - gparted
     - audacity
     - filezilla
-    - chromium-browser
+    - chromium
     - wine
     - simple-scan
-    - gnome-do
     - gkrellm
     - backintime-gnome          # Backup
     - fsarchiver                # Backup system tool
@@ -55,4 +54,3 @@
 - name: Install virtualbox
   apt: pkg=virtualbox-ose
   when: ansible_os_family == "Debian"
-
