@@ -16,7 +16,7 @@
 #  command: /bin/sed -i 's/^deb cdrom/#deb cdrom/g' /etc/apt/sources.list
   
 - name: Add multimedia wheezy repository
-  apt_repository: repo='deb http://www.deb-multimedia.org wheezy main non-free'
+  apt_repository: repo="deb http://www.deb-multimedia.org {{ repo }} main non-free"
   when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to main

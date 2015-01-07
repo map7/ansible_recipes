@@ -21,6 +21,7 @@
     - "vars/defaults.yml"
     - "vars/$ansible_distribution-$ansible_architecture.yml"
     - "vars/$ansible_distribution.yml"
+    - "vars/Debian-testing.yml"
 
   # Tasks for XBMC are put in a specific order
   tasks:
