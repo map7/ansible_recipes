@@ -2,22 +2,42 @@
 #
 # Media center
 #
-# This builds a media center using XBMC & LTSP. At the end you should have the following
+# This builds a media center & office machine using XBMC & LTSP. At the end you should have 
+# the following.
 # - Main server with XBMC and lots of software for work, rest and play
-# - Fat clients booting from the main server with XBMC and some software for basic browsing/email.
 #
-- hosts: ungrouped
-  user: bender
+# 
+# Version: 1.9
+# Tested OS: Linux Mint Debian Edition (rolling release)
+# Command: ansible-playbook -K bender.yml
+#
+- hosts: all
+  user: map7
   sudo: yes
+  vars:
+    main_user: xbmc
+    password: $1$SomeSalt$nbQMcEVhuIZWc9xDaQOs70
   vars_files:
     - "vars/defaults.yml"
     - "vars/$ansible_distribution-$ansible_architecture.yml"
     - "vars/$ansible_distribution.yml"
-    - "vars/custom.yml"
+    - "vars/Debian-testing.yml"
 
   # Tasks for XBMC are put in a specific order
   tasks:
-    - include: common/tasks/libreoffice.yml
-    - include: common/tasks/java.yml
-    - include: common/tasks/auskey.yml
+    # Add xbmc user
+    - name: Add $main_user user
+      user: name=$main_user password=$password groups='sudo' shell=/bin/bash
 
+    - include: common/tasks/system.yml
+    - include: common/tasks/rbenv.yml
+    - include: common/tasks/apache.yml 
+    - include: common/tasks/ltsp.yml
+    - include: common/tasks/ltsp-build.yml
+    - include: common/tasks/office.yml 
+    - include: common/tasks/xbmc.yml
+    - include: common/tasks/nvidia.yml
+    - include: common/tasks/gnome-do.yml
+
+  handlers:
+    - include: common/handlers/handlers.yml

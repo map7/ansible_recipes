@@ -22,7 +22,7 @@
   when: ansible_os_family == "Ubuntu" or ansible_os_family == "Linuxmint"
 
 - name: Install x2goserver
-  apt: pkg=$item state=present
+  apt: pkg={{ item }} state=present
   with_items:
     - x2goserver
     - x2goserver-xsession

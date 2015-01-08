@@ -15,56 +15,56 @@
   notify: Update apt-get
 #  command: /bin/sed -i 's/^deb cdrom/#deb cdrom/g' /etc/apt/sources.list
   
-- name: Add multimedia wheezy repository
-  apt_repository: repo='deb http://www.deb-multimedia.org wheezy main non-free'
+- name: Add multimedia {{ repo }} repository
+  apt_repository: repo="deb http://www.deb-multimedia.org {{ repo }} main non-free"
   when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to main
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb http://ftp.au.debian.org/debian/ wheezy main$'
-    line='deb http://ftp.au.debian.org/debian/ wheezy main contrib non-free'
+    regexp='deb http://ftp.au.debian.org/debian/ {{ repo }} main$'
+    line='deb http://ftp.au.debian.org/debian/ {{ repo }} main contrib non-free'
   when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to main src
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb-src http://ftp.au.debian.org/debian/ wheezy main$'
-    line='deb-src http://ftp.au.debian.org/debian/ wheezy main contrib non-free'
+    regexp='deb-src http://ftp.au.debian.org/debian/ {{ repo }} main$'
+    line='deb-src http://ftp.au.debian.org/debian/ {{ repo }} main contrib non-free'
   when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to security
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb http://security.debian.org/ wheezy/updates main$'
-    line='deb http://security.debian.org/ wheezy/updates main contrib non-free'
+    regexp='deb http://security.debian.org/ {{ repo }}/updates main$'
+    line='deb http://security.debian.org/ {{ repo }}/updates main contrib non-free'
   when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to security src
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb-src http://security.debian.org/ wheezy/updates main$'
-    line='deb-src http://security.debian.org/ wheezy/updates main contrib non-free'
+    regexp='deb-src http://security.debian.org/ {{ repo }}/updates main$'
+    line='deb-src http://security.debian.org/ {{ repo }}/updates main contrib non-free'
   when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to updates
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb http://ftp.au.debian.org/debian/ wheezy-updates main$'
-    line='deb http://ftp.au.debian.org/debian/ wheezy-updates main contrib non-free'
+    regexp='deb http://ftp.au.debian.org/debian/ {{ repo }}-updates main$'
+    line='deb http://ftp.au.debian.org/debian/ {{ repo }}-updates main contrib non-free'
   when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to updates
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb-src http://ftp.au.debian.org/debian/ wheezy-updates main$'
-    line='deb-src http://ftp.au.debian.org/debian/ wheezy-updates main contrib non-free'
+    regexp='deb-src http://ftp.au.debian.org/debian/ {{ repo }}-updates main$'
+    line='deb-src http://ftp.au.debian.org/debian/ {{ repo }}-updates main contrib non-free'
   when: ansible_os_family == "Debian"
   
 # - name: Update APT package cache

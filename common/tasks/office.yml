@@ -4,7 +4,7 @@
 #
 
 - name: Install office applications
-  action: apt pkg=$item state=installed force=yes
+  action: apt pkg={{ item }} state=installed force=yes
   with_items:
     - xclip
     - pdfshuffler
@@ -25,10 +25,9 @@
     - gparted
     - audacity
     - filezilla
-    - chromium-browser
+    - chromium
     - wine
     - simple-scan
-    - gnome-do
     - gkrellm
     - backintime-gnome          # Backup
     - fsarchiver                # Backup system tool
@@ -36,7 +35,7 @@
     - cheese                    # camera shot
       
 - name: Install compression tools
-  action: apt pkg=$item state=installed force=yes
+  action: apt pkg={{ item }} state=installed force=yes
   with_items:
     - unzip
     - zip
@@ -53,6 +52,5 @@
   when: ansible_os_family == "Debian"
 
 - name: Install virtualbox
-  apt: pkg=virtualbox-ose
+  apt: pkg=virtualbox
   when: ansible_os_family == "Debian"
-

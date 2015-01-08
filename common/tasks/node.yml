@@ -4,12 +4,13 @@
 #
 
 - name: Install dependencies
-  action: apt pkg=$item state=installed force=yes
+  action: apt pkg={{ item }} state=installed force=yes
   with_items:
     - build-essential
     - libssl-dev
     - openssl
     - curl
+    - git
 
 - name: Download node from github
   git: repo=https://github.com/joyent/node.git dest=/tmp/node depth=1
@@ -22,6 +23,14 @@
 
 - name: Install node
   action: command make install chdir=/tmp/node creates=/usr/local/bin/node
+
+# 2775 will set drwxrwsr-x which is what we want. The 2 at the front tells us that we want the 'sticky bit' on
+# the group
+- name: Change permissions so that users can add node_modules
+  file: path=/usr/local/lib/node_modules state=directory recurse=yes mode=2775
+
+- name: Set the main user as part of the staff group
+  user: name=$main_user group=staff
 
 # 
 # Install coffee-script & coffeelint for emacs coffee development

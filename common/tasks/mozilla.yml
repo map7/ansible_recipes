@@ -3,7 +3,7 @@
 # Install thunderbird for all distros
 #
 - name: Remove icedove
-  apt: pkg=$item state=absent
+  apt: pkg={{ item }} state=absent
   when: ansible_os_family == "Debian"
   with_items:
     - icedove
@@ -21,14 +21,14 @@
   when: ansible_os_family == "Debian"
 
 - name: Install mozilla apps through normal repo
-  action: apt pkg=$item update_cache=yes state=installed
+  action: apt pkg={{ item }} update_cache=yes state=installed
   when: ansible_os_family == "Ubuntu"
   with_items:
     - thunderbird
     - firefox
 
 - name: Install mozilla apps through build
-  action: apt pkg=$item update_cache=yes state=installed
+  action: apt pkg={{ item }} update_cache=yes state=installed
   when: ansible_os_family == "Debian"
   with_items:
     - thunderbird-mozilla-build

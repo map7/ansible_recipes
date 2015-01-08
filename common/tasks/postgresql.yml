@@ -4,7 +4,7 @@
 #
 
 - name: Install postgresql requirements
-  action: apt pkg=$item force=yes state=installed
+  action: apt pkg={{ item }} force=yes state=installed
   with_items:
     - python-psycopg2
     - libpq-dev
@@ -25,7 +25,7 @@
   sudo_user: postgres
 
 - name: Install nice postgresql tools
-  action: apt pkg=$item force=yes state=installed
+  action: apt pkg={{ item }} force=yes state=installed
   with_items:
     - pgadmin3
     - phppgadmin

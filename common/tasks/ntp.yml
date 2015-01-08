@@ -5,7 +5,7 @@
 # http://www.massimilianomarini.com/12/04/2012/how-install-and-setup-ntpdate-debian
 #
 - name: Install ntpdate to set time
-  apt: pkg=$item force=yes
+  apt: pkg={{ item }} force=yes
   with_items:
     - ntpdate
     - ntp

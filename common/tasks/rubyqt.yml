@@ -2,7 +2,7 @@
 # Install ruby qt bindings (for front display screen)
 #
 - name: Install required libraries
-  apt: pkg=$items state=installed
+  apt: pkg={{ item }}s state=installed
   with_items:
     - cmake
     - build-essential

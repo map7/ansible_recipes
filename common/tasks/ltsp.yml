@@ -6,7 +6,7 @@
 #
 
 - name: Install LTSP & related tools
-  apt: pkg=$item force=yes
+  apt: pkg={{ item }} force=yes
   with_items:
     - ltsp-server
     - ltspfs
