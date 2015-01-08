@@ -8,9 +8,6 @@
 - name: Install Apache2
   apt: pkg=apache2 state=installed
 
-- name: Install Passenger
-  action: command bash -c "/usr/local/bin/gem install --version=$passenger_version passenger" creates=/usr/local/rbenv/versions/$ruby_version/bin/passenger
-
 - name: Install required packages
   action: apt pkg={{ item }}
   with_items:
@@ -19,18 +16,3 @@
     - libapr1-dev
     - libaprutil1-dev
 
-- name: Install Passenger apache2 module
-  action: command /usr/local/rbenv/shims/passenger-install-apache2-module -a creates=/usr/local/rbenv/versions/$ruby_version/lib/ruby/gems/1.9.1/gems/passenger-$passenger_version/libout/apache2/mod_passenger.so
-
-- name: Add the passenger module to the apache2 config
-  template: src=common/templates/passenger.load.j2 dest=/etc/apache2/mods-enabled/passenger.load mode=0644
-  notify: restart apache
-
-- name: Copy over example file for rails project config
-  copy: src=common/files/rails_project dest=/etc/apache2/sites-enabled/rails_project mode=0644 force=no
-
-- name: Remove the default setup
-  file: path=/etc/apache2/sites-enabled/000-default state=absent 
-
-- name: Set permissions on shims dir
-  command: chmod g+w /usr/local/rbenv/shims
