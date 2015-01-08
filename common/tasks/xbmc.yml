@@ -60,42 +60,47 @@
 
 # Setting up XBMC for shared library
 - name: Create a storage1 directory for your first storage drive.
-  file: path=/media/storage1 owner=$main_user group=$main_user mode=777 state=directory 
-  
-- name: Add /media/storage1 to NFS exports
-  lineinfile:
-    dest=/etc/exports
-    regexp="/media/storage1"
-    line="/media/storage1 *(rw,insecure)"
-  notify: reload nfs
-  
-- name: Create settings dir for main user
-  file: path=/home/$main_user/.xbmc owner=$main_user group=$main_user state=directory
+  file: path=/media/storage1 owner={{ main_user }} group={{ main_user }} mode=777 state=directory 
+
+## This doesn't work on Debian as there is no /etc/exports file created by default  
+# - name: Add /media/storage1 to NFS exports
+#   lineinfile:
+#     dest=/etc/exports
+#     regexp="/media/storage1"
+#     line="/media/storage1 *(rw,insecure)"
+#   notify: reload nfs
   
 - name: Create settings dir for main user
-  file: path=/home/$main_user/.xbmc/userdata owner=$main_user group=$main_user state=directory
+  file: path=/home/{{ main_user }}/.xbmc owner={{ main_user }} group={{ main_user }} state=directory
+  
+- name: Create settings dir for main user
+  file: path=/home/{{ main_user }}/.xbmc/userdata owner={{ main_user }} group={{ main_user }} state=directory
   
 # This advancedsettings.xml file should be copied to the userdata dir of every XBMC install you want to sync with  
 - name: Create an advancedsettings.xml file
   template:
     src=common/templates/advancedsettings.xml.j2
-    dest=/home/$main_user/.xbmc/userdata/advancedsettings.xml mode=0644 force=no
+    dest=/home/{{ main_user }}/.xbmc/userdata/advancedsettings.xml mode=0644 force=no
 
 # Autostart xbmc for xbmc user
+- name: create the config dir
+  file: path=/home/{{ main_user }}/.config state=directory owner={{ main_user }} group={{ main_user }}
+  
 - name: Setup xbmc autostart for xbmc user
   copy:
     src=common/files/xbmc.desktop
-    dest=/home/$main_user/.config/autostart
-    owner=$main_user
-    group=$main_user
+    dest=/home/{{ main_user }}/.config/autostart
+    owner={{ main_user }}
+    group={{ main_user }}
     mode=644
 
 # Add spotify plugin
 - name: Download plugin
-  command: wget $xbmc_spotify chdir=/tmp creates=/home/$main_user/.xbmc/addons/script.audio.spotimc
+  command: wget {{ xbmc_spotify }} chdir=/tmp creates=/home/{{ main_user }}/.xbmc/addons/script.audio.spotimc
 
 - name: mkdir
-  shell: mkdir -p /home/$main_user/.xbmc/addons creates=/home/$main_user/.xbmc/addons/script.audio.spotimc
+  shell: mkdir -p /home/{{ main_user }}/.xbmc/addons creates=/home/{{ main_user }}/.xbmc/addons/script.audio.spotimc
 
 - name: untar plugin
-  shell: tar xvf /tmp/script.audio_.spotimc-1.0-beta5.zip /home/$main_user/.xbmc/addons creates=/home/$main_user/.xbmc/addons/script.audio.spotimc
+  shell: unzip /tmp/script-audio-spotimc-1-0-beta5 -d /home/{{ main_user }}/.xbmc/addons creates=/home/{{ main_user }}/.xbmc/addons/script.audio.spotimc
+  tags: focus
