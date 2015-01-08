@@ -30,11 +30,13 @@
       user: name=$main_user password=$password groups='sudo' shell=/bin/bash
 
     - include: common/tasks/system.yml
+    - include: common/tasks/rbenv.yml
+    - include: common/tasks/apache.yml 
+    - include: common/tasks/ltsp.yml
+    - include: common/tasks/ltsp-build.yml
     - include: common/tasks/office.yml 
     - include: common/tasks/xbmc.yml
     - include: common/tasks/nvidia.yml
-    - include: common/tasks/ltsp.yml
-    - include: common/tasks/ltsp-build.yml
     - include: common/tasks/gnome-do.yml
 
   handlers:

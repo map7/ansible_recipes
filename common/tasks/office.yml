@@ -52,5 +52,5 @@
   when: ansible_os_family == "Debian"
 
 - name: Install virtualbox
-  apt: pkg=virtualbox-ose
+  apt: pkg=virtualbox
   when: ansible_os_family == "Debian"
