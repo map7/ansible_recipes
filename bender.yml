@@ -35,10 +35,10 @@
     - include: common/tasks/office.yml 
     - include: common/tasks/xbmc.yml
     - include: common/tasks/gnome-do.yml
-    # - include: common/tasks/ltsp.yml
-    # - include: common/tasks/ltsp-build.yml
-    # - include: common/tasks/nvidia.yml
-    # - include: common/tasks/rbenv.yml
+    - include: common/tasks/ltsp.yml
+    - include: common/tasks/ltsp-build.yml
+    - include: common/tasks/nvidia.yml
+    - include: common/tasks/rbenv.yml
 
   handlers:
     - include: common/handlers/handlers.yml
