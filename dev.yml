@@ -14,7 +14,6 @@
   tasks:
     - include: common/tasks/system.yml
     - include: common/tasks/lvm.yml
-    - include: common/tasks/java.yml
     - include: common/tasks/programming.yml 
     - include: common/tasks/postgresql.yml
     - include: common/tasks/wkhtmltopdf.yml

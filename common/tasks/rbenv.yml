@@ -25,7 +25,7 @@
 
 # With git repos I've found you have to use https not git
 - name: Install rbenv
-  git: repo=https://github.com/sstephenson/rbenv.git dest=/usr/local/rbenv
+  git: repo=git://github.com/sstephenson/rbenv.git dest=/usr/local/rbenv accept_hostkey=true
 
 - name: Install rbenv plugin ruby-build
   git: repo=https://github.com/sstephenson/ruby-build.git dest=/usr/local/rbenv/plugins/ruby-build
