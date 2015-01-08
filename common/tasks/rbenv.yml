@@ -24,7 +24,7 @@
     - git-core
 
 - name: Install rbenv
-  git: repo=git://github.com/sstephenson/rbenv.git dest=/usr/local/rbenv
+  git: repo=git://github.com/sstephenson/rbenv.git dest=/usr/local/rbenv accept_hostkey=true
 
 - name: Install rbenv plugin ruby-build
   git: repo=https://github.com/sstephenson/ruby-build.git dest=/usr/local/rbenv/plugins/ruby-build
@@ -80,4 +80,3 @@
 
 - name: Link gem so we can get to it easy
   command: ln -s /usr/local/rbenv/shims/gem /usr/local/bin/gem creates=/usr/local/bin/gem
-
