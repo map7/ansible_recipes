@@ -7,10 +7,14 @@
   apt: pkg=gnome-do
 
 # Set gnome-do to hide on startup
-- name: Copy gnome-do settings
-  copy: src=common/files/gnome-do.tar dest=/home/$main_user/.gconf/apps
+- name: create directory
+  file: path=/home/{{ main_user }}/.gconf/apps state=directory
+  tags: focus
   
+- name: Copy gnome-do settings
+  copy: src=common/files/gnome-do.tar dest=/home/{{ main_user }}/.gconf/apps
+  tags: focus
+
 - name: Untar gnome-do settings
-  command:
-    mkdir -p /home/$main_user/.gconf/apps;tar xvf /home/$main_user/.gconf/apps/gnome-do chdir=/home/$main_user/.gconf/apps
-    creates=/home/$main_user/.gconf/apps/gnome-do
+  command: tar xvf /home/{{ main_user }}/.gconf/apps/gnome-do.tar chdir=/home/{{ main_user }}/.gconf/apps creates=/home/{{ main_user }}/.gconf/apps/gnome-do
+  tags: focus
