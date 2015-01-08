@@ -9,7 +9,7 @@
 - include: rbenv.yml
 - include: node.yml
 - include: rails.yml
-- include: common/tasks/phantomjs.yml
+- include: phantomjs.yml
      
 - name: Install programming tools
   action: apt pkg=$item state=installed force=yes
