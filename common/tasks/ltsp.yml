@@ -18,7 +18,7 @@
   action: command bash -c "for user in `ls /home`; do usermod -a -G epoptes $user; done"
   ignore_errors: yes
   
-- name: Add $user to fuse group for local mounting
+- name: Add all users to fuse group for local mounting
   action: command bash -c "for user in `ls /home`; do usermod -a -G fuse $user; done"
   ignore_errors: yes
   
