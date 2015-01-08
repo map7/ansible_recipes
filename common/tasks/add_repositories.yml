@@ -23,7 +23,7 @@
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb http://ftp.au.debian.org/debian/ {{ repo }} main$'
+    regexp='deb http://ftp.au.debian.org/debian/ wheezy main$'
     line='deb http://ftp.au.debian.org/debian/ {{ repo }} main contrib non-free'
   when: ansible_os_family == "Debian"
 
@@ -31,7 +31,7 @@
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb-src http://ftp.au.debian.org/debian/ {{ repo }} main$'
+    regexp='deb-src http://ftp.au.debian.org/debian/ wheezy main$'
     line='deb-src http://ftp.au.debian.org/debian/ {{ repo }} main contrib non-free'
   when: ansible_os_family == "Debian"
 
@@ -39,7 +39,7 @@
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb http://security.debian.org/ {{ repo }}/updates main$'
+    regexp='deb http://security.debian.org/ wheezy/updates main$'
     line='deb http://security.debian.org/ {{ repo }}/updates main contrib non-free'
   when: ansible_os_family == "Debian"
 
@@ -47,7 +47,7 @@
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb-src http://security.debian.org/ {{ repo }}/updates main$'
+    regexp='deb-src http://security.debian.org/ wheezy/updates main$'
     line='deb-src http://security.debian.org/ {{ repo }}/updates main contrib non-free'
   when: ansible_os_family == "Debian"
 
@@ -55,7 +55,7 @@
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb http://ftp.au.debian.org/debian/ {{ repo }}-updates main$'
+    regexp='deb http://ftp.au.debian.org/debian/ wheezy-updates main$'
     line='deb http://ftp.au.debian.org/debian/ {{ repo }}-updates main contrib non-free'
   when: ansible_os_family == "Debian"
 
@@ -63,7 +63,7 @@
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb-src http://ftp.au.debian.org/debian/ {{ repo }}-updates main$'
+    regexp='deb-src http://ftp.au.debian.org/debian/ wheezy-updates main$'
     line='deb-src http://ftp.au.debian.org/debian/ {{ repo }}-updates main contrib non-free'
   when: ansible_os_family == "Debian"
   
@@ -71,5 +71,6 @@
 #   action: apt update_cache=yes
 
 - name: Add multimedia keyring
-  apt: pkg=deb-multimedia-keyring force=yes
+  apt: pkg=deb-multimedia-keyring force=yes update_cache=yes
   when: ansible_os_family == "Debian"
+  tags: focus

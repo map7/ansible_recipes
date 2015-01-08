@@ -11,7 +11,7 @@
 # Tested OS: Linux Mint Debian Edition (rolling release)
 # Command: ansible-playbook -K bender.yml
 #
-- hosts: all
+- hosts: test
   user: map7
   sudo: yes
   vars:
