@@ -23,6 +23,7 @@
     - bwm-ng            # bandwidth monitor for network & disk
     - safe-rm           # Stop people typing 'rm -fr /'
     - molly-guard       # Save people from rebooting the wrong server.
+    - mg                # emacs lite
 
 - name: Update command-not-found
   action: command update-command-not-found creates=/var/cache/apt/apt-file
