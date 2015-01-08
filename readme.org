@@ -31,10 +31,15 @@ Don't ask for a password when using sudo, *risky*
 : %sudo   ALL = NOPASSWD: ALL
 
 ** Running
+
 Now you can run with this command (on the server)
+
 : ansible-playbook media_center.yml -K -v
 | -K | ask for sudo password |
 | -v | verbose               |
+
+*NOTE* With mysql I leave the password blank for the root user until I've finished setup, then manually assign a new password using the following;
+: mysqladmin -u root password 'newpassword'
 
 ** Custom variables
 
