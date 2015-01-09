@@ -38,7 +38,11 @@
     - include: common/tasks/ltsp.yml
     - include: common/tasks/ltsp-build.yml
     - include: common/tasks/nvidia.yml
+    - include: common/tasks/lvm.yml
+    - include: common/tasks/x2go.yml
     - include: common/tasks/rbenv.yml
+    - include: common/tasks/emacs.yml
+
 
   handlers:
     - include: common/handlers/handlers.yml

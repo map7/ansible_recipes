@@ -25,4 +25,3 @@
 
 - name: Install wkhtmltopdf
   apt: pkg=wkhtmltopdf state=present
-  tags: focus

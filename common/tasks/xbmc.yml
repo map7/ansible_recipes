@@ -103,4 +103,3 @@
 
 - name: untar plugin
   shell: unzip /tmp/script-audio-spotimc-1-0-beta5 -d /home/{{ main_user }}/.xbmc/addons creates=/home/{{ main_user }}/.xbmc/addons/script.audio.spotimc
-  tags: focus

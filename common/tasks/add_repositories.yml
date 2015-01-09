@@ -73,4 +73,3 @@
 - name: Add multimedia keyring
   apt: pkg=deb-multimedia-keyring force=yes update_cache=yes
   when: ansible_os_family == "Debian"
-  tags: focus

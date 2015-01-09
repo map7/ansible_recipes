@@ -35,11 +35,11 @@
 - name: Copy my setup across
   git: repo=https://github.com/map7/emacs-config.git dest=/home/map7/.emacs.d
 
-- name: Set permissions
-  file: path=/home/map7/.emacs.d owner=map7 group=map7
-
 - name: Compile my plugins
   command: /home/map7/.cask/bin/cask chdir=/home/map7/.emacs.d
+
+- name: Set permissions
+  file: path=/home/map7/.emacs.d owner=map7 group=map7 recurse=yes state=directory
 
 # OLD Way
 
