@@ -10,7 +10,7 @@
   when: ansible_os_family == "Debian"
 
 - name: Add X2Go repository
-  apt_repository: repo='deb http://packages.x2go.org/debian wheezy main'
+  apt_repository: repo='deb http://packages.x2go.org/debian {{ repo }} main'
   when: ansible_os_family == "Debian"
 
 - name: Install x2go-keyring
