@@ -84,3 +84,9 @@
 
 - name: Link gem so we can get to it easy
   command: ln -s /usr/local/rbenv/shims/gem /usr/local/bin/gem creates=/usr/local/bin/gem
+
+- name: Chmod shims
+  action: command chmod -R g+rwxXs /usr/local/rbenv/shims
+
+- name: Set group to developer for /usr/local/rbenv/shims
+  action: command chgrp -R developer /usr/local/rbenv/shims

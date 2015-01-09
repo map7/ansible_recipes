@@ -10,6 +10,7 @@
   with_items:
     - ltsp-server
     - ltspfs
+  notify: reload nfs
 
 - name: Install epoptes
   apt: pkg=epoptes
