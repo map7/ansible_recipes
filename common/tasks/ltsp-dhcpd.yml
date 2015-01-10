@@ -1,0 +1,29 @@
+---
+#
+# DHCPD setup for LTSP
+#
+
+- name: Install isc-dhcp-server but don't start yet
+  apt: pkg=isc-dhcp-server state=present install_recommends=no
+  #environment:
+  #  RUNLEVEL: 1
+  #tags: focus
+
+- name: Copy setup accross
+  template: src=common/templates/dhcpd.conf.j2 dest=/etc/dhcp/dhcpd.conf mode=0755
+  tags: focus
+
+- name: Add static IP to network interfaces
+  template: src=common/templates/interfaces.j2 dest=/etc/network/interfaces mode=0644
+  tags: focus
+
+- name: Link DHCP to interface
+  lineinfile:
+    dest=/etc/default/isc-dhcp-server
+    regexp="^INTERFACES"
+    line='INTERFACES="eth0"'
+    backup=yes
+    state=present
+  tags: focus
+
+  

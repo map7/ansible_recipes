@@ -30,6 +30,7 @@
       user: name={{ main_user }} password={{ password }} groups='sudo' shell=/bin/bash
 
     - include: common/tasks/system.yml
+    - include: common/tasks/samba.yml
     - include: common/tasks/apache.yml 
     - include: common/tasks/php.yml
     - include: common/tasks/office.yml 
@@ -37,11 +38,21 @@
     - include: common/tasks/gnome-do.yml
     - include: common/tasks/ltsp.yml
     - include: common/tasks/ltsp-build.yml
+    
+    # Remarked out DHCP until we fix the issue with starting it
+    #- include: common/tasks/ltsp-dhcpd.yml
+    
     - include: common/tasks/nvidia.yml
     - include: common/tasks/lvm.yml
     - include: common/tasks/x2go.yml
-    - include: common/tasks/rbenv.yml
+
+    - include: common/tasks/dropbox.yml
+    - include: common/tasks/mozilla.yml
+
     - include: common/tasks/emacs.yml
+    - include: common/tasks/rbenv.yml
+    - include: common/tasks/rails.yml
+
 
 
   handlers:

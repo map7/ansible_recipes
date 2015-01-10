@@ -2,7 +2,7 @@
 # Build the LTSP client
 #
 - name: Update image
-  command: ltsp-update-image --config-nbd
+  command: ltsp-update-image --config-nbd creates=/opt/ltsp/images/i386.img
 
 - name: Create ssh keys
   command: ltsp-update-sshkeys

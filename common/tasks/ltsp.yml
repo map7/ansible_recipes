@@ -79,5 +79,4 @@
     line='TFTP_ADDRESS=":69"'
     backup=yes
     state=present
-  tags: focus
   
