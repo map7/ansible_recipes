@@ -40,7 +40,7 @@
     - include: common/tasks/ltsp-build.yml
     
     # Remarked out DHCP until we fix the issue with starting it
-    #- include: common/tasks/ltsp-dhcpd.yml
+    - include: common/tasks/ltsp-dhcpd.yml
     
     - include: common/tasks/nvidia.yml
     - include: common/tasks/lvm.yml
