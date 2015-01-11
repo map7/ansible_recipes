@@ -15,5 +15,5 @@
 - name: Link DHCP to interface
   template: src=common/templates/isc-dhcp-server.j2 dest=/etc/default/isc-dhcp-server mode=0644
 
-- name: Install isc-dhcp-server but don't start yet
+- name: Install isc-dhcp-server and start
   apt: pkg=isc-dhcp-server state=present install_recommends=no
