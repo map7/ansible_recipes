@@ -24,6 +24,7 @@
     - safe-rm           # Stop people typing 'rm -fr /'
     - molly-guard       # Save people from rebooting the wrong server.
     - mg                # emacs lite
+    - firmware-linux
 
 - name: Update command-not-found
   action: command update-command-not-found creates=/var/cache/apt/apt-file
@@ -39,3 +40,7 @@
 - name: Install expect for some installation scripts
   apt: pkg=expect force=yes
 
+- name: GUI tools
+  action: apt pkg={{ item }} state=installed force=yes
+  with_items:
+    - font-manager
