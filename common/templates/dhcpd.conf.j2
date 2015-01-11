@@ -19,7 +19,7 @@ option domain-name-servers 10.1.1.1;
 option broadcast-address 10.1.1.255;
 option routers 10.1.1.1;
 option root-path "/opt/ltsp/i386";
-next-server 10.1.1.9;
+next-server 10.1.1.10;
 
 if substring( option vendor-class-identifier, 0, 9 ) = "PXEClient" {
     filename "/ltsp/i386/pxelinux.0";
