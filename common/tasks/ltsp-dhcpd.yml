@@ -2,6 +2,9 @@
 #
 # DHCPD setup for LTSP
 #
+# Note: The config files have to be put in place before the install so that the 
+# daemon starts after installation correctly.
+#
 
 - name: Copy setup accross
   template: src=common/templates/dhcpd.conf.j2 dest=/etc/dhcp/dhcpd.conf mode=0755
