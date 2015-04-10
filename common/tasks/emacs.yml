@@ -33,7 +33,7 @@
     state=present    
 
 - name: Copy my setup across
-  git: repo=https://github.com/map7/emacs-config.git dest=/home/map7/.emacs.d
+  git: repo=https://github.com/map7/emacs-config.git dest=/home/map7/.emacs.d update=no
 
 - name: Compile my plugins
   command: /home/map7/.cask/bin/cask chdir=/home/map7/.emacs.d

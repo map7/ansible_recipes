@@ -11,8 +11,8 @@
 - name: Install W64 codecs
   apt: pkg=w64codecs state=installed
 
-- name: Install mplayer
-  apt: pkg=mplayer state=installed
+- name: Install mpv (mplayer replacement)
+  apt: pkg=mpv state=installed
 
 - name: Install vlc
   apt: pkg=vlc state=installed

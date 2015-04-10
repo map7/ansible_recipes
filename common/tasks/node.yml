@@ -19,7 +19,7 @@
   action: command ./configure --openssl-libpath=/usr/lib/ssl chdir=/tmp/node creates=/usr/local/bin/node
 
 - name: Compile node
-  action: command make -j $ansible_processor_cores chdir=/tmp/node creates=/usr/local/bin/node
+  action: command make chdir=/tmp/node creates=/usr/local/bin/node
 
 - name: Install node
   action: command make install chdir=/tmp/node creates=/usr/local/bin/node

@@ -8,7 +8,7 @@
 # Note: The root user doesn't have access to ruby/rbenv/gems/rails but this does not
 # stop passenger from running.
 #
-- name: Install dependencies
+- name: Install dependencies for rbenv
   action: apt pkg={{ item }} state=installed force=yes
   with_items:
     - build-essential

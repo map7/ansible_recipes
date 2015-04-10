@@ -2,7 +2,7 @@
 # Add phantomJS for testing
 # 1. Download $phantomjs_download
 - name: Download phantomjs
-  command: wget $phantomjs_download chdir=/tmp creates=/opt/phantomjs
+  command: wget {{ phantomjs_download }} chdir=/tmp creates=/opt/phantomjs
 
 # 2. untar into /opt/phantomjs
 - name: Untar phantomjs
