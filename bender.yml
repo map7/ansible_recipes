@@ -12,10 +12,9 @@
 # Command: ansible-playbook -K bender.yml
 #
 - hosts: home_server
-  user: map7
+  user: xbmc
   sudo: yes
   vars:
-    main_user: xbmc
     password: $1$SomeSalt$nbQMcEVhuIZWc9xDaQOs70
   vars_files:
     - "vars/defaults.yml"

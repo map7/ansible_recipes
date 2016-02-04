@@ -7,10 +7,9 @@
 # - Fat clients booting from the main server with XBMC & some software for basic browsing/email.
 #
 - hosts: xbmc
-  user: map7
+  user: xbmc
   sudo: yes
   vars:
-    main_user: xbmc
     password: $1$SomeSalt$nbQMcEVhuIZWc9xDaQOs70
   vars_files:
     - "vars/defaults.yml"

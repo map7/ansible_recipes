@@ -8,8 +8,6 @@
 - hosts: office-basic
   user: map7
   sudo: yes
-  vars:
-    main_user: map7
   vars_files:
     - "vars/defaults.yml"
     - "vars/$ansible_distribution-$ansible_architecture.yml"
