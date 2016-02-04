@@ -24,7 +24,7 @@ Install Debian 7 into virtual box (name: debian7)
 Create passwordless access (server to client)
 : ssh-copy-id <user>@<target ip>
 
-Add your user to the 'sudo' group within /etc/groups
+Add your user to the 'sudo' group within /etc/group
 
 Don't ask for a password when using sudo, *risky*
 /etc/sudoers
