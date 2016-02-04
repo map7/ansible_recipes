@@ -17,15 +17,17 @@
 - name: Install postgresql
   action: apt pkg=postgresql force=yes state=installed
 
-#
-# Postgresql create user
-#
-- name: Create postgresql user
-  postgresql_user: user=$db_user password=$db_passwd role_attr_flags=CREATEDB,SUPERUSER
-  sudo_user: postgres
-
 - name: Install nice postgresql tools
   action: apt pkg={{ item }} force=yes state=installed
   with_items:
     - pgadmin3
     - phppgadmin
+
+#
+# Postgresql create user
+# If problems here make sure you add the following to your /etc/sudoers
+# %sudo   ALL= (postgres) NOPASSWD: ALL
+- name: Create postgresql user
+  postgresql_user: user={{ db_user }} password={{ db_passwd }} role_attr_flags=CREATEDB,SUPERUSER
+  sudo_user: postgres
+

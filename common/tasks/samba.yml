@@ -3,11 +3,8 @@
 # Install samba & swat so we can share some directories.
 #
 
-- name: Install samba
+- name: Install cifs-utils
   apt: pkg=cifs-utils state=installed
 
 - name: Install samba
   apt: pkg=samba state=present
-
-- name: Install swat
-  apt: pkg=swat state=present

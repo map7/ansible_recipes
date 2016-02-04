@@ -8,7 +8,7 @@
 # Note: The root user doesn't have access to ruby/rbenv/gems/rails but this does not
 # stop passenger from running.
 #
-- name: Install dependencies
+- name: Install dependencies for rbenv
   action: apt pkg={{ item }} state=installed force=yes
   with_items:
     - build-essential
@@ -23,29 +23,30 @@
     - wget
     - git-core
 
+# With git repos I've found you have to use https not git
 - name: Install rbenv
-  git: repo=git://github.com/sstephenson/rbenv.git dest=/usr/local/rbenv
+  git: repo=git://github.com/sstephenson/rbenv.git dest=/usr/local/rbenv accept_hostkey=true
 
 - name: Install rbenv plugin ruby-build
   git: repo=https://github.com/sstephenson/ruby-build.git dest=/usr/local/rbenv/plugins/ruby-build
 
 - name: Add rbenv ROOT to Bash profile
   lineinfile:
-    dest=/etc/profile
+    dest=/etc/bash.bashrc
     regexp='RBENV_ROOT=/usr/local/rbenv'
     line='export RBENV_ROOT=/usr/local/rbenv'
     state=present    
 
 - name: Add rbenv PATH to Bash profile
   lineinfile:
-    dest=/etc/profile
+    dest=/etc/bash.bashrc
     regexp="RBENV_ROOT\/bin"
     line='export PATH="$RBENV_ROOT/bin:$PATH"'
     state=present    
 
 - name: Add rbenv init to Bash profile
   lineinfile:
-    dest=/etc/profile
+    dest=/etc/bash.bashrc
     regexp='rbenv init -'
     line='eval "$(rbenv init -)"'
     state=present    
@@ -53,26 +54,29 @@
 - name: Install ruby-build
   action: command /usr/local/rbenv/plugins/ruby-build/install.sh chdir=/usr/local/rbenv/plugins/ruby-build
 
+- name: Create developer group
+  group: name=developer state=present
+
 - name: Add all users to developer group
   action: command bash -c "for user in `ls /home`; do usermod -a -G developer $user; done"
   ignore_errors: yes
   
-- name: Install ruby
-  action: command bash -c "ruby-build $ruby_version /usr/local/rbenv/versions/$ruby_version --with-openssl-dir=/usr/local" creates=/usr/local/rbenv/versions/$ruby_version
+- name: Install ruby under rbenv
+  action: command bash -c "ruby-build {{ ruby_version }} /usr/local/rbenv/versions/{{ ruby_version }} --with-openssl-dir=/usr/local" creates=/usr/local/rbenv/versions/{{ ruby_version }}
   environment:
     CONFIGURE_OPTS: "--enable-shared"
 
-- name: Chgrp settings
+- name: Chmod settings to allow team to install/update gems
   action: command chmod -R g+rwxXs /usr/local/rbenv
 
 - name: Set group to developer for /usr/local/rbenv
   action: command chgrp -R developer /usr/local/rbenv
 
-- name: Set the default ruby to $ruby_version
-  action: command bash -c "/usr/local/rbenv/bin/rbenv global $ruby_version"
+- name: Set the default ruby
+  action: command bash -c "/usr/local/rbenv/bin/rbenv global {{ ruby_version }}"
   environment:
     RBENV_ROOT: /usr/local/rbenv
-
+    
 - name: Initialise rbenv
   action: command bash -c "/usr/local/rbenv/bin/rbenv rehash" creates=/usr/local/rbenv/shims/ruby
   environment:
@@ -81,3 +85,8 @@
 - name: Link gem so we can get to it easy
   command: ln -s /usr/local/rbenv/shims/gem /usr/local/bin/gem creates=/usr/local/bin/gem
 
+- name: Chmod shims
+  action: command chmod -R g+rwxXs /usr/local/rbenv/shims
+
+- name: Set group to developer for /usr/local/rbenv/shims
+  action: command chgrp -R developer /usr/local/rbenv/shims

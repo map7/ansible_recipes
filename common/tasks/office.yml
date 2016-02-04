@@ -11,7 +11,6 @@
     - xchm
     - okular                    # PDF reader of choice
     - inkscape
-    - unetbootin                # Create USB bootable distros
     - krita
     - gimp
     - gthumb                    # Picture viewer & basic editor
@@ -25,15 +24,15 @@
     - gparted
     - audacity
     - filezilla
-    - chromium-browser
+    - chromium
     - wine
     - simple-scan
-    - gnome-do
     - gkrellm
     - backintime-gnome          # Backup
     - fsarchiver                # Backup system tool
     - file-roller               # Better integration with nautilus
     - cheese                    # camera shot
+    #- unetbootin                # Create USB bootable distros (10/04/2015-N/A)
       
 - name: Install compression tools
   action: apt pkg={{ item }} state=installed force=yes
@@ -53,6 +52,5 @@
   when: ansible_os_family == "Debian"
 
 - name: Install virtualbox
-  apt: pkg=virtualbox-ose
+  apt: pkg=virtualbox
   when: ansible_os_family == "Debian"
-

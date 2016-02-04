@@ -9,6 +9,7 @@ Ansible 1.8 (currently the HEAD branch when you clone).
 : sudo apt-get install python-yaml python-jinja2 python-paramiko
 : git clone https://github.com/ansible/ansible.git
 : cd ansible
+: git submodule update --init --recursive
 : sudo make install 
 (Make sure you do not have any other ansible installed through your systems package manager).
 
@@ -28,12 +29,18 @@ Add your user to the 'sudo' group within /etc/groups
 Don't ask for a password when using sudo, *risky*
 /etc/sudoers
 : %sudo   ALL = NOPASSWD: ALL
+: %sudo   ALL= (postgres) NOPASSWD: ALL
 
 ** Running
+
 Now you can run with this command (on the server)
+
 : ansible-playbook media_center.yml -K -v
 | -K | ask for sudo password |
 | -v | verbose               |
+
+*NOTE* With mysql I leave the password blank for the root user until I've finished setup, then manually assign a new password using the following;
+: mysqladmin -u root password 'newpassword'
 
 ** Custom variables
 
@@ -51,9 +58,15 @@ Place it at the bottom of your vars list to override the defaults I've set.
 | ltsp_thin    | Thin client server                    |
 | ltsp_fat     | Fat client server                     |
 | webserver    | Ruby on Rails server                  |
-
 ** TODO Update to 1.8
 
 - [ ] [[https://github.com/ansible/ansible/blob/devel/CHANGELOG.md][Look at changes from 1.2 to 1.5 and optimise]]
 
 - [ ] Update any 'cp' command to using the copy module. Since ansible 1.4 the copy module allows recursive copy.
+
+** TODO Update to 2.0
+   :PROPERTIES:
+   :CREATED:  [2015-04-10 Fri 11:48]
+   :END:
+
+- [ ] Change all $var to {{ var }}

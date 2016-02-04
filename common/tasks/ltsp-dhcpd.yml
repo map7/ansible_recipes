@@ -1,0 +1,19 @@
+---
+#
+# DHCPD setup for LTSP
+#
+# Note: The config files have to be put in place before the install so that the 
+# daemon starts after installation correctly.
+#
+
+- name: Copy setup accross
+  template: src=common/templates/dhcpd.conf.j2 dest=/etc/dhcp/dhcpd.conf mode=0755
+
+- name: Add static IP to network interfaces
+  template: src=common/templates/interfaces.j2 dest=/etc/network/interfaces mode=0644
+
+- name: Link DHCP to interface
+  template: src=common/templates/isc-dhcp-server.j2 dest=/etc/default/isc-dhcp-server mode=0644
+
+- name: Install isc-dhcp-server and start
+  apt: pkg=isc-dhcp-server state=present install_recommends=no

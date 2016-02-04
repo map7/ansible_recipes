@@ -9,10 +9,10 @@
 
 # You cannot use the gem module as the path will not pick it up if you have just installed rbenv
 - name: Install rbenv-rehash
-  action: command bash -c "/usr/local/bin/gem install rbenv-rehash" creates=/usr/local/rbenv/versions/$ruby_version/bin/rbenv-rehash
+  action: command bash -c "/usr/local/bin/gem install rbenv-rehash" creates=/usr/local/rbenv/versions/{{ ruby_version }}/bin/rbenv-rehash
 
 - name: Install rails
-  action: command bash -c "/usr/local/bin/gem install rails" creates=/usr/local/rbenv/versions/$ruby_version/bin/rails
+  action: command bash -c "/usr/local/bin/gem install rails" creates=/usr/local/rbenv/versions/{{ ruby_version }}/bin/rails
 
 #
 # Extra rails projects requirements
@@ -20,9 +20,5 @@
 - name: Install libxslt-dev for nokogiri
   apt: pkg=libxslt-dev state=present
 
-- name: Install sphinx for searching
-  apt: pkg=sphinxsearch state=present
-
 - name: Install wkhtmltopdf
   apt: pkg=wkhtmltopdf state=present
-  tags: focus

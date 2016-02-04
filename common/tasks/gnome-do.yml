@@ -1,0 +1,17 @@
+---
+#
+# gnome-do install & configure
+#
+
+- name: Install gnome-do
+  apt: pkg=gnome-do
+
+# Set gnome-do to hide on startup
+- name: create directory
+  file: path=/home/{{ main_user }}/.gconf/apps state=directory
+  
+- name: Copy gnome-do settings
+  copy: src=common/files/gnome-do.tar dest=/home/{{ main_user }}/.gconf/apps
+
+- name: Untar gnome-do settings
+  command: tar xvf /home/{{ main_user }}/.gconf/apps/gnome-do.tar chdir=/home/{{ main_user }}/.gconf/apps creates=/home/{{ main_user }}/.gconf/apps/gnome-do

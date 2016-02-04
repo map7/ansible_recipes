@@ -24,6 +24,8 @@
     - safe-rm           # Stop people typing 'rm -fr /'
     - molly-guard       # Save people from rebooting the wrong server.
     - expect            # Required for some installation scripts
+    - mg                # emacs lite
+    - firmware-linux
 
 - name: Update command-not-found
   action: command update-command-not-found creates=/var/cache/apt/apt-file
@@ -36,3 +38,11 @@
     - remmina-plugin-nx
     - remmina-plugin-vnc
   when: gui == "true"
+
+- name: GUI tools
+  action: apt pkg={{ item }} state=installed force=yes
+  with_items:
+    - font-manager
+    - ttf-mscorefonts-installer
+  when: gui == "true"
+  
