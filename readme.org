@@ -51,6 +51,10 @@ Create passwordless access (server to client)
 : ssh-copy-id deploy@<target ip>
 
 
+** Install required roles
+
+: ansible-galaxy install -r requirements.yml
+
 ** Running
 
 Now you can run with this command (on the development machine)
