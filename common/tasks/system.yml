@@ -10,11 +10,11 @@
   with_items:
     - htop
     - screen
-    - vim
+    - vim                       
     - openssh-server
     - zsh
     - sysstat
-    - mutt
+    - mutt                      # Email
     - mc                        # Midnight Commander
     - nethogs
     - ncdu              # Check disk usage per directory
@@ -23,6 +23,7 @@
     - bwm-ng            # bandwidth monitor for network & disk
     - safe-rm           # Stop people typing 'rm -fr /'
     - molly-guard       # Save people from rebooting the wrong server.
+    - expect            # Required for some installation scripts
 
 - name: Update command-not-found
   action: command update-command-not-found creates=/var/cache/apt/apt-file
@@ -34,7 +35,4 @@
     - remmina
     - remmina-plugin-nx
     - remmina-plugin-vnc
-
-- name: Install expect for some installation scripts
-  apt: pkg=expect force=yes
-
+  when: gui == "true"

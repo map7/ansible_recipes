@@ -2,6 +2,10 @@
 #
 # Webserver for running Ruby on Rails with postgresql & node.
 #
+# Run
+# ansible-playbook webserver.yml -K -v
+# -K sudo access
+# -v verbose
 
 - hosts: webservers
   user: map7
@@ -16,21 +20,21 @@
 
   tasks:
     - include: common/tasks/system.yml
-    - include: common/tasks/rbenv.yml
-    - include: common/tasks/node.yml
-    - include: common/tasks/rails.yml
-    - include: common/tasks/apache.yml
-    - include: common/tasks/postgresql.yml
-    - include: common/tasks/wkhtmltopdf.yml
+    # - include: common/tasks/rbenv.yml
+    # - include: common/tasks/node.yml
+    # - include: common/tasks/rails.yml
+    # - include: common/tasks/apache.yml
+    # - include: common/tasks/postgresql.yml
+    # - include: common/tasks/wkhtmltopdf.yml
 
-    - name: Set permissions on /srv
-      file: path=/srv owner=root group=www-data mode=0775 state=directory
+    # - name: Set permissions on /srv
+    #   file: path=/srv owner=root group=www-data mode=0775 state=directory
 
-    - name: Add main user to www-data group
-      user: name=$main_user append=yes groups=www-data
+    # - name: Add main user to www-data group
+    #   user: name=$main_user append=yes groups=www-data
 
-    - name: Install Sphinx
-      apt: pkg=sphinxsearch state=installed
+    # - name: Install Sphinx
+    #   apt: pkg=sphinxsearch state=installed
 
   handlers:
     - include: common/handlers/handlers.yml

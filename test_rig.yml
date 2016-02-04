@@ -1,0 +1,30 @@
+---
+#
+# Test Rig system
+#
+# My office system which runs thin clients and is setup for these firms Accountants, Lawyers, Real Estate &
+# Programmers. It uses thin clients and the server has nvidia graphics cards.
+#
+# Requirements
+# sudo ansible-galaxy install smola.java
+
+- hosts: test
+  user: map7
+  sudo: yes
+  vars:
+    main_user: map7
+  vars_files:
+    - "vars/defaults.yml"
+    - "vars/$ansible_distribution-$ansible_architecture.yml"
+    - "vars/$ansible_distribution.yml"
+    - "vars/custom.yml"
+
+  tasks:
+    - include: common/tasks/system.yml
+    - include: common/tasks/node.yml
+
+    - name: Install Java
+      apt: name=java7-jdk
+      
+  handlers:
+    - include: common/handlers/handlers.yml    
