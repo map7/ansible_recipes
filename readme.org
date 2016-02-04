@@ -24,9 +24,14 @@ Install Debian 7 into virtual box (name: debian7)
 Create passwordless access (server to client)
 : ssh-copy-id <user>@<target ip>
 
+Install sudo
+: su
+: apt-get install sudo
+
 Add your user to the 'sudo' group within /etc/group
 
-Don't ask for a password when using sudo, *risky*
+Don't ask for a password when using sudo, *risky* (optional)
+Note: This is optional if you are using the -K then there is no need for this.
 /etc/sudoers
 : %sudo   ALL = NOPASSWD: ALL
 : %sudo   ALL= (postgres) NOPASSWD: ALL
