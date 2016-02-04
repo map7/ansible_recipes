@@ -30,18 +30,4 @@
   action: command update-command-not-found creates=/var/cache/apt/apt-file
   when: ansible_os_family == "Debian"
 
-- name: Remote support
-  action: apt pkg={{ item }} state=installed force=yes
-  with_items:
-    - remmina
-    - remmina-plugin-nx
-    - remmina-plugin-vnc
-  when: gui == "true"
-
-- name: GUI tools
-  action: apt pkg={{ item }} state=installed force=yes
-  with_items:
-    - font-manager
-    - ttf-mscorefonts-installer
-  when: gui == "true"
   
