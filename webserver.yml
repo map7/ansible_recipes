@@ -19,7 +19,8 @@
     - "vars/custom.yml"
 
   tasks:
-    - include: common/tasks/system.yml
+    # - include: common/tasks/system.yml
+
     # - include: common/tasks/rbenv.yml
     # - include: common/tasks/node.yml
     # - include: common/tasks/rails.yml
@@ -36,5 +37,8 @@
     # - name: Install Sphinx
     #   apt: pkg=sphinxsearch state=installed
 
+  roles:
+    - palkan.nodejs
+    
   handlers:
     - include: common/handlers/handlers.yml
