@@ -12,7 +12,6 @@
   sudo: yes
   vars:
     main_user: map7
-    repo: "jessie"
   vars_files:
     - "vars/defaults.yml"
     - "vars/$ansible_distribution-$ansible_architecture.yml"
