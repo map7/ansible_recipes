@@ -2,7 +2,6 @@
 #
 # Override these settings in custom.yml
 #
-repo: wheezy
 locale: "en_AU.UTF-8"
 jvm_folder: "/opt"
 gems_version: "2.1.0"

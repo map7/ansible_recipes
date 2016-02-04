@@ -14,7 +14,7 @@
     line='#deb cdrom:[Debian GNU/Linux 7.0.0 _Wheezy_ - Official amd64 CD Binary-1 20130504-14:44]/ wheezy main contrib non-free'
   notify: Update apt-get
   
-- name: Add multimedia {{ repo }} repository
+- name: Add multimedia repository
   apt_repository: repo="deb http://www.deb-multimedia.org {{ repo }} main non-free"
   when: ansible_os_family == "Debian"
 
@@ -22,7 +22,7 @@
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb http://ftp.au.debian.org/debian/ wheezy main$'
+    regexp='deb http://ftp.au.debian.org/debian/ {{ repo }} main$'
     line='deb http://ftp.au.debian.org/debian/ {{ repo }} main contrib non-free'
   when: ansible_os_family == "Debian"
 
@@ -30,7 +30,7 @@
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb-src http://ftp.au.debian.org/debian/ wheezy main$'
+    regexp='deb-src http://ftp.au.debian.org/debian/ {{ repo }} main$'
     line='deb-src http://ftp.au.debian.org/debian/ {{ repo }} main contrib non-free'
   when: ansible_os_family == "Debian"
 
@@ -38,7 +38,7 @@
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb http://security.debian.org/ wheezy/updates main$'
+    regexp='deb http://security.debian.org/ {{ repo }}/updates main$'
     line='deb http://security.debian.org/ {{ repo }}/updates main contrib non-free'
   when: ansible_os_family == "Debian"
 
@@ -46,7 +46,7 @@
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb-src http://security.debian.org/ wheezy/updates main$'
+    regexp='deb-src http://security.debian.org/ {{ repo }}/updates main$'
     line='deb-src http://security.debian.org/ {{ repo }}/updates main contrib non-free'
   when: ansible_os_family == "Debian"
 
@@ -54,7 +54,7 @@
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb http://ftp.au.debian.org/debian/ wheezy-updates main$'
+    regexp='deb http://ftp.au.debian.org/debian/ {{ repo }}-updates main$'
     line='deb http://ftp.au.debian.org/debian/ {{ repo }}-updates main contrib non-free'
   when: ansible_os_family == "Debian"
 
@@ -62,7 +62,7 @@
   lineinfile:
     dest=/etc/apt/sources.list
     backrefs=yes
-    regexp='deb-src http://ftp.au.debian.org/debian/ wheezy-updates main$'
+    regexp='deb-src http://ftp.au.debian.org/debian/ {{ repo }}-updates main$'
     line='deb-src http://ftp.au.debian.org/debian/ {{ repo }}-updates main contrib non-free'
   when: ansible_os_family == "Debian"
   
