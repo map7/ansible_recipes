@@ -16,17 +16,20 @@
     - "vars/$ansible_distribution.yml"
     - "vars/custom.yml"
   roles:
+    # Install passenger & apache
     - role: mtpereira.passenger
       passenger_webserver: apache
-   
+    
   tasks:
     - include: common/tasks/system.yml
 
-    # - include: common/tasks/rbenv.yml
     # - include: common/tasks/node.yml
+
+    # - include: common/tasks/rbenv.yml
     # - include: common/tasks/rails.yml
-    # - include: common/tasks/apache.yml
+
     # - include: common/tasks/postgresql.yml
+
     # - include: common/tasks/wkhtmltopdf.yml
 
     # - name: Set permissions on /srv
