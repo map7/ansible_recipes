@@ -1,10 +1,12 @@
 ---
+
 #
 # Add commonly used repositories
 #
 - name: Add python-software-properties
-  apt: pkg=python-software-properties force=yes update_cache=yes state=installed
+  apt: pkg=python-software-properties force=yes state=installed
   when: ansible_os_family == "Debian"
+  notify: Update apt-get
 
 - name: Remove cdrom source
   lineinfile:
@@ -84,5 +86,6 @@
   when: ansible_os_family == "Debian"
   
 - name: Add multimedia keyring
-  apt: pkg=deb-multimedia-keyring force=yes update_cache=yes
+  apt: pkg=deb-multimedia-keyring force=yes
   when: ansible_os_family == "Debian"
+  notify: Update apt-get

@@ -1,0 +1,7 @@
+---
+#
+# Install sphinx for index searching
+#
+
+- name: Install Sphinx
+  apt: pkg=sphinxsearch state=installed

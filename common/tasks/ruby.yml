@@ -1,0 +1,20 @@
+---
+#
+# Ruby installation
+#
+
+#
+# Install ruby & ruby headers
+#
+- name: Install ruby
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - ruby
+    - ruby-dev
+
+#    
+# Test that we can install gems
+#
+- name: install cheat
+  gem: name=cheat state=present user_install=no
+  sudo: yes

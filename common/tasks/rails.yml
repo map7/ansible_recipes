@@ -4,21 +4,27 @@
 #
 # This will be used on servers so keep this list of extra gems to a minimum.
 #
-# Requires: rbenv.yml
-# 
-
-# You cannot use the gem module as the path will not pick it up if you have just installed rbenv
-- name: Install rbenv-rehash
-  action: command bash -c "/usr/local/bin/gem install rbenv-rehash" creates=/usr/local/rbenv/versions/{{ ruby_version }}/bin/rbenv-rehash
 
 - name: Install rails
-  action: command bash -c "/usr/local/bin/gem install rails" creates=/usr/local/rbenv/versions/{{ ruby_version }}/bin/rails
+  gem: name=rails state=present user_install=no
+  sudo: yes
 
+#
+# Setup web apps area
+#
+- name: Set permissions on /srv
+  file: path=/srv owner=root group=www-data mode=0775 state=directory
+  sudo: yes
+
+- name: Add main user to www-data group
+  user: name=$main_user append=yes groups=www-data
+  sudo: yes
+  
 #
 # Extra rails projects requirements
 # 
 - name: Install libxslt-dev for nokogiri
   apt: pkg=libxslt-dev state=present
+  sudo: yes
+  
 
-- name: Install wkhtmltopdf
-  apt: pkg=wkhtmltopdf state=present

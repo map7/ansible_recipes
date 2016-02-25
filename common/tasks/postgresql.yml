@@ -2,7 +2,6 @@
 #
 # Install PostgreSQL
 #
-
 - name: Install postgresql requirements
   action: apt pkg={{ item }} force=yes state=installed
   with_items:
@@ -15,19 +14,17 @@
   command: /usr/sbin/update-locale LANG=$locale LC_ALL=$locale
 
 - name: Install postgresql
-  action: apt pkg=postgresql force=yes state=installed
+  action: apt pkg=postgresql-9.4 force=yes state=installed
 
-- name: Install nice postgresql tools
-  action: apt pkg={{ item }} force=yes state=installed
-  with_items:
-    - pgadmin3
-    - phppgadmin
-
-#
 # Postgresql create user
 # If problems here make sure you add the following to your /etc/sudoers
 # %sudo   ALL= (postgres) NOPASSWD: ALL
+#
+# Issues;
+# https://stackoverflow.com/questions/35619477/ansible-create-a-postgres-user
+#
 - name: Create postgresql user
   postgresql_user: user={{ db_user }} password={{ db_passwd }} role_attr_flags=CREATEDB,SUPERUSER
-  sudo_user: postgres
+  become_user: postgres
+
 

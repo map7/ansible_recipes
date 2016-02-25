@@ -8,6 +8,7 @@
 
 - name: Run the setup
   action: command bash setup_4.x
+  sudo: yes
 
 
 # --------------------------------------------------------------------------------
