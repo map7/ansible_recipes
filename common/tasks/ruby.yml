@@ -11,10 +11,13 @@
   with_items:
     - ruby
     - ruby-dev
+    - zlib1g-dev
+    - liblzma-dev
+  become: yes
 
 #    
 # Test that we can install gems
 #
 - name: install cheat
   gem: name=cheat state=present user_install=no
-  sudo: yes
+  become: yes

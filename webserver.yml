@@ -22,14 +22,14 @@
     - role: Heroqu.nodejs4x
       sudo: yes
     
+    # --------------------------------------------------------------------------------
+    # Broken roles
+    # --------------------------------------------------------------------------------
     # # Issues: https://github.com/William-Yeh/ansible-nodejs/issues/4
     # - role: williamyeh.nodejs
     #   nodejs_version: "5"
     #   become: yes
     
-    # --------------------------------------------------------------------------------
-    # Broken
-    # --------------------------------------------------------------------------------
     # # Issues: https://github.com/SamyRoad/ansible-rbenv/issues/1
     # - role: mmacia.rbenv
     #   rbenv_env: user
@@ -39,7 +39,7 @@
     
   tasks:
     - include: common/tasks/system.yml
-    # - include: common/tasks/node.yml
+      become: yes
     - include: common/tasks/ruby.yml
     - include: common/tasks/rails.yml
     - include: common/tasks/postgresql.yml

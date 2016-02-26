@@ -7,24 +7,24 @@
 
 - name: Install rails
   gem: name=rails state=present user_install=no
-  sudo: yes
+  become: yes
 
 #
 # Setup web apps area
 #
 - name: Set permissions on /srv
   file: path=/srv owner=root group=www-data mode=0775 state=directory
-  sudo: yes
+  become: yes
 
 - name: Add main user to www-data group
   user: name=$main_user append=yes groups=www-data
-  sudo: yes
+  become: yes
   
 #
 # Extra rails projects requirements
 # 
 - name: Install libxslt-dev for nokogiri
   apt: pkg=libxslt-dev state=present
-  sudo: yes
+  become: yes
   
 
