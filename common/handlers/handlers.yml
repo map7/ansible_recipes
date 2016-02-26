@@ -4,18 +4,25 @@
 #
 - name: restart apache
   action: service name=apache2 state=restarted
+  become: yes
 
 - name: restart mysql
   action: service name=mysql state=restarted
+  become: yes
 
 - name: reload nfs
   action: command invoke-rc.d nfs-kernel-server restart
+  become: yes
 
 - name: restart ssh
   action: service name=ssh state=restarted
+  become: yes
 
 - name: Update apt-get
   action: apt update_cache=yes  
+  become: yes
 
+# RAID
 - name: restart mdm
   action: service name=mdm state=restarted
+  become: yes
