@@ -36,6 +36,7 @@
     #   rbenv_ruby_version: 2.1.8
     #   rbenv_users:
     #     - map7
+    #   become: yes
     
   tasks:
     - include: common/tasks/system.yml
