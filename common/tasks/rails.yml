@@ -27,4 +27,7 @@
   apt: name=libxslt-dev state=present
   become: yes
   
-
+# Install sqlite (just for testing)
+- name: Install libsqlite3-dev for sqlite gem
+  apt: name=libsqlite3-dev state=present
+  become: yes
