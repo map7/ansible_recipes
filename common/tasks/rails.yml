@@ -24,7 +24,7 @@
 # Extra rails projects requirements
 # 
 - name: Install libxslt-dev for nokogiri
-  apt: pkg=libxslt-dev state=present
+  apt: name=libxslt-dev state=present
   become: yes
   
 
