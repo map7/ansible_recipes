@@ -24,7 +24,7 @@
 # https://stackoverflow.com/questions/35619477/ansible-create-a-postgres-user
 #
 - name: Create postgresql user
-  postgresql_user: user={{ db_user }} password={{ db_passwd }} role_attr_flags=CREATEDB,SUPERUSER
+  postgresql_user: user={{ansible_ssh_user}} password={{db_passwd}} role_attr_flags=CREATEDB,SUPERUSER
   become_user: postgres
 
 
