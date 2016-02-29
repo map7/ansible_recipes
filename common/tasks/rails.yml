@@ -12,12 +12,12 @@
 #
 # Setup web apps area
 #
-- name: Set permissions on /srv
-  file: path=/srv owner=root group=www-data mode=0775 state=directory
+- name: Set permissions on /var/www
+  file: path=/var/www owner=root group=www-data mode=2775 state=directory
   become: yes
 
 - name: Add main user to www-data group
-  user: name=$main_user append=yes groups=www-data
+  user: name={{ansible_ssh_user}} append=yes groups=www-data
   become: yes
   
 #
@@ -31,3 +31,4 @@
 - name: Install libsqlite3-dev for sqlite gem
   apt: name=libsqlite3-dev state=present
   become: yes
+
