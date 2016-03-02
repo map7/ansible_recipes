@@ -26,6 +26,11 @@
 - name: Install libxslt-dev for nokogiri
   apt: name=libxslt-dev state=present
   become: yes
+
+# For RefineryCMS & any image manipulation
+- name: Install imagemagick
+  apt: name=imagemagick state=present
+  become: yes
   
 # Install sqlite (just for testing)
 - name: Install libsqlite3-dev for sqlite gem
