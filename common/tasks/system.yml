@@ -26,6 +26,7 @@
     - molly-guard       # Save people from rebooting the wrong server.
     - expect            # Required for some installation scripts
     - mg                # emacs lite
+    - git
 
 - name: Update command-not-found
   action: command update-command-not-found creates=/var/cache/apt/apt-file
