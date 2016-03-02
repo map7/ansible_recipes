@@ -8,12 +8,21 @@
 # -v verbose
 
 - hosts: webservers
-  user: map7
+  user: deploy
   vars_files:
     - "vars/defaults.yml"
     - "vars/$ansible_distribution-$ansible_architecture.yml"
     - "vars/$ansible_distribution.yml"
 
+  pre_tasks:
+    # Required on Debian 8 minimum install
+    - name: install python-apt
+      command: >
+        apt-get install python-apt -y -q
+        creates=/usr/share/doc/python-apt
+      sudo: yes
+
+    
   roles:
     # Install passenger & apache
     - role: mtpereira.passenger
