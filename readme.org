@@ -3,6 +3,28 @@
 
 Written for ansible 1.8
 
+** Target (Server in need of configuration)
+
+Install Debian 8 into virtual box (name: debian8)
+
+Login as root
+: ssh root@<target ip>
+
+Install sudo
+: apt-get update
+: apt-get install sudo
+
+Add your user to the 'sudo' group within /etc/group
+
+Don't ask for a password when using sudo, *risky* (optional)
+Note: This is optional if you are using the -b then there is no need for this.
+/etc/sudoers
+: %sudo   ALL = NOPASSWD: ALL
+: %sudo   ALL= (postgres) NOPASSWD: ALL
+
+Add a deploy user & set a password
+: adduser deploy
+
 ** Source (Your development box)
 
 Ansible 1.8 (currently the HEAD branch when you clone).
@@ -13,28 +35,15 @@ Ansible 1.8 (currently the HEAD branch when you clone).
 : sudo make install 
 (Make sure you do not have any other ansible installed through your systems package manager).
 
+Clone this repo (ansible-recipes)
+
 Add target's IP to /etc/ansible/hosts file under the top ungrouped section
 EG:
 : 192.168.0.100
 
-** Target (Server in need of configuration)
-
-Install Debian 7 into virtual box (name: debian7)
-
 Create passwordless access (server to client)
-: ssh-copy-id <user>@<target ip>
+: ssh-copy-id deploy@<target ip>
 
-Install sudo
-: su
-: apt-get install sudo
-
-Add your user to the 'sudo' group within /etc/group
-
-Don't ask for a password when using sudo, *risky* (optional)
-Note: This is optional if you are using the -b then there is no need for this.
-/etc/sudoers
-: %sudo   ALL = NOPASSWD: ALL
-: %sudo   ALL= (postgres) NOPASSWD: ALL
 
 ** Running
 
