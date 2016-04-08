@@ -14,16 +14,17 @@ Install sudo
 : apt-get update
 : apt-get install sudo
 
+Add a deploy user & set a password
+: adduser deploy
+
 Add your user to the 'sudo' group within /etc/group
+: sudo:x:27:deploy
 
 Don't ask for a password when using sudo, *risky* (optional)
 Note: This is optional if you are using the -b then there is no need for this.
 /etc/sudoers
 : %sudo   ALL = NOPASSWD: ALL
 : %sudo   ALL= (postgres) NOPASSWD: ALL
-
-Add a deploy user & set a password
-: adduser deploy
 
 ** Source (Your development box)
 
@@ -36,6 +37,11 @@ Ansible 1.8 (currently the HEAD branch when you clone).
 (Make sure you do not have any other ansible installed through your systems package manager).
 
 Clone this repo (ansible-recipes)
+: git clone https://github.com/map7/ansible_recipes.git
+
+Install the roles
+: sudo ansible-galaxy install Heroqu.nodejs4x
+: sudo ansible-galaxy install mtpereira.passenger
 
 Add target's IP to /etc/ansible/hosts file under the top ungrouped section
 EG:
@@ -47,7 +53,7 @@ Create passwordless access (server to client)
 
 ** Running
 
-Now you can run with this command (on the server)
+Now you can run with this command (on the development machine)
 
 : ansible-playbook media_center.yml -b -v
 | -b | become sudo |
