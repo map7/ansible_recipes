@@ -18,6 +18,10 @@
   action: service name=ssh state=restarted
   become: yes
 
+- name: restart exim4
+  action: service name=exim4 state=restarted
+  become: yes
+
 - name: Update apt-get
   action: apt update_cache=yes  
   become: yes

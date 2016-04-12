@@ -50,6 +50,8 @@
   tasks:
     - include: common/tasks/system.yml
       become: yes
+    - include: common/tasks/email.yml
+      become: yes
     - include: common/tasks/ruby.yml
     - include: common/tasks/rails.yml
     - include: common/tasks/postgresql.yml
