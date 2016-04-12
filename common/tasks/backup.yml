@@ -1,0 +1,13 @@
+---
+#
+# Install Ruby backup utililty
+#
+
+- name: Install backup gem
+  gem: name=backup state=present user_install=no
+  become: yes
+
+  # Doesn't work, some permissions problem
+# - name: Generate a model
+#   shell: backup generate:model --trigger website --databases="postgresql" --archives --splitter --notifiers=mail --compressor=gzip
+#   become_user: deploy
