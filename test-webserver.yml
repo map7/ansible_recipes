@@ -1,0 +1,59 @@
+---
+#
+# Webserver for running Ruby on Rails with postgresql & node.
+#
+# Run
+# ansible-playbook webserver.yml -b -v
+# -b become sudo
+# -v verbose
+
+- hosts: test-webservers
+  user: map7
+  vars_files:
+    - "vars/defaults.yml"
+    - "vars/$ansible_distribution-$ansible_architecture.yml"
+    - "vars/$ansible_distribution.yml"
+
+  pre_tasks:
+    # Required on Debian 8 minimum install
+    - name: install python-apt
+      command: >
+        apt-get install python-apt -y -q
+        creates=/usr/share/doc/python-apt
+      sudo: yes
+
+    
+  roles:
+    # # Install passenger & apache
+    # - role: mtpereira.passenger
+    #   passenger_webserver: apache
+    #   sudo: yes
+    # - role: Heroqu.nodejs4x
+    #   sudo: yes
+    
+    # --------------------------------------------------------------------------------
+    # Broken roles
+    # --------------------------------------------------------------------------------
+    # # Issues: https://github.com/William-Yeh/ansible-nodejs/issues/4
+    # - role: williamyeh.nodejs
+    #   nodejs_version: "5"
+    #   become: yes
+    
+    # Issues: https://github.com/SamyRoad/ansible-rbenv/issues/1
+    - role: mmacia.rbenv
+      rbenv_env: user
+      rbenv_ruby_version: 2.1.8
+      rbenv_users:
+        - map7
+      become: yes
+    
+  tasks:
+    # - include: common/tasks/system.yml
+    #   become: yes
+    # - include: common/tasks/ruby.yml
+    # - include: common/tasks/rails.yml
+    # - include: common/tasks/postgresql.yml
+    #   become: yes               
+
+  handlers:
+    - include: common/handlers/handlers.yml
