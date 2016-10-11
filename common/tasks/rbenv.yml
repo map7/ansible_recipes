@@ -9,6 +9,12 @@
 # stop passenger from running.
 #
 
+####
+# RBENV INSTALL NEEDS TO BE LOOKED AT
+# I DONT THINK IT IS SETUP CORRECTLY
+# NEED TO INSTALL RBENV GLOBALLY
+# EG. We should be adding rbenv to the PATH via ZSH
+####
 - name: Install rbenv & ruby-build
   action: apt pkg={{ item }} state=installed force=yes
   with_items:
