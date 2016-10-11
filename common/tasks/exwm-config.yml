@@ -1,0 +1,60 @@
+
+---
+
+#
+# EXWM (already added through emacs install, just configure autostart here)
+# Also configures other programs to autostart such as volti, network maanger, udiskie...  
+#
+
+- name: Copy the xinitrc.sample to ~/.xinitrc
+  file: 
+    src: "/home/{{ user }}/.emacs.d/xinitrc.sample"
+    dest: "/home/{{ user }}/.xinitrc"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+
+- name: Link .xinit to .xsession to set EXWM as default windows manager
+  file:
+    src: "/home/{{ user }}/.xinitrc" 
+    dest: "/home/{{ user }}/.xsession"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    state: link
+
+- name: Autostart GUI apps
+  file:
+    dest: "/home/{{ user }}/.emacs.autostart.el"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    state: touch
+    
+- name: Populate .emacs.autostart.el
+  lineinfile:
+    dest: "/home/{{ user }}/.emacs.autostart.el"
+    state: present
+    line: "{{ item.line }}"
+  with_items:
+    - { line: ";;Autostart Dropbox" }
+    - { line: "(call-process-shell-command \"(sleep 10s && ~/.dropbox-dist/dropboxd) &\" nil 0)" }
+
+- name: Multiple Screens
+  file:
+    dest: "/home/{{ user }}/.emacs.randr.el"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    state: touch
+
+- name: Populate .emacs.randr.el
+  lineinfile:
+    dest: "/home/{{ user }}/.emacs.randr.el"
+    state: present
+    line: "{{ item.line }}"
+  with_items:
+    - { line: "(setq exwm-randr-workspace-output-plist '(0 \"HDMI2\" 1 \"eDP1\" 2 \"eDP1\" 3 \"eDP1\"))" }
+    - { line: "(add-hook 'exwm-randr-screen-change-hook" }
+    - { line: "         (lambda ()" }
+    - { line: "           (start-process-shell-command" }
+    - { line: "            \"xrandr\" nil \"xrandr --output eDP1 --left-of HDMI2 --output HDMI2 --auto\")))" }
+    - { line: "(exwm-randr-enable)" }
+
+
