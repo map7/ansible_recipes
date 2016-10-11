@@ -13,7 +13,7 @@
     dest=/etc/apt/sources.list
     backrefs=yes
     regexp='^deb cdrom'
-    line='#deb cdrom:[Debian GNU/Linux 7.0.0 _Wheezy_ - Official amd64 CD Binary-1 20130504-14:44]/ wheezy main contrib non-free'
+    line='#deb cdrom[device for cdrom] [distro] main contrib non-free'
   notify: Update apt-get
   
 - name: Add multimedia repository
