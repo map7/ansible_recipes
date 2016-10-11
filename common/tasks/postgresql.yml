@@ -14,7 +14,7 @@
   command: /usr/sbin/update-locale LANG=$locale LC_ALL=$locale
 
 - name: Install postgresql
-  action: apt pkg=postgresql-9.4 force=yes state=installed
+  action: apt pkg=postgresql-9.5 force=yes state=installed
 
 # Postgresql create user
 # If problems here make sure you add the following to your /etc/sudoers
