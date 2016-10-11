@@ -1,0 +1,7 @@
+---
+#
+# Configure System Locale
+#
+
+- name: Setup System Locale as EN_US.UTF-8
+  command: /usr/sbin/update-locale LANG="en_US.UTF-8" LC_ALL="en_US.UTF-8"
