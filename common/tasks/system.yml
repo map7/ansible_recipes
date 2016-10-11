@@ -27,6 +27,7 @@
     - expect            # Required for some installation scripts
     - mg                # emacs lite
     - git
+    - build-essential   # Build tools like gcc.
 
 - name: Update command-not-found
   action: command update-command-not-found creates=/var/cache/apt/apt-file
