@@ -55,11 +55,10 @@
       become: yes
     - include: common/tasks/email.yml
       become: yes
-    - include: common/tasks/rbenv.yml
-    #- include: common/tasks/ruby.yml
-    - include: common/tasks/rails.yml
     - include: common/tasks/postgresql.yml
       become: yes
+    - include: common/tasks/ruby.yml #install a system ruby used with backup
+    - include: common/tasks/programming.yml #Also installs emacs, rbenv, ruby thru rbenv, rails
     - include: common/tasks/backup.yml
     - include: common/tasks/locale.yml  
       #more office things to be installed
@@ -67,7 +66,6 @@
     - include: common/tasks/lvm.yml
     - include: common/tasks/x2go.yml
     # - include: common/tasks/dropbox.yml
-    - include: common/tasks/programming.yml
     - include: common/tasks/exwm-config.yml
     - include: common/tasks/node-dev-machine.yml
   handlers:
