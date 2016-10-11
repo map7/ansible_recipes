@@ -66,7 +66,7 @@
     - include: common/tasks/lvm.yml
     - include: common/tasks/x2go.yml
     # - include: common/tasks/dropbox.yml
-    - include: common/tasks/exwm-config.yml
+    #- include: common/tasks/exwm-config.yml
     - include: common/tasks/node-dev-machine.yml
   handlers:
     - include: common/handlers/handlers.yml
