@@ -12,13 +12,13 @@
     - okular                    # PDF reader of choice
     - inkscape
     - gimp
-    - gthumb                    # Picture viewer & basic editor
+    #- gthumb                    # Picture viewer & basic editor
     - keepassx
     - gwakeonlan                # Turn computers on around the office
     - ktorrent
     - wireshark
     - gparted
-    - audacity
+    #- audacity
     - filezilla
     - chromium
     - wine
