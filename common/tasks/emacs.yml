@@ -38,7 +38,7 @@
     state=present    
 
 - name: Copy my setup across
-  git: repo="https://github.com/{{ user }}/emacs-config.git"
+  git: repo="https://github.com/{{ gituser }}/emacs-config.git"
   args:
     dest: "/home/{{ user }}/.emacs.d"
     update: no
