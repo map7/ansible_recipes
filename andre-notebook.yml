@@ -12,6 +12,7 @@
   vars:
     repo: testing
     user: andre
+    gituser: drej2k
   vars_files:
     - "vars/defaults.yml"
     - "vars/$ansible_distribution-$ansible_architecture.yml"
