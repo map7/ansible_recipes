@@ -6,47 +6,47 @@
 # we like to put this media processing onto the clients.
 #
 
-# Some must-have stuff
-# This should be done manually for fat clients
-# LATE_PACKAGES="
-# 		less
-# 		nano
-# 		aptitude
-# 		man
-# 		nfs-client
-# 		ssh
-# 		epoptes-client
-# 		lirc
-# 		cifs-utils
-# "
-
 # Add items to the chroot section
 
 # Add desktop (must use aptitude so it sets the configuration correctly)
-- name: Convert thin-client to fat-client by installing a desktop environment
-  command: ltsp-chroot 'aptitude install lxde -y'
+- name: LTSP CHROOT - Convert thin-client to fat-client by installing a desktop environment
+  command: ltsp-chroot -m apt-get install xfce4 -y
 
-# Add XBMC
-- name: Install add-apt-repository
-  command: ltsp-chroot 'aptitude install python-software-properties -y'
+# Add kodi
 
-- name: Add multimedia testing repository
-  command: cp /etc/apt/sources.list /opt/ltsp/i386/etc/apt/sources.list
+# # BROKEN
+# - name: Install add-apt-repository
+#   command: ltsp-chroot -m 'aptitude install python-software-properties -y'
+
+- name: LTSP CHROOT - Add multimedia testing repository
+  command: cp /etc/apt/sources.list.d/www_deb_multimedia_org.list /opt/ltsp/amd64/etc/apt/sources.list.d
   when: ansible_os_family == "Debian"
 
-- name: Update repo for chroot
-  command: ltsp-chroot 'apt-get update'
-  
+- name: LTSP CHROOT - Update repo for chroot
+  command: ltsp-chroot -m apt-get update
+
+# --------------------------------------------------------------------------------
+# Install applications in chroot section
+# --------------------------------------------------------------------------------
+
 # Had to use apt-get as I couldn't get aptitude to install without questions
-- name: Install latest xbmc
-  command: ltsp-chroot 'apt-get install --force-yes -y xbmc'
+- name: LTSP CHROOT - Install latest kodi
+  command: ltsp-chroot -m apt-get install --force-yes -y {{ item }} 
+  with_items:
+    - kodi
+    - mysql-client              # Required for testing only.
+    - kodi-pvr-hts
 
-#
-# Works with my 'chroot' module, awaiting pull request before I use this.
-#
-# https://github.com/ansible/ansible/pull/3059
-#  - Not accepted as there is a runner for chroot, but I'm not convinced it works the same.
-#
-# - name: Install latest xbmc
-#   chroot: cmd='apt-get install --force-yes -y xbmc'
+- name: LTSP CHROOT - Install office and admin tools
+  command: ltsp-chroot -m apt-get install --force-yes -y {{ item }} 
+  with_items:
+    - firefox-esr
+    - icedove
+    - firmware-linux-nonfree
 
+
+# --------------------------------------------------------------------------------
+# LTS.CONF
+# --------------------------------------------------------------------------------
+- name: LTSP CHROOT - Copy over standard lts.conf config file
+  copy: src=common/files/lts.conf dest=/opt/ltsp/amd64/etc/lts.conf.example

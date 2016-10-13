@@ -2,7 +2,13 @@
 # Build the LTSP client
 #
 - name: Update image
-  command: ltsp-update-image --config-nbd creates=/opt/ltsp/images/i386.img
+  command: ltsp-update-image --config-nbd creates=/opt/ltsp/images/amd64.img
 
 - name: Create ssh keys
   command: ltsp-update-sshkeys
+
+# Configure nbd
+- name: Configure network block device
+  command: ltsp-config nbd-server
+  notify: restart nbd
+

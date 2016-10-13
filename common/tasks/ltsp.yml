@@ -15,20 +15,27 @@
 - name: Install epoptes
   apt: pkg=epoptes
 
-- name: Add $user to epoptes
-  action: command bash -c "for user in `ls /home`; do usermod -a -G epoptes $user; done"
+- name: Add {{ ansible_ssh_user }} to epoptes
+  action: command bash -c "for user in `ls /home`; do usermod -a -G epoptes {{ ansible_ssh_user }}; done"
   ignore_errors: yes
-  
+
+- name: Add fuse group
+  group: name=fuse state=present
+
 - name: Add all users to fuse group for local mounting
-  action: command bash -c "for user in `ls /home`; do usermod -a -G fuse $user; done"
+  action: command bash -c "for user in `ls /home`; do usermod -a -G fuse {{ ansible_ssh_user }}; done"
   ignore_errors: yes
   
 - name: Copy LTSP configuration accross
   copy: src=common/files/ltsp-build-client.conf dest=/etc/ltsp/ltsp-build-client.conf
-  
-## Sometimes there are some errors, but these can be safely ignored
+
+# --------------------------------------------------------------------------------
+# Build thin client
+#
+# NOTE: Sometimes there are some errors, but these can be safely ignored
+# --------------------------------------------------------------------------------
 - name: Build thin client
-  action: command ltsp-build-client creates=/opt/ltsp/i386
+  action: command ltsp-build-client creates=/opt/ltsp/amd64
   ignore_errors: yes
 
 ## Debian recommends we run LTSP in NFS mode, not NBD mode
@@ -40,32 +47,30 @@
     backup=yes
     state=present
   notify: reload nfs
+
+# --------------------------------------------------------------------------------
+# WORKAROUNDS
+# --------------------------------------------------------------------------------
   
-- name: Copy helper program over
-  copy: src=common/files/ltsp-chroot dest=/usr/local/bin/ltsp-chroot mode=0755
+# #
+# # Pulseaudio fixes
+# #
+# - name: Copy asound.conf
+#   copy: src=common/files/asound.conf dest=/etc/asound.conf backup=yes
 
-- name: Copy over standard lts.conf config file
-  copy: src=common/files/lts.conf dest=/var/lib/tftpboot/ltsp/i386/lts.conf
-
-#
-# Pulseaudio fixes
-#
-- name: Copy asound.conf
-  copy: src=common/files/asound.conf dest=/etc/asound.conf backup=yes
-
-- name: WORKAROUND - Copy Pulseaudio startup file
-  copy: src="common/files/PulseAudio load module.desktop" dest="/tmp/PulseAudio load module.desktop"
+# - name: WORKAROUND - Copy Pulseaudio startup file
+#   copy: src="common/files/PulseAudio load module.desktop" dest="/tmp/PulseAudio load module.desktop"
   
-- name: WORKAROUND - Load module-suspend-on-idle in users startup
-  action: command bash -c "for user in `ls /home`; do cp '/tmp/PulseAudio load module.desktop' /home/$user/.config/autostart; done"
-  ignore_errors: yes
+# - name: WORKAROUND - Load module-suspend-on-idle in users startup
+#   action: command bash -c "for user in `ls /home`; do cp '/tmp/PulseAudio load module.desktop' /home/{{ ansible_ssh_user }}/.config/autostart; done"
+#   ignore_errors: yes
   
 
-#
-# Copy over intel xorg settings to force HD resolution
-#
-- name: Copy intel_xorg.conf
-  copy: src=common/files/intel_xorg.conf dest=/opt/ltsp/i386/etc/X11
+# #
+# # Copy over intel xorg settings to force HD resolution
+# #
+# - name: Copy intel_xorg.conf
+#   copy: src=common/files/intel_xorg.conf dest=/opt/ltsp/i386/etc/X11
 
 #
 # Work around for network manager to work with tftpd
