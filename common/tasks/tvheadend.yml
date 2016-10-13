@@ -1,0 +1,23 @@
+---
+
+#
+# TVHeadend used for watching/recording TV
+#
+# Only available in Debian testing repo, for older versions you have to add
+# a repository. Ref: https://tvheadend.org/projects/tvheadend/wiki/AptRepository
+#
+# To set password: sudo dpkg-reconfigure tvheadend
+#
+
+- name: Add tvheadend repository
+  apt_repository: repo="deb https://dl.bintray.com/tvheadend/deb jessie amd64"
+  when: (ansible_distribution == "Debian" and ansible_distribution_release == "jessie")
+  
+- name: Install TVHeadend
+  apt: pkg=tvheadend update_cache=yes
+
+# - name: Install kodi pvr
+#   apt: pkg={{ item }}
+#   with_items:
+#     - kodi-pvr-hts
+#     - kodi-pvr-tvheadend-hts
