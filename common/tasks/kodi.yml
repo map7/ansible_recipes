@@ -1,0 +1,93 @@
+---
+#
+# KODI install
+#
+# NOTE: If you want thin/fat clients then this is setup in ltsp-fat-client.yml
+#
+- name: Install add-apt-repository
+  apt: pkg=python-software-properties state=installed
+    
+- name: Install latest kodi
+  apt: pkg=kodi state=installed force=yes update_cache=yes 
+
+# --------------------------------------------------------------------------------
+# Setup shared KODI library
+# --------------------------------------------------------------------------------
+
+# Setting up MySQL for shared library
+- name: Install MySQL 
+  apt: pkg=mysql-server force=yes state=installed
+
+- name: Change the bind-address to servers static IP
+  lineinfile:
+    dest=/etc/mysql/my.cnf
+    regexp="bind-address.*=.*127.0.0.1"
+    backrefs=yes
+    line="bind-address = {{ ansible_default_ipv4['address'] }}"
+    backup=yes
+    state=present
+  notify: restart mysql
+  
+- name: start mysql
+  service: name=mysql state=started
+  
+- name: Install python mysql module
+  apt: pkg=python-mysqldb force=yes state=installed
+
+# host as '%' means anyone on the current network can login as this user
+- name: Create mysql user 'kodi'
+  mysql_user: name={{ ansible_ssh_user }} password={{ ansible_ssh_user }} host=% priv=*.*:ALL state=present
+
+# Setting up KODI for shared library
+- name: Create a storage1 directory for your first storage drive.
+  file: path=/media/storage1 owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} mode=777 state=directory 
+
+## This doesn't work on Debian as there is no /etc/exports file created by default  
+# - name: Add /media/storage1 to NFS exports
+#   lineinfile:
+#     dest=/etc/exports
+#     regexp="/media/storage1"
+#     line="/media/storage1 *(rw,insecure)"
+#   notify: reload nfs
+  
+- name: Create settings dir for main user
+  file: path=/home/{{ ansible_ssh_user }}/.kodi owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} state=directory
+  
+- name: Create settings dir for main user
+  file: path=/home/{{ ansible_ssh_user }}/.kodi/userdata owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} state=directory
+  
+# This advancedsettings.xml file should be copied to the userdata dir of every KODI install you want to sync with  
+- name: Create an advancedsettings.xml file
+  template:
+    src=common/templates/advancedsettings.xml.j2
+    dest=/home/{{ ansible_ssh_user }}/.kodi/userdata/advancedsettings.xml mode=0644 force=no
+
+# --------------------------------------------------------------------------------
+# Autostart login and start kodi for kodi user
+# --------------------------------------------------------------------------------
+- name: Autologin
+  lineinfile:
+    dest=/etc/lightdm/lightdm.conf
+    regexp="^#autologin-user="
+    line="autologin-user={{ ansible_ssh_user }}"
+
+- name: Autologin
+  lineinfile:
+    dest=/etc/lightdm/lightdm.conf
+    regexp="^#autologin-user-timeout=0"
+    line="autologin-user-timeout=0"
+
+- name: create the config dir
+  file: path=/home/{{ ansible_ssh_user }}/.config state=directory owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }}
+
+- name: Make autostart directory
+  command: mkdir /home/{{ ansible_ssh_user }}/.config/autostart creates=/home/{{ ansible_ssh_user }}/.config/autostart
+  
+- name: Setup kodi autostart for kodi user
+  copy:
+    src=common/files/kodi.desktop
+    dest=/home/{{ ansible_ssh_user }}/.config/autostart
+    owner={{ ansible_ssh_user }}
+    group={{ ansible_ssh_user }}
+    mode=644
+
