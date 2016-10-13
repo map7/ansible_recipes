@@ -12,6 +12,10 @@
   vars:
     repo: testing
     gituser: drej2k
+    monitor_1: "HDMI2"
+    monitor_2: "eDP1"
+    monitor_orientation: "--left-of"
+    output_mode: "--auto"
   vars_files:
     - "vars/defaults.yml"
     - "vars/$ansible_distribution-$ansible_architecture.yml"
@@ -27,20 +31,6 @@
 
     
   roles:
-  #   Install passenger & apache
-  #   - role: mtpereira.passenger
-  #     passenger_webserver: apache
-  #     sudo: yes
-  #   - role: Heroqu.nodejs4x
-  #     sudo: yes
-    
-    # --------------------------------------------------------------------------------
-    # Broken roles
-    # --------------------------------------------------------------------------------
-    # # Issues: https://github.com/William-Yeh/ansible-nodejs/issues/4
-    # - role: williamyeh.nodejs
-    #   nodejs_version: "5"
-    #   become: yes
     
     # Issues: https://github.com/SamyRoad/ansible-rbenv/issues/1
     # - role: mmacia.rbenv
