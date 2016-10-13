@@ -3,8 +3,6 @@
 # System related tasks and tools
 #
 
-- include: add_repositories.yml
-  
 - name: Install system tools
   action: apt pkg={{ item }} state=installed force=yes
   with_items:
@@ -28,6 +26,7 @@
     - mg                # emacs lite
     - git
     - build-essential   # Build tools like gcc.
+    - firmware-linux-nonfree
 
 - name: Update command-not-found
   action: command update-command-not-found creates=/var/cache/apt/apt-file
