@@ -16,8 +16,8 @@
 - name: Install TVHeadend
   apt: pkg=tvheadend update_cache=yes
 
-# - name: Install kodi pvr
-#   apt: pkg={{ item }}
-#   with_items:
-#     - kodi-pvr-hts
-#     - kodi-pvr-tvheadend-hts
+- name: Install kodi pvr
+  apt: pkg={{ item }}
+  with_items:
+    - kodi-pvr-hts
+
