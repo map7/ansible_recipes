@@ -6,17 +6,13 @@
 # we like to put this media processing onto the clients.
 #
 
+# --------------------------------------------------------------------------------
 # Add items to the chroot section
+# --------------------------------------------------------------------------------
 
 # Add desktop (must use aptitude so it sets the configuration correctly)
 - name: LTSP CHROOT - Convert thin-client to fat-client by installing a desktop environment
   command: ltsp-chroot -m apt-get install xfce4 -y
-
-# Add kodi
-
-# # BROKEN
-# - name: Install add-apt-repository
-#   command: ltsp-chroot -m 'aptitude install python-software-properties -y'
 
 - name: LTSP CHROOT - Add multimedia testing repository
   command: cp /etc/apt/sources.list.d/www_deb_multimedia_org.list /opt/ltsp/amd64/etc/apt/sources.list.d
@@ -27,9 +23,10 @@
 
 # --------------------------------------------------------------------------------
 # Install applications in chroot section
+#
+# NOTE: Had to use apt-get as I couldn't get aptitude to install without questions
 # --------------------------------------------------------------------------------
 
-# Had to use apt-get as I couldn't get aptitude to install without questions
 - name: LTSP CHROOT - Install latest kodi
   command: ltsp-chroot -m apt-get install --force-yes -y {{ item }} 
   with_items:
