@@ -3,16 +3,16 @@
         <type>mysql</type>
         <host>{{ ansible_default_ipv4['address'] }}</host>
         <port>3306</port>
-        <user>xbmc</user>
-        <pass>xbmc</pass>
+        <user>{{ ansible_ssh_user }}</user>
+        <pass>{{ ansible_ssh_user }}</pass>
     </videodatabase> 
 
     <musicdatabase>
         <type>mysql</type>
         <host>{{ ansible_default_ipv4['address'] }}</host>
         <port>3306</port>
-        <user>xbmc</user>
-        <pass>xbmc</pass>
+        <user>{{ ansible_ssh_user }}</user>
+        <pass>{{ ansible_ssh_user }}</pass>
     </musicdatabase>
 
      <videolibrary>
