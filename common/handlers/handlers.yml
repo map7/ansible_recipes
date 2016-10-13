@@ -26,7 +26,12 @@
   action: apt update_cache=yes  
   become: yes
 
+- name: restart nbd
+  action: service name=nbd-server state=restarted
+  become: yes
+
 # RAID
 - name: restart mdm
   action: service name=mdm state=restarted
   become: yes
+
