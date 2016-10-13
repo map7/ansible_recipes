@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=kodi
+Hidden=false
+X-GNOME-Autostart-enabled=true
+Name[en_AU]=kodi
+Name=kodi
+Comment[en_AU]=
+Comment=
