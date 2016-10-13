@@ -48,6 +48,7 @@
     #   become: yes
     
   tasks:
+    - include: common/tasks/add_repositories.yml
     - include: common/tasks/system.yml
       become: yes
     - include: common/tasks/email.yml
