@@ -11,13 +11,9 @@
     - xchm
     - okular                    # PDF reader of choice
     - inkscape
-    - krita
     - gimp
     - gthumb                    # Picture viewer & basic editor
     - keepassx
-    - password-gorilla          # Getting replaced by keepassx
-    - gobby                     # Collab. text editor
-    - xchat
     - gwakeonlan                # Turn computers on around the office
     - ktorrent
     - wireshark
@@ -32,7 +28,8 @@
     - fsarchiver                # Backup system tool
     - file-roller               # Better integration with nautilus
     - cheese                    # camera shot
-    #- unetbootin                # Create USB bootable distros (10/04/2015-N/A)
+    - firefox-esr
+    - icedove
       
 - name: Install compression tools
   action: apt pkg={{ item }} state=installed force=yes
@@ -51,6 +48,3 @@
   apt: pkg=flashplugin-nonfree
   when: ansible_os_family == "Debian"
 
-- name: Install virtualbox
-  apt: pkg=virtualbox
-  when: ansible_os_family == "Debian"
