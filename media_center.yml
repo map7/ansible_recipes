@@ -1,16 +1,21 @@
 ---
 #
 # Media center
+# Tested on: Debian 8.6 Jessie
+# Updated & tested: 12/10/2016
 #
-# This builds a media center using XBMC & LTSP. At the end you should have the following
-# - Main server with XBMC and lots of software for work, rest and play
-# - Fat clients booting from the main server with XBMC & some software for basic browsing/email.
+# This builds a media center using Kodi, tvheadend & LTSP. At the end you should have the following
+# - Main server with Kodi and lots of software for work, rest and play
+# - Fat clients booting from the main server with Kodi & some software for basic browsing/email.
 #
-- hosts: xbmc
-  user: xbmc
+# Run
+# ansible-playbook media_center.yml -b -v
+# -b become sudo
+# -v verbose
+#
+- hosts: media-servers
+  user: kodi
   sudo: yes
-  vars:
-    password: $1$SomeSalt$nbQMcEVhuIZWc9xDaQOs70
   vars_files:
     - "vars/defaults.yml"
     - "vars/$ansible_distribution-$ansible_architecture.yml"
@@ -19,47 +24,23 @@
 
   # Tasks for XBMC are put in a specific order
   tasks:
-    # Add xbmc user
-    - name: Add $main_user user
-      user: name=$main_user password=$password groups='sudo' shell=/bin/bash
-
-      # Add main user to epoptes & vboxusers in suitable include files
-
-    # Autologin
-    # Ubuntu
-    - name: Set Automatic login
-      lineinfile:
-        dest=/etc/gdm3/daemon.conf
-        regexp="^#.*AutomaticLoginEnable.*"
-        backrefs=yes
-        line="AutomaticLoginEnable=true"
-        state=present
-
-    - name: Set Automatic login user
-      lineinfile:
-        dest=/etc/gdm3/daemon.conf
-        regexp="^#.*AutomaticLogin = user1"
-        backrefs=yes
-        line="AutomaticLogin=$main_user"
-        state=present
-
+    # Install system tools
+    - include: common/tasks/add_testing_repo.yml
     - include: common/tasks/system.yml
-    - include: common/tasks/office.yml 
-    - include: common/tasks/xbmc.yml
-    - include: common/tasks/nvidia.yml
+    - include: common/tasks/email.yml
+    - include: common/tasks/ruby.yml
+    - include: common/tasks/backup.yml
+
+    # Install multimedia and thin clients
+    - include: common/tasks/kodi.yml
     - include: common/tasks/ltsp.yml
     - include: common/tasks/ltsp-fat-client.yml
     - include: common/tasks/ltsp-build.yml
+    - include: common/tasks/tvheadend.yml
 
-    - name: Copy gnome-do settings
-      copy: src=common/files/gnome-do.tar dest=/home/$main_user/.gconf/apps
-      tags: focus
-      
-    - name: Untar gnome-do settings
-      command:
-        mkdir -p /home/$main_user/.gconf/apps;tar xvf /home/$main_user/.gconf/apps/gnome-do chdir=/home/$main_user/.gconf/apps
-        creates=/home/$main_user/.gconf/apps/gnome-do
-      tags: focus
+    # Install office and admin related software
+    - include: common/tasks/office.yml 
+    - include: common/tasks/x2go.yml
 
   handlers:
     - include: common/handlers/handlers.yml
