@@ -48,7 +48,7 @@
   template:
     src: "common/templates/.emacs.randr.el.j2"
     dest: "/home/{{ ansible_ssh_user }}/.emacs.randr.el"
-      mode: 0644
-      force: no
+    mode: 0644
+    force: no
 
 
