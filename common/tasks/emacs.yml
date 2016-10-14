@@ -30,7 +30,7 @@
     owner: "{{ ansible_ssh_user }}"
     group: "{{ ansible_ssh_user }}"
 
-- name: Add cask bin PATH to Bash profile
+- name: Add cask bin PATH 
   lineinfile:
     dest="/etc/profile"
     regexp=".cask\/bin"
