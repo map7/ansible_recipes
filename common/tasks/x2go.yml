@@ -28,10 +28,12 @@
 - name: Install x2goserver
   apt: pkg={{ item }} state=present
   with_items:
+    - x2goclient
     - x2goserver
     - x2goserver-xsession
     - x2goserver-fmbindings
     - cups-x2go
+    - x2godesktopsharing
 
 - name: Setup SSH to be compatible with x2go
   lineinfile:
