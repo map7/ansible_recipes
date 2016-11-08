@@ -4,10 +4,7 @@
 #
 # NOTE: If you want thin/fat clients then this is setup in ltsp-fat-client.yml
 #
-- name: Install add-apt-repository
-  apt: pkg=python-software-properties state=installed
-    
-- name: Install latest kodi
+- name: Install kodi
   apt: pkg=kodi state=installed force=yes update_cache=yes 
 
 # --------------------------------------------------------------------------------
