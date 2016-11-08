@@ -42,5 +42,11 @@
     - include: common/tasks/office.yml 
     - include: common/tasks/x2go.yml
 
+    # Copy sources.list from server to LTSP
+    # This is not always required, but in the multimedia servers I like to do it.
+    - name: Copy sources.list
+      copy: src=/etc/apt/sources.list dest=/opt/ltsp/amd64/etc/apt/sources.list backup=yes
+
+      
   handlers:
     - include: common/handlers/handlers.yml
