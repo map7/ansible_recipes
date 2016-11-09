@@ -5,9 +5,18 @@
 # I only use X2Go for remote access at the moment.
 #
 
-- name: Add X2Go key
-  command: apt-key adv --recv-keys --keyserver keys.gnupg.net E1F958385BFE2B6E
-  when: ansible_os_family == "Debian"
+## Issue: Just hangs there, this is supposed to take 4 seconds. I had to do it manually on the server;
+## sudo -s
+## apt-key adv --recv-keys --keyserver keys.gnupg.net E1F958385BFE2B6E
+##
+# - name: Add X2Go key
+#   command: apt-key adv --recv-keys --keyserver keys.gnupg.net E1F958385BFE2B6E
+#   when: ansible_os_family == "Debian"
+
+## Issue: unsupported parameter for module: keyserver
+# - name: Add X2Go key
+#   apt_key: keyserver=keys.gnupg.net id=E1F958385BFE2B6E state=present
+#   when: ansible_os_family == "Debian"
 
 - name: Add X2Go repository
   apt_repository: repo='deb http://packages.x2go.org/debian {{ ansible_distribution_release }} main'
