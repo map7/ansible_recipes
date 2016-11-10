@@ -27,9 +27,11 @@
     # Install system tools
     - include: common/tasks/add_testing_repo.yml
     - include: common/tasks/system.yml
+    - include: common/tasks/system-gui.yml
     - include: common/tasks/email.yml
     - include: common/tasks/ruby.yml
     - include: common/tasks/backup.yml
+    - include: common/tasks/dropbox.yml
 
     # Install multimedia and thin clients
     - include: common/tasks/kodi.yml
@@ -45,7 +47,7 @@
     # Copy sources.list from server to LTSP
     # This is not always required, but in the multimedia servers I like to do it.
     - name: Copy sources.list
-      copy: src=/etc/apt/sources.list dest=/opt/ltsp/amd64/etc/apt/sources.list backup=yes
+      command: cp /etc/apt/sources.list /opt/ltsp/amd64/etc/apt/sources.list
       
   handlers:
     - include: common/handlers/handlers.yml
