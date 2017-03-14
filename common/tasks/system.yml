@@ -9,28 +9,34 @@
     - htop
     - pwgen
     - screen
-    - vim                       
     - openssh-server
-    - zsh
     - sysstat
-    - mutt                      # Email
-    - mc                        # Midnight Commander
-    - nethogs
     - ncdu              # Check disk usage per directory
     - mosh              # Awesome mobile ssh server/client
-    - command-not-found # Package suggestion utility
-    - bwm-ng            # bandwidth monitor for network & disk
     - safe-rm           # Stop people typing 'rm -fr /'
     - molly-guard       # Save people from rebooting the wrong server.
     - expect            # Required for some installation scripts
     - mg                # emacs lite
     - git
-    - build-essential   # Build tools like gcc.
-    - firmware-linux-nonfree
-    - cifs-utils                # Mount Samba shares
 
 - name: Update command-not-found
   action: command update-command-not-found creates=/var/cache/apt/apt-file
   when: ansible_os_family == "Debian"
 
+  # Move the following
   
+    # Source building tools
+    # - build-essential   # Build tools like gcc.
+    
+    # Zsh (& oh-my-shell)
+    # - zsh
+
+    # Debian package helpers
+    # - command-not-found # Package suggestion utility
+
+    # Monitoring tools
+    # - nethogs
+    # - bwm-ng            # bandwidth monitor for network & disk
+
+    # Firmware
+    # - firmware-linux-nonfree
