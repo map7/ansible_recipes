@@ -107,8 +107,6 @@
     recurse: yes
   with_items: "{{ ansible_ssh_user }}"
 
-# - name: Install emacs24
-#   command: make install chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
 - name: Compile, Configure, Make & Install Emacs
   shell: "{{ item }}"
   with_items:
