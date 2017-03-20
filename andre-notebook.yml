@@ -16,10 +16,12 @@
     monitor_2: "eDP1"
     monitor_orientation: "--left-of"
     output_mode: "--auto"
+
   vars_files:
     - "vars/defaults.yml"
     - "vars/$ansible_distribution-$ansible_architecture.yml"
     - "vars/$ansible_distribution.yml"
+    emacs_user_config_github: 'https://github.com/drej2k/emacs-config.git'
 
   pre_tasks:
     # Required on Debian 8 minimum install
@@ -55,6 +57,7 @@
     - include: common/tasks/programming.yml 
     - include: common/tasks/backup.yml
     - include: common/tasks/locale.yml
+    - include: common/tasks/emacs.yml
       
       # More office things to be installed
     - include: common/tasks/office.yml 
