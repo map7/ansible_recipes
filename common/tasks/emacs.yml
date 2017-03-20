@@ -127,6 +127,12 @@
     name: emacs
     path: /opt/emacs/bin/emacs-25.2
 
+- name: 'Update alternative: emacsclient'
+  alternatives:
+    link: /usr/bin/emacsclient
+    name: emacsclient
+    path: /opt/emacs/bin/emacsclient
+    priority: 100 #only works in ansible 2.2
 
 # - name: Link emacs24
 #   command: ln -s /opt/emacs24/bin/emacs /usr/local/bin/emacs creates=/usr/local/bin/emacs
