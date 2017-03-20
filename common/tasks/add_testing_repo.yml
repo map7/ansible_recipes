@@ -4,7 +4,7 @@
 # Add commonly used repositories
 #
 - name: Add python-software-properties
-  apt: pkg=python-software-properties force=yes state=installed
+  apt: pkg=python3-software-properties force=yes state=installed
   when: ansible_os_family == "Debian"
   notify: Update apt-get
 
@@ -15,10 +15,6 @@
     regexp='^deb cdrom'
     line='#deb cdrom[device for cdrom] [distro] main contrib non-free'
   notify: Update apt-get
-  
-- name: Add multimedia repository
-  apt_repository: repo="deb http://www.deb-multimedia.org stretch main non-free"
-  when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to main
   lineinfile:
@@ -72,3 +68,7 @@
   apt: pkg=deb-multimedia-keyring force=yes
   when: ansible_os_family == "Debian"
   notify: Update apt-get
+  
+- name: Add multimedia repository
+  apt_repository: repo="deb http://www.deb-multimedia.org stretch main non-free"
+  when: ansible_os_family == "Debian"

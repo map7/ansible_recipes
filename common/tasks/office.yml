@@ -35,6 +35,7 @@
   action: apt pkg={{ item }} state=installed force=yes
   with_items:
     - unzip
+    - unrar
     - zip
     - p7zip
     - gzip

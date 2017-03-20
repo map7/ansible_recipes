@@ -17,6 +17,7 @@
 
 - name: Add {{ ansible_ssh_user }} to epoptes
   action: command bash -c "for user in `ls /home`; do usermod -a -G epoptes {{ ansible_ssh_user }}; done"
+  become: yes
   ignore_errors: yes
 
 - name: Add fuse group
@@ -24,6 +25,7 @@
 
 - name: Add all users to fuse group for local mounting
   action: command bash -c "for user in `ls /home`; do usermod -a -G fuse {{ ansible_ssh_user }}; done"
+  become: yes
   ignore_errors: yes
   
 - name: Copy LTSP configuration accross
@@ -38,14 +40,21 @@
   action: command ltsp-build-client creates=/opt/ltsp/amd64
   ignore_errors: yes
 
+# ## Debian recommends we run LTSP in NFS mode, not NBD mode
+# - name: Add LTSP to exports
+#   lineinfile:
+#     dest=/etc/exports
+#     regexp="^/opt/ltsp"
+#     line="/opt/ltsp *(ro,no_root_squash,async,no_subtree_check)"
+#     backup=yes
+#     state=present
+#   notify: reload nfs
+
 ## Debian recommends we run LTSP in NFS mode, not NBD mode
-- name: Add LTSP to exports
-  lineinfile:
-    dest=/etc/exports
-    regexp="^/opt/ltsp"
-    line="/opt/ltsp *(ro,no_root_squash,async,no_subtree_check)"
-    backup=yes
-    state=present
+## I have noticed on some systems /etc/exportsfs is missing completely after installation
+## of LTSP, so let's copy our file.
+- name: Copy exports
+  copy: src=common/files/exports dest=/etc
   notify: reload nfs
 
 # --------------------------------------------------------------------------------
