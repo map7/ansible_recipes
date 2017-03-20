@@ -76,9 +76,6 @@
 #     - libwebkitgtk-3.0-0
 #     - libwebkitgtk-3.0-dev
 
-# - name: Download latest stable release 24.3 from March 2013
-#   command: wget http://gnu.mirror.uber.com.au/emacs/emacs-24.3.tar.gz chdir=/tmp creates=/usr/local/bin/emacs
-
 # - name: Untar image
 #   shell: tar xvf emacs-24.3.tar.gz chdir=/tmp creates=/usr/local/bin/emacs
 
@@ -87,6 +84,13 @@
 
 # - name: Run emacs configure
 #   action: command ./configure --prefix=/opt/emacs24 chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
+- name: Clone Emacs from git master using tag
+  git:
+    repo: https://github.com/emacs-mirror/emacs.git
+    dest: "/home/{{ ansible_ssh_user }}/emacs"
+    version: emacs-25.2-rc2
+    depth: 1
+    update: no
 
 # - name: Compile emacs24
 #   command: make -j $ansible_processor_cores chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
