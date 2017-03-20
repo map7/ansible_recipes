@@ -136,3 +136,8 @@
 
 # - name: Install window control
 #   apt: pkg=wmctrl state=present
+- name: Copy Emacs User Config From Github
+  git:
+    repo: "{{ emacs_user_config_github }}"
+    dest: "/home/{{ ansible_ssh_user }}/.emacs.d"
+    update: no
