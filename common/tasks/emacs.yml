@@ -109,6 +109,13 @@
 
 # - name: Compile emacs24
 #   command: make -j $ansible_processor_cores chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
+- name: Set permissions for Emacs Git Clone
+  file:
+    path: "/home/{{ ansible_ssh_user }}/emacs"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    recurse: yes
+  with_items: "{{ ansible_ssh_user }}"
 
 # - name: Install emacs24
 #   command: make install chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
