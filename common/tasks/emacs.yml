@@ -121,6 +121,12 @@
     chdir: "/home/{{ ansible_ssh_user }}/emacs"
     creates: /opt/emacs/bin/emacs-25.2
     
+- name: 'Update alternative: emacs'
+  alternatives:
+    link: /usr/bin/emacs
+    name: emacs
+    path: /opt/emacs/bin/emacs-25.2
+
 
 # - name: Link emacs24
 #   command: ln -s /opt/emacs24/bin/emacs /usr/local/bin/emacs creates=/usr/local/bin/emacs
