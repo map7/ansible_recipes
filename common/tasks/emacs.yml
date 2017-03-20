@@ -127,6 +127,12 @@
 #   with_items:
 #     - 'update-alternatives --config emacs'
 #     - 'update-alternatives --config emacsclient'
+- name: Link the alternatives
+  command: "{{ item }}"
+  become: yes
+  with_items:
+    - 'update-alternatives --config emacs'
+    - 'update-alternatives --config emacsclient'
 
 # - name: Install window control
 #   apt: pkg=wmctrl state=present
