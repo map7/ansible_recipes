@@ -83,7 +83,13 @@
     - libdbus-1-dev
     - libxft-dev
 
+# - name: Install requirements for emacs widgets to work
+#   apt:
+#     pkg: "{{ item }}"
+#     state: present
 #   with_items:
+#     - libwebkitgtk-3.0-0
+#     - libwebkitgtk-3.0-dev
 
 # - name: Download latest stable release 24.3 from March 2013
 #   command: wget http://gnu.mirror.uber.com.au/emacs/emacs-24.3.tar.gz chdir=/tmp creates=/usr/local/bin/emacs
