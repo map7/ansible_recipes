@@ -91,11 +91,6 @@
 #     - libwebkitgtk-3.0-0
 #     - libwebkitgtk-3.0-dev
 
-# - name: Generate emacs config
-#   action: command ./autogen.sh chdir=/tmp/emacs-24.3 creates=/tmp/emacs-24.3/configure
-
-# - name: Run emacs configure
-#   action: command ./configure --prefix=/opt/emacs24 chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
 - name: Clone Emacs from git master using tag
   git:
     repo: https://github.com/emacs-mirror/emacs.git
@@ -104,8 +99,6 @@
     depth: 1
     update: no
 
-# - name: Compile emacs24
-#   command: make -j $ansible_processor_cores chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
 - name: Set permissions for Emacs Git Clone
   file:
     path: "/home/{{ ansible_ssh_user }}/emacs"
@@ -116,6 +109,18 @@
 
 # - name: Install emacs24
 #   command: make install chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
+- name: Compile, Configure, Make & Install Emacs
+  shell: "{{ item }}"
+  with_items:
+    - ./autogen.sh
+    - ./autogen.sh git
+    - ./configure --prefix=/opt/emacs
+    - make bootstrap -j4
+    - make install
+  args:
+    chdir: "/home/{{ ansible_ssh_user }}/emacs"
+    creates: /opt/emacs/bin/emacs-25.2
+    
 
 # - name: Link emacs24
 #   command: ln -s /opt/emacs24/bin/emacs /usr/local/bin/emacs creates=/usr/local/bin/emacs
