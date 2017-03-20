@@ -46,6 +46,10 @@
 
 # - name: Install emacs graphics libraries
 #   action: apt pkg={{ item }} state=installed
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
 #   with_items:
 #     - libxaw7-dev
 #     - libxpm-dev
