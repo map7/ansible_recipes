@@ -121,6 +121,18 @@
 
 # - name: Link emacs24
 #   command: ln -s /opt/emacs24/bin/emacs /usr/local/bin/emacs creates=/usr/local/bin/emacs
+# - name: Configure the alternatives
+#   command: "{{ item }}"
+#   become: yes
+#   with_items:
+#     - 'update-alternatives --config emacs'
+#     - 'update-alternatives --config emacsclient'
+- name: Link the alternatives
+  command: "{{ item }}"
+  become: yes
+  with_items:
+    - 'update-alternatives --config emacs'
+    - 'update-alternatives --config emacsclient'
 
 # - name: Install window control
 #   apt: pkg=wmctrl state=present
