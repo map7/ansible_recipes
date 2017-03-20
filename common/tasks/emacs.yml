@@ -139,3 +139,11 @@
     repo: "{{ emacs_user_config_github }}"
     dest: "/home/{{ ansible_ssh_user }}/.emacs.d"
     update: no
+
+- name: Set permissions for Emacs User Config
+  file:
+    path: "/home/{{ ansible_ssh_user }}/.emacs.d"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    recurse: yes
+  with_items: "{{ ansible_ssh_user }}"
