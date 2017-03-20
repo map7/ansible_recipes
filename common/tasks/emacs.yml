@@ -76,9 +76,6 @@
 #     - libwebkitgtk-3.0-0
 #     - libwebkitgtk-3.0-dev
 
-# - name: Untar image
-#   shell: tar xvf emacs-24.3.tar.gz chdir=/tmp creates=/usr/local/bin/emacs
-
 # - name: Generate emacs config
 #   action: command ./autogen.sh chdir=/tmp/emacs-24.3 creates=/tmp/emacs-24.3/configure
 
