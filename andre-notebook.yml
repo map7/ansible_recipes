@@ -43,9 +43,8 @@
   tasks:
     - include: common/tasks/system.yml
       become: yes
-    - include: common/tasks/email.yml
-      become: yes
     - include: common/tasks/postgresql.yml
+    - include: common/tasks/email-server.yml
       become: yes
       
       # Install a system ruby used with backup
