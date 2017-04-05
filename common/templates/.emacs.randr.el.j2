@@ -1,0 +1,6 @@
+(setq exwm-randr-workspace-output-plist '(0 {{ monitor_1 }} 1 {{ monitor_2 }} 2 {{ monitor_2 }} 3 {{ monitor_2 }}))
+   (add-hook 'exwm-randr-screen-change-hook
+            (lambda ()
+              (start-process-shell-command
+               "xrandr" nil "xrandr --output {{ monitor_2 }} {{ monitor_orientation }} {{ monitor_1 }} --output {{ monitor_1 }} {{ output_mode }}")))
+   (exwm-randr-enable)

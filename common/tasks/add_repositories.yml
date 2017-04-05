@@ -3,8 +3,8 @@
 #
 # Add commonly used repositories
 #
-- name: Add python-software-properties
-  apt: pkg=python-software-properties force=yes state=installed
+- name: Add python3-software-properties
+  apt: pkg=python3-software-properties force=yes state=installed
   when: ansible_os_family == "Debian"
   notify: Update apt-get
 
@@ -16,76 +16,76 @@
     line='#deb cdrom[device for cdrom] [distro] main contrib non-free'
   notify: Update apt-get
   
-- name: Add multimedia repository
-  apt_repository: repo="deb http://www.deb-multimedia.org {{ ansible_distribution_release }} main non-free"
-  when: ansible_os_family == "Debian"
+# - name: Add multimedia repository
+#   apt_repository: repo="deb http://www.deb-multimedia.org {{ ansible_distribution_release }} main non-free"
+#   when: ansible_os_family == "Debian"
 
-- name: Add contrib & non-free to main
-  lineinfile:
-    dest=/etc/apt/sources.list
-    backrefs=yes
-    regexp='deb http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }} main$'
-    line='deb http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }} main contrib non-free'
-  when: ansible_os_family == "Debian"
+# - name: Add contrib & non-free to main
+#   lineinfile:
+#     dest=/etc/apt/sources.list
+#     backrefs=yes
+#     regexp='deb http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }} main$'
+#     line='deb http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }} main contrib non-free'
+#   when: ansible_os_family == "Debian"
 
-- name: Add contrib & non-free to main src
-  lineinfile:
-    dest=/etc/apt/sources.list
-    backrefs=yes
-    regexp='deb-src http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }} main$'
-    line='deb-src http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }} main contrib non-free'
-  when: ansible_os_family == "Debian"
+# - name: Add contrib & non-free to main src
+#   lineinfile:
+#     dest=/etc/apt/sources.list
+#     backrefs=yes
+#     regexp='deb-src http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }} main$'
+#     line='deb-src http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }} main contrib non-free'
+#   when: ansible_os_family == "Debian"
 
-- name: Add contrib & non-free to security
-  lineinfile:
-    dest=/etc/apt/sources.list
-    backrefs=yes
-    regexp='deb http://security.debian.org/ {{ ansible_distribution_release }}/updates main$'
-    line='deb http://security.debian.org/ {{ ansible_distribution_release }}/updates main contrib non-free'
-  when: ansible_os_family == "Debian"
+# - name: Add contrib & non-free to security
+#   lineinfile:
+#     dest=/etc/apt/sources.list
+#     backrefs=yes
+#     regexp='deb http://security.debian.org/ {{ ansible_distribution_release }}/updates main$'
+#     line='deb http://security.debian.org/ {{ ansible_distribution_release }}/updates main contrib non-free'
+#   when: ansible_os_family == "Debian"
 
-- name: Add contrib & non-free to security src
-  lineinfile:
-    dest=/etc/apt/sources.list
-    backrefs=yes
-    regexp='deb-src http://security.debian.org/ {{ ansible_distribution_release }}/updates main$'
-    line='deb-src http://security.debian.org/ {{ ansible_distribution_release }}/updates main contrib non-free'
-  when: ansible_os_family == "Debian"
+# - name: Add contrib & non-free to security src
+#   lineinfile:
+#     dest=/etc/apt/sources.list
+#     backrefs=yes
+#     regexp='deb-src http://security.debian.org/ {{ ansible_distribution_release }}/updates main$'
+#     line='deb-src http://security.debian.org/ {{ ansible_distribution_release }}/updates main contrib non-free'
+#   when: ansible_os_family == "Debian"
 
-- name: Add contrib & non-free to updates
-  lineinfile:
-    dest=/etc/apt/sources.list
-    backrefs=yes
-    regexp='deb http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }}-updates main$'
-    line='deb http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }}-updates main contrib non-free'
-  when: ansible_os_family == "Debian"
+# - name: Add contrib & non-free to updates
+#   lineinfile:
+#     dest=/etc/apt/sources.list
+#     backrefs=yes
+#     regexp='deb http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }}-updates main$'
+#     line='deb http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }}-updates main contrib non-free'
+#   when: ansible_os_family == "Debian"
 
-- name: Add contrib & non-free to updates
-  lineinfile:
-    dest=/etc/apt/sources.list
-    backrefs=yes
-    regexp='deb-src http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }}-updates main$'
-    line='deb-src http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }}-updates main contrib non-free'
-  when: ansible_os_family == "Debian"
+# - name: Add contrib & non-free to updates
+#   lineinfile:
+#     dest=/etc/apt/sources.list
+#     backrefs=yes
+#     regexp='deb-src http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }}-updates main$'
+#     line='deb-src http://ftp.au.debian.org/debian/ {{ ansible_distribution_release }}-updates main contrib non-free'
+#   when: ansible_os_family == "Debian"
 
-# Backports for updated software
-- name: Add backports
-  lineinfile:
-    dest=/etc/apt/sources.list
-    regexp='deb http://ftp.au.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free$'
-    line='deb http://ftp.au.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free'
-    state=present
-  when: ansible_os_family == "Debian"
+# # Backports for updated software
+# - name: Add backports
+#   lineinfile:
+#     dest=/etc/apt/sources.list
+#     regexp='deb http://ftp.au.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free$'
+#     line='deb http://ftp.au.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free'
+#     state=present
+#   when: ansible_os_family == "Debian"
 
-- name: Add backports
-  lineinfile:
-    dest=/etc/apt/sources.list
-    regexp='deb-src http://ftp.au.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free$'
-    line='deb-src http://ftp.au.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free'
-    state=present
-  when: ansible_os_family == "Debian"
+# - name: Add backports
+#   lineinfile:
+#     dest=/etc/apt/sources.list
+#     regexp='deb-src http://ftp.au.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free$'
+#     line='deb-src http://ftp.au.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free'
+#     state=present
+#   when: ansible_os_family == "Debian"
   
-- name: Add multimedia keyring
-  apt: pkg=deb-multimedia-keyring force=yes
-  when: ansible_os_family == "Debian"
-  notify: Update apt-get
+# - name: Add multimedia keyring
+#   apt: pkg=deb-multimedia-keyring force=yes
+#   when: ansible_os_family == "Debian"
+#   notify: Update apt-get

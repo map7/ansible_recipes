@@ -20,26 +20,41 @@
   apt: name=emacs24
 
 - name: Install cask
-  git: repo=https://github.com/cask/cask.git dest=/home/map7/.cask
+  git: repo=https://github.com/cask/cask.git
+  args:
+    dest: "/home/{{ ansible_ssh_user }}/.cask"
 
 - name: Set permissions
-  file: path=/home/map7/.cask owner=map7 group=map7
+  file: path="/home/{{ ansible_ssh_user }}/.cask"
+  args:
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
 
-- name: Add cask bin PATH to Bash profile
+- name: Add cask bin PATH 
   lineinfile:
-    dest=/etc/profile
+    dest="/etc/profile"
     regexp=".cask\/bin"
-    line='export PATH="/home/map7/.cask/bin:$PATH"'
+    line='export PATH="/home/{{ ansible_ssh_user }}/.cask/bin:$PATH"'
     state=present    
 
 - name: Copy my setup across
-  git: repo=https://github.com/map7/emacs-config.git dest=/home/map7/.emacs.d update=no
+  git: repo="https://github.com/{{ gituser }}/emacs-config.git"
+  args:
+    dest: "/home/{{ ansible_ssh_user }}/.emacs.d"
+    update: no
 
 - name: Compile my plugins
-  command: /home/map7/.cask/bin/cask chdir=/home/map7/.emacs.d
+  command: "/home/{{ ansible_ssh_user }}/.cask/bin/cask"
+  args:
+    chdir: "/home/{{ ansible_ssh_user }}/.emacs.d"
 
 - name: Set permissions
-  file: path=/home/map7/.emacs.d owner=map7 group=map7 recurse=yes state=directory
+  file: path="/home/{{ ansible_ssh_user }}/.emacs.d"
+  args:
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    recurse: yes
+    state: directory
 
 # OLD Way
 

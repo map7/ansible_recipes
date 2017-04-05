@@ -1,0 +1,20 @@
+---
+
+#
+# Compile n node version manager, install it then install latest stable version of node
+#
+
+- name: Download n from github
+  git: repo="https://github.com/tj/n.git" dest="/home/{{ ansible_ssh_user }}/n"
+
+- name: Navigate into n directory
+  command: chdir="/home/{{ ansible_ssh_user }}/n" ls
+
+- name: Make n
+  command: chdir="/home/{{ ansible_ssh_user }}/n" make
+
+- name: Add n to zsh
+  command: echo "N_PREFIX=$HOME" >> ~/.zshrc && . ~/.zshrc
+  
+- name: Install the latest stable version of node
+  command: n stable && . ~/.profile
