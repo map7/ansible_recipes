@@ -1,0 +1,16 @@
+---
+#
+# Configure System Locale
+#
+
+- name: Setup System Locale as EN_AU.UTF-8
+  lineinfile:
+    dest: "/home/{{ ansible_ssh_user }}/.zshenv"
+    state: present
+    line: "{{ item.line }}"
+  with_items:
+    - { line: "export LANGUAGE=en_AU.UTF-8" }
+    - { line: "export LC_ALL=en_AU.UTF-8" }
+    - { line: "export LANG=en_AU.UTF-8" }
+    - { line: "export LC_TYPE=en_AU.UTF-8" }
+ # command: /usr/sbin/update-locale LANG="en_AU.UTF-8" LC_ALL="en_AU.UTF-8"
