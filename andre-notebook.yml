@@ -18,8 +18,8 @@
     output_mode: "--auto"
   vars_files:
     - "vars/defaults.yml"
-    - "vars/$ansible_distribution-$ansible_architecture.yml"
-    - "vars/$ansible_distribution.yml"
+    - "vars/{{ ansible_distribution }}-{{ ansible_architecture }}.yml"
+    - "vars/{{ ansible_distribution }}.yml"
 
   pre_tasks:
     # Required on Debian 8 minimum install
