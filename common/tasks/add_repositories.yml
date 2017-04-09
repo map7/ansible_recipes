@@ -16,7 +16,11 @@
   become: yes
       
 - name: Add python3-software-properties
-  apt: pkg=python3-software-properties force=yes state=installed
+  apt:
+    name: python3-software-properties
+    state: latest
+    default_release: testing
+
   when: ansible_os_family == "Debian"
   notify: Update apt-get
 
