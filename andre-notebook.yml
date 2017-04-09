@@ -29,17 +29,6 @@
         creates=/usr/share/doc/python-apt
       sudo: yes
 
-    
-  roles:
-    
-    # Issues: https://github.com/SamyRoad/ansible-rbenv/issues/1
-    # - role: mmacia.rbenv
-    #   rbenv_env: user
-    #   rbenv_ruby_version: 2.1.8
-    #   rbenv_users:
-    #     - map7
-    #   become: yes
-    
   tasks:
     - include: common/tasks/system.yml
       become: yes
