@@ -85,7 +85,9 @@
     state=present
   when: ansible_os_family == "Debian"
   
-- name: Add multimedia keyring
-  apt: pkg=deb-multimedia-keyring force=yes
-  when: ansible_os_family == "Debian"
-  notify: Update apt-get
+- name: install deb-multimedia-keyring
+  apt:
+    name: deb-multimedia-keyring
+    state: latest
+    default_release: testing
+    force: yes
