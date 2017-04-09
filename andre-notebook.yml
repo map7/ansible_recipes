@@ -8,7 +8,9 @@
 # -v verbose
 
 - hosts: dev-notebook
-  user: andre
+  user: dev
+  become: yes
+  connection: ssh # or paramiko
   vars:
     repo: testing
     gituser: drej2k
