@@ -24,12 +24,8 @@
     - "vars/{{ ansible_distribution }}.yml"
 
   pre_tasks:
-    # Required on Debian 8 minimum install
-    - name: install python-apt
-      command: >
-        apt-get install python-apt -y -q
-        creates=/usr/share/doc/python-apt
-      sudo: yes
+    - include: common/tasks/add_repositories.yml
+      become: yes
 
   tasks:
     - include: common/tasks/system.yml
@@ -37,7 +33,6 @@
     - include: common/tasks/email.yml
       become: yes
     - include: common/tasks/postgresql.yml
-      become: yes
       
       # Install a system ruby used with backup
     - include: common/tasks/ruby.yml 
