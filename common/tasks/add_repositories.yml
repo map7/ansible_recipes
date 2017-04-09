@@ -3,6 +3,11 @@
 #
 # Add commonly used repositories
 #
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
 - name: Add python3-software-properties
   apt: pkg=python3-software-properties force=yes state=installed
   when: ansible_os_family == "Debian"
