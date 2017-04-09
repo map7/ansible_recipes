@@ -8,6 +8,13 @@
     update_cache: yes
     cache_valid_time: 3600
 
+# Required on Debian 8 minimum install
+- name: install python-apt
+  command: >
+    apt-get install python-apt -y -q
+    creates=/usr/share/doc/python-apt
+  become: yes
+      
 - name: Add python3-software-properties
   apt: pkg=python3-software-properties force=yes state=installed
   when: ansible_os_family == "Debian"
