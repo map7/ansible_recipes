@@ -101,6 +101,13 @@
     line='deb-src http://ftp.au.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free'
     state=present
   when: ansible_os_family == "Debian"
+
+- name: Add backports for virtual box
+  lineinfile:
+    dest=/etc/apt/sources.list
+    regexp='deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib$'
+    line='deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib'
+  when: ansible_os_family == "Debian"
   
 - name: install deb-multimedia-keyring
   apt:
