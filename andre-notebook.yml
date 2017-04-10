@@ -1,0 +1,70 @@
+---
+#
+# Webserver for running Ruby on Rails with postgresql & node.
+#
+# Run
+# ansible-playbook webserver.yml -b -v
+# -b become sudo
+# -v verbose
+
+- hosts: dev-notebook
+  user: andre
+  vars:
+    repo: testing
+    gituser: drej2k
+    monitor_1: "HDMI2"
+    monitor_2: "eDP1"
+    monitor_orientation: "--left-of"
+    output_mode: "--auto"
+    emacs_user_config_github: 'https://github.com/drej2k/emacs-config.git'
+    
+  vars_files:
+    - "vars/defaults.yml"
+    - "vars/$ansible_distribution-$ansible_architecture.yml"
+    - "vars/$ansible_distribution.yml"
+
+  pre_tasks:
+    # Required on Debian 8 minimum install
+    - name: install python-apt
+      command: >
+        apt-get install python-apt -y -q
+        creates=/usr/share/doc/python-apt
+      sudo: yes
+
+    
+  roles:
+    
+    # Issues: https://github.com/SamyRoad/ansible-rbenv/issues/1
+    # - role: mmacia.rbenv
+    #   rbenv_env: user
+    #   rbenv_ruby_version: 2.1.8
+    #   rbenv_users:
+    #     - map7
+    #   become: yes
+    
+  tasks:
+    - include: common/tasks/system.yml
+      become: yes
+    - include: common/tasks/email.yml
+      become: yes
+    - include: common/tasks/postgresql.yml
+      become: yes
+      
+      # Install a system ruby used with backup
+    - include: common/tasks/ruby.yml 
+
+      # Also installs emacs, rbenv, ruby thru rbenv, rails
+    - include: common/tasks/programming.yml 
+    - include: common/tasks/backup.yml
+    - include: common/tasks/locale.yml
+    - include: common/tasks/emacs.yml
+      
+      # More office things to be installed
+    - include: common/tasks/office.yml 
+    - include: common/tasks/lvm.yml
+    - include: common/tasks/x2go.yml
+      
+    - include: common/tasks/exwm-config.yml
+    - include: common/tasks/node-dev-machine.yml
+  handlers:
+    - include: common/handlers/handlers.yml
