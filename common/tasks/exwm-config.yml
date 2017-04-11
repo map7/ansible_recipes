@@ -7,11 +7,13 @@
 #
 
 - name: Copy the xinitrc.sample to ~/.xinitrc
-  file: 
+  copy:
+    remote_src: true
     src: "/home/{{ ansible_ssh_user }}/.emacs.d/xinitrc.sample"
     dest: "/home/{{ ansible_ssh_user }}/.xinitrc"
     owner: "{{ ansible_ssh_user }}"
     group: "{{ ansible_ssh_user }}"
+    mode: 0644
 
 - name: Link .xinit to .xsession to set EXWM as default windows manager
   file:
