@@ -2,8 +2,6 @@
 #
 # Programming tools and configuration
 #  
-- name: Install git
-  apt: pkg=git state=installed
 
 - include: emacs.yml
 - include: rbenv.yml
@@ -20,5 +18,4 @@
     - ghex
     - geany
     - pgadmin3
-
-  
+    - git
