@@ -10,11 +10,13 @@
 
 # https://coderwall.com/p/hdul2g - Update locale & timezone
 # This is required so that PostgreSQL installs with UTF-8 support.
-- name: set locale to $locale
-  command: /usr/sbin/update-locale LANG=$locale LC_ALL=$locale
+# - name: set locale to $locale
+#   command: /usr/sbin/update-locale LANG=$locale LC_ALL=$locale
 
 - name: Install postgresql
-  action: apt pkg=postgresql-9.5 force=yes state=installed
+  apt:
+    name: postgresql
+    state: latest
 
 # Postgresql create user
 # If problems here make sure you add the following to your /etc/sudoers
