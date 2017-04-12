@@ -50,11 +50,7 @@
       become: yes
     - include: common/tasks/email-server.yml
       become: yes
-      
-      # Install a system ruby used with backup
-    - include: common/tasks/ruby.yml 
-
-      # Also installs emacs, rbenv, ruby thru rbenv, rails
+    - include: common/tasks/ruby.yml # Install a system ruby used with backup
     - include: common/tasks/programming.yml 
     - include: common/tasks/backup.yml
     - include: common/tasks/locale.yml
