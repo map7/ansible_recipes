@@ -13,55 +13,6 @@
 #  - texlive-latex-base, texlive-latex-recommended, texlive-latex-extra
 #
 
-- name: Install git
-  apt: pkg=git-core
-
-- name: Install emacs
-  apt: name=emacs24
-
-- name: Install cask
-  git: repo=https://github.com/cask/cask.git
-  args:
-    dest: "/home/{{ ansible_ssh_user }}/.cask"
-
-- name: Set permissions
-  file: path="/home/{{ ansible_ssh_user }}/.cask"
-  args:
-    owner: "{{ ansible_ssh_user }}"
-    group: "{{ ansible_ssh_user }}"
-
-- name: Add cask bin PATH 
-  lineinfile:
-    dest="/etc/profile"
-    regexp=".cask\/bin"
-    line='export PATH="/home/{{ ansible_ssh_user }}/.cask/bin:$PATH"'
-    state=present    
-
-- name: Copy my setup across
-  git: repo="https://github.com/{{ gituser }}/emacs-config.git"
-  args:
-    dest: "/home/{{ ansible_ssh_user }}/.emacs.d"
-    update: no
-
-- name: Compile my plugins
-  command: "/home/{{ ansible_ssh_user }}/.cask/bin/cask"
-  args:
-    chdir: "/home/{{ ansible_ssh_user }}/.emacs.d"
-
-- name: Set permissions
-  file: path="/home/{{ ansible_ssh_user }}/.emacs.d"
-  args:
-    owner: "{{ ansible_ssh_user }}"
-    group: "{{ ansible_ssh_user }}"
-    recurse: yes
-    state: directory
-
-# OLD Way
-
-
-# - name: Install emacs graphics libraries
-#   action: apt pkg={{ item }} state=installed
-
 - name: Run the equivalent of "apt-get update" as a separate step
   apt:
     update_cache: yes
