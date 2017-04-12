@@ -59,11 +59,15 @@ Create passwordless access (server to client)
 
 Now you can run with this command (on the development machine)
 
+For server boxes
 : ansible-playbook media_center.yml -b -v
 | -b | become sudo |
 | -v | verbose     |
 
-*NOTE* With mysql I leave the password blank for the root user until I've finished setup, then manually assign a new password using the following;
+For dev (non server) boxes
+: ansible-playbook dev.yml -K -v
+| -K | ask for sudo password and pass |
+| -v | verbose                        |
 : mysqladmin -u root password 'newpassword'
 
 ** Custom variables
