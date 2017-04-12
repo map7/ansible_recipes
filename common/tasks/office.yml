@@ -8,9 +8,10 @@
   with_items:
     - xclip
     - pdfshuffler
-    - xchm
+    - xchm                      # Read microsoft help files
     - okular                    # PDF reader of choice
     - inkscape
+    - krita                     # Photo editing
     - gimp
     #- gthumb                    # Picture viewer & basic editor
     - keepassx
@@ -19,12 +20,13 @@
     - wireshark
     - gparted
     #- audacity
+    - audacity                  # Modify mp3 or wave files
     - filezilla
     - chromium
     - wine
-    - simple-scan
-    - gkrellm
-    - backintime-gnome          # Backup
+    - simple-scan               # Self configures usb scanners
+    - gkrellm                   # System stats program
+    - backintime-gnome          # Backup 
     - fsarchiver                # Backup system tool
     - file-roller               # Better integration with nautilus
     - cheese                    # camera shot
