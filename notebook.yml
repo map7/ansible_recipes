@@ -19,6 +19,10 @@
     monitor_orientation: "--left-of"
     output_mode: "--auto"
     emacs_user_config_github: 'https://github.com/drej2k/emacs-config.git'
+    oh_my_zsh:
+      theme: robbyrussell
+      plugins: git
+      update_days: 13
   vars_files:
     - "vars/defaults.yml"
     - "vars/{{ ansible_distribution }}-{{ ansible_architecture }}.yml"
