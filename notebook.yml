@@ -23,6 +23,17 @@
       theme: robbyrussell
       plugins: git
       update_days: 13
+    locale: "en_AU.UTF-8"
+      case_sensitive: true
+      hyphen_insensitive: true
+      disable_update_prompt: true
+      disable_auto_update: true
+      disable_ls_colors: true
+      disable_auto_title: true
+      disable_untracked_files_dirty: true
+      disable_correction: true
+      completion_waiting_dots: false
+
   vars_files:
     - "vars/defaults.yml"
     - "vars/{{ ansible_distribution }}-{{ ansible_architecture }}.yml"
