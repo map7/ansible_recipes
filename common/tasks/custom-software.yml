@@ -1,0 +1,9 @@
+---
+    
+- name: Custom Software
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    default_release: testing
+  with_items:
+    - sweethome3d
