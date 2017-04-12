@@ -88,9 +88,47 @@ Place it at the bottom of your vars list to override the defaults I've set.
 
 - [X] Update any 'cp' command to using the copy module. Since ansible 1.4 the copy module allows recursive copy.
 
-** TODO Update to 2.0
+** TODO Update to 2.2 [62%]
    :PROPERTIES:
    :CREATED:  [2015-04-10 Fri 11:48]
    :END:
 
-- [ ] Change all $var to {{ var }}
+*** DONE Change all $var to {{ var }}
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:04]
+    :END:
+
+*** DONE Add oh_my_zsh install
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:04]
+    :END:
+
+*** DONE Pull oh_my_zsh config from github
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:05]
+    :END:
+
+*** TODO Add multi language switching support
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:05]
+    :END:
+
+*** TODO Ensure Rbenv installs to latest version
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:05]
+    :END:
+
+*** TODO Remove all force=yes and replace with
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:07]
+    :END:
+
+*** DONE Update locale & ensure locale works correctly
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:06]
+    :END:
+
+*** DONE Determine if we need phantomJS
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:06]
+    :END:
