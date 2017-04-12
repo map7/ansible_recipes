@@ -1,7 +1,8 @@
 ---
 
 #
-# Compile n node version manager, install it then install latest stable version of node
+# Compile & install n (node version manager)
+# Install latest stable version of node
 #
 
 - name: Download n from github
@@ -12,6 +13,25 @@
 
 - name: Make n
   command: chdir="/home/{{ ansible_ssh_user }}/n" make
+  git:
+    repo: https://github.com/tj/n.git
+    dest: "/home/{{ ansible_ssh_user }}/n"
+
+- name: Set permissions for n git directory
+  file:
+    path: "/home/{{ ansible_ssh_user }}/n"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    recurse: yes
+  with_items: "{{ ansible_ssh_user }}"
+    
+- name:  Make & Install n
+  shell: "{{ item }}"
+  with_items:
+    - make -j4
+    - make install
+  args:
+    chdir: "/home/{{ ansible_ssh_user }}/n"
 
 - name: Add n to zsh
   command: echo "N_PREFIX=$HOME" >> ~/.zshrc && . ~/.zshrc
