@@ -47,6 +47,7 @@
     - include: common/tasks/system.yml
       become: yes
     - include: common/tasks/postgresql.yml
+      become: yes
     - include: common/tasks/email-server.yml
       become: yes
       
