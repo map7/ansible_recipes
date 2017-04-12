@@ -1,0 +1,20 @@
+---
+###
+# Compresssion Utilities
+###
+- name: Install compression tools
+  action: apt pkg={{ item }} state=installed force=yes
+  with_items:
+    - unzip
+    - zip
+    - p7zip
+    - gzip
+    - pbzip2
+    - bzip2
+    - mscompress
+    - xz-utils
+    - dar
+
+- name: Install flash
+  apt: pkg=flashplugin-nonfree
+  when: ansible_os_family == "Debian"
