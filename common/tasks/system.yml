@@ -42,3 +42,12 @@
 
     # Firmware
     # - firmware-linux-nonfree
+- name: Ensure source building tools are installed
+  apt: "pkg={{ item }} state=installed"
+  with_items:
+    - build-essential
+    - autoconf
+    - automake
+    - fakeroot
+    - devscripts
+  when: ansible_os_family == 'Debian'  
