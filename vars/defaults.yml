@@ -11,3 +11,35 @@ db_user: 'vps'       # This should be the same as your user
 db_passwd: 'secret'  # Change this to something more secure
 custom_ntp_server: ''
 xbmc_spotify: 'http://azkotoki.org/download-file/28/script-audio-spotimc-1-0-beta5'
+
+####
+# Oh_my_ZSH
+####
+# default theme
+users_oh_my_zsh_theme: robbyrussell
+# update git repo on config run
+users_oh_my_zsh_update: no
+# default plugins
+users_oh_my_zsh_plugins: git
+# Use case-sensitive completion
+users_oh_my_zsh_case_sensitive: false
+# Use hyphen-insensitive completion. Case sensitive
+# completion must be off. _ and - will be interchangeable.
+users_oh_my_zsh_hyphen_insensitive: false
+# Disable update prompt
+users_oh_my_zsh_disable_update_prompt: false
+# Disable bi-weekly auto-update checks
+users_oh_my_zsh_disable_auto_update: true
+# How often before auto-updates occur? (in days)
+users_oh_my_zsh_update_days: 13
+# If you want to disable colors in ls
+users_oh_my_zsh_disable_ls_colors: false
+# If you want to disable autosetting terminal title.
+users_oh_my_zsh_disable_auto_title: false
+# If you want to disable marking untracked files under VCS as dirty.
+# This makes repository status check for large repositories much, much faster.
+users_oh_my_zsh_disable_untracked_files_dirty: false
+# If you want to disable command autocorrection
+users_oh_my_zsh_disable_correction: true
+# If you want red dots to be displayed while waiting for completion
+users_oh_my_zsh_completion_waiting_dots: false
