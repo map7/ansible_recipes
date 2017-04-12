@@ -68,6 +68,14 @@ For dev (non server) boxes
 : ansible-playbook dev.yml -K -v
 | -K | ask for sudo password and pass |
 | -v | verbose                        |
+
+
+*NOTES* 
+1. For an encypted ssh key file with password, to prevent always being asked for password
+: eval `ssh-agent`
+: ssh-add /home/user/.ssh/id_rsa
+
+2. With mysql I leave the password blank for the root user until I've finished setup, then manually assign a new password using the following;
 : mysqladmin -u root password 'newpassword'
 
 ** Custom variables
