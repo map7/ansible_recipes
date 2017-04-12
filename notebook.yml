@@ -67,7 +67,7 @@
     - include: common/tasks/rails.yml
     - include: common/tasks/compression-tools.yml
     - include: common/tasks/custom-software.yml      
-    - include: common/tasks/kvm.yml
+    # - include: common/tasks/kvm.yml
     - include: common/tasks/virtual-box.yml
   handlers:
     - include: common/handlers/handlers.yml
