@@ -1,0 +1,52 @@
+---
+#
+# YARN
+#
+
+# touch yarn.list file
+- file:
+    path: /etc/apt/sources.list.d/yarn.list
+    state: touch
+    mode: 0644
+
+- name: Add Yarn Source to list file
+  lineinfile:
+    dest: "/etc/apt/sources.list.d/yarn.list"
+    state: present
+    line: "{{ item.line }}"
+  with_items:
+    - { line: "deb https://dl.yarnpkg.com/debian/ stable main" }
+
+# Create a yarn certificate file
+- file: 
+    path: "/usr/share/ca-certificates/yarn.crt"
+    state: touch
+
+- name: Obtain YARN CA certificate 
+  shell: "{{ item }}"
+  with_items:
+    - "openssl s_client -showcerts -connect www.yarnpkg.com:443 </dev/null 2>/dev/null|openssl x509 -outform der >yarn.crt"
+  args:
+    chdir: "/usr/share/ca-certificates/"
+    creates: "/usr/share/ca-certificates/yarn.crt"
+
+# Only update if cert created
+- name: Update CA certs
+  become: yes
+  command: update-ca-certificates
+  args: 
+    creates: "/usr/share/ca-certificates/yarn.crt"
+
+- apt_key:
+    url: https://dl.yarnpkg.com/debian/pubkey.gpg
+    state: present
+    
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Install Yarn
+  apt:
+    pkg: yarn
+    state: present
+    default_release: testing
