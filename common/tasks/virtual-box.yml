@@ -2,12 +2,12 @@
 ###
 # VIRTUAL BOX
 ###
-- name: Download virtualbox installation
-  command: 'curl -O https://www.virtualbox.org/download/oracle_vbox_2016.asc'
 
-- name: Prepare virtualbox installation
-  command: 'sudo apt-key add oracle_vbox_2016.asc'
-
+- name: Add apt signing key
+  apt_key:
+    url: "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
+    state: present
+  
 - name: Run the equivalent of "apt-get update" as a separate step
   apt:
     update_cache: yes
