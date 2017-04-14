@@ -18,7 +18,7 @@
     monitor_2: "eDP1"
     monitor_orientation: "--left-of"
     output_mode: "--auto"
-    emacs_user_config_github: 'https://github.com/drej2k/emacs-config.git'
+    emacs_user_config_github: 'https://github.com/map7/emacs-config.git'
     oh_my_zsh:
       theme: robbyrussell
       plugins: git
