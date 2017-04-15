@@ -14,8 +14,8 @@
 # Install Homebank
 ####
 
-# Create the homebank directory if it doesn't exist
-- file:
+- name: "Create tmp directory if it doesn't exist"
+  file:
     path: "/home/{{ ansible_ssh_user }}/tmp"
     state: directory
     owner: "{{ ansible_ssh_user }}"
