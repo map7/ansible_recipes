@@ -33,7 +33,8 @@
     - libncurses5-dev
     - libdbus-1-dev
     - libxft-dev
-
+    - gnutls-bin # needed to automatically bootstrap install of emacs 
+    
 # - name: Install requirements for emacs widgets to work
 #   apt:
 #     pkg: "{{ item }}"
