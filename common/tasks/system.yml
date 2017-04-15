@@ -26,8 +26,5 @@
   when: ansible_os_family == "Debian"
 
   # Move the following
-  
-    # Zsh (& oh-my-shell)
-    # - zsh
     # Firmware
     # - firmware-linux-nonfree
