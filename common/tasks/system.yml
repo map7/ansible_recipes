@@ -36,9 +36,5 @@
     # Debian package helpers
     # - command-not-found # Package suggestion utility
 
-    # Monitoring tools
-    # - nethogs
-    # - bwm-ng            # bandwidth monitor for network & disk
-
     # Firmware
     # - firmware-linux-nonfree
