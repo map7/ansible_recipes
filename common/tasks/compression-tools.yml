@@ -14,7 +14,3 @@
     - mscompress
     - xz-utils
     - dar
-
-- name: Install flash
-  apt: pkg=flashplugin-nonfree
-  when: ansible_os_family == "Debian"
