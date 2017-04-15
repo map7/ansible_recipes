@@ -24,7 +24,3 @@
 - name: Update command-not-found
   action: command update-command-not-found creates=/var/cache/apt/apt-file
   when: ansible_os_family == "Debian"
-
-  # Move the following
-    # Firmware
-    # - firmware-linux-nonfree
