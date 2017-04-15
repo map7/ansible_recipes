@@ -43,6 +43,7 @@
   pre_tasks:
     - include: common/tasks/add_repositories.yml
       become: yes
+    - include: common/tasks/compression-tools.yml
 
   tasks:
     - include: common/tasks/system.yml
@@ -65,7 +66,6 @@
     - include: common/tasks/zsh.yml
     - include: common/tasks/rbenv.yml
     - include: common/tasks/rails.yml
-    - include: common/tasks/compression-tools.yml
     - include: common/tasks/custom-software.yml      
     # - include: common/tasks/kvm.yml
     - include: common/tasks/virtual-box.yml
