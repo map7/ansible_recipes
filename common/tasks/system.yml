@@ -32,9 +32,5 @@
     
     # Zsh (& oh-my-shell)
     # - zsh
-
-    # Debian package helpers
-    # - command-not-found # Package suggestion utility
-
     # Firmware
     # - firmware-linux-nonfree
