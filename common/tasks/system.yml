@@ -27,9 +27,6 @@
 
   # Move the following
   
-    # Source building tools
-    # - build-essential   # Build tools like gcc.
-    
     # Zsh (& oh-my-shell)
     # - zsh
     # Firmware
