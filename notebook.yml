@@ -48,27 +48,14 @@
   tasks:
     - include: common/tasks/system.yml
       become: yes
-    - include: common/tasks/postgresql.yml
-      become: yes
     - include: common/tasks/email-server.yml
       become: yes
-    - include: common/tasks/ruby.yml # Install a system ruby used with backup
     - include: common/tasks/programming.yml 
     - include: common/tasks/backup.yml
-    - include: common/tasks/locale.yml
-    - include: common/tasks/emacs.yml
     - include: common/tasks/office.yml 
-    - include: common/tasks/lvm.yml
-    - include: common/tasks/x2go.yml      
-    - include: common/tasks/exwm-config.yml
-    - include: common/tasks/node-dev-machine.yml
-    - include: common/tasks/yarn.yml
-    - include: common/tasks/zsh.yml
-    - include: common/tasks/rbenv.yml
-    - include: common/tasks/rails.yml
     - include: common/tasks/custom-software.yml      
     # - include: common/tasks/kvm.yml
-    - include: common/tasks/virtual-box.yml
+
   handlers:
     - include: common/handlers/handlers.yml
 
