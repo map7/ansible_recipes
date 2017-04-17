@@ -22,7 +22,9 @@
     - flashplugin-nonfree
     
 - name: Update command-not-found
-  action: command update-command-not-found creates=/var/cache/apt/apt-file
+  command: update-command-not-found
+  args:
+    creates: /var/cache/apt/apt-file
   when: ansible_os_family == "Debian"
 
 - include: postgresql.yml
