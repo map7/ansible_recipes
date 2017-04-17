@@ -2,10 +2,9 @@
 #
 # Programming tools and configuration
 #  
-
 - include: node-dev-machine.yml
 - include: zsh.yml
-- inlcude: yarn.yml
+- include: yarn.yml
 - include: ruby.yml # Install a system ruby used with backup
 - include: rbenv.yml
 - include: rails.yml
