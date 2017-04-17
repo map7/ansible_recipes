@@ -15,16 +15,16 @@ xbmc_spotify: 'http://azkotoki.org/download-file/28/script-audio-spotimc-1-0-bet
 ###
 # Locale
 ###
-# locale_all: "en_AU.UTF-8 UTF-8" # should only be used for testing
+# locale_all: "en_AU.UTF-8" # should only be used for testing
 # locale: "en_AU.UTF-8"
 locale_language: "en_AU:en"
-locale_numeric: "en_AU.UTF-8 UTF-8"
-locale_time: "en_AU.UTF-8 UTF-8"
-locale_monetary: "en_AU.UTF-8 UTF-8"
-locale_paper: "en_AU.UTF-8 UTF-8"
-locale_identification: "en_AU.UTF-8 UTF-8"
-locale_name: "en_AU.UTF-8 UTF-8"
-locale_address: "en_AU.UTF-8 UTF-8"
-locale_telephone: "en_AU.UTF-8 UTF-8"
-locale_measurement: "en_AU.UTF-8 UTF-8"
+locale_numeric: "en_AU.UTF-8"
+locale_time: "en_AU.UTF-8"
+locale_monetary: "en_AU.UTF-8"
+locale_paper: "en_AU.UTF-8"
+locale_identification: "en_AU.UTF-8"
+locale_name: "en_AU.UTF-8"
+locale_address: "en_AU.UTF-8"
+locale_telephone: "en_AU.UTF-8"
+locale_measurement: "en_AU.UTF-8"
 
