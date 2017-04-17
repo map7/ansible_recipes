@@ -9,16 +9,16 @@
     state: present
     line: "{{ item.line }}"
   with_items:
-    - { line: "export LANGUAGE={{ locale }}" }
-    - { line: "export LC_ALL={{ locale }}" }
-    - { line: "export LANG={{ locale }}" }
-    - { line: "export LC_TYPE={{ locale }}" }
+    - { line: "export LANGUAGE={{ locale.locale }}" }
+    - { line: "export LC_ALL={{ locale.locale }}" }
+    - { line: "export LANG={{ locale.locale }}" }
+    - { line: "export LC_TYPE={{ locale.locale }}" }
 
-- name: prepare locale info
+- name: prepare locales info
   command: "{{ item }}"
   with_items:
-    - "echo locales locales/locales_to_be_generated multiselect {{ locale }} | debconf-set-selections"
-    - "echo locales locales/default_environment_locale      select {{ locale }} | debconf-set-selections"
+    - "echo locales locales/locales_to_be_generated multiselect {{ locale.locale }} | debconf-set-selections"
+    - "echo locales locales/default_environment_locale      select {{ locale.locale }} | debconf-set-selections"
     - dpkg-reconfigure locales -f noninteractive
     - touch /root/.locales-updated
   when: ansible_distribution == 'Debian'
@@ -32,7 +32,7 @@
     line: "{{ item.line }}"
     state: "{{ item.state }}"
   with_items:
-    - { regexp: "^#? ?{{ locale }} UTF-8", line: "{{ locale }} UTF-8", state: present }
+    - { regexp: "^#? ?{{ locale.locale }} UTF-8", line: "{{ locale.locale }} UTF-8", state: present }
   when: ansible_os_family == "Debian"
   notify: generate locales
   
