@@ -3,33 +3,22 @@
 # Configure System Locale
 #
 
-- name: Setup System Locale as EN_AU.UTF-8
+- name: Setup locale in zsh
   lineinfile:
     dest: "/home/{{ ansible_ssh_user }}/.zshenv"
     state: present
     line: "{{ item.line }}"
   with_items:
-    - { line: "export LANGUAGE=en_AU.UTF-8" }
-    - { line: "export LC_ALL=en_AU.UTF-8" }
-    - { line: "export LANG=en_AU.UTF-8" }
-    - { line: "export LC_TYPE=en_AU.UTF-8" }
- # command: /usr/sbin/update-locale LANG="en_AU.UTF-8" LC_ALL="en_AU.UTF-8"
-# - name: Setup System Locale as EN_AU.UTF-8
-#   lineinfile:
-#     dest: "/home/{{ ansible_ssh_user }}/.zshenv"
-#     state: present
-#     line: "{{ item.line }}"
-#   with_items:
-#     - { line: "export LANGUAGE=en_AU.UTF-8" }
-#     - { line: "export LC_ALL=en_AU.UTF-8" }
-#     - { line: "export LANG=en_AU.UTF-8" }
-#     - { line: "export LC_TYPE=en_AU.UTF-8" }
+    - { line: "export LANGUAGE={{ locale }}" }
+    - { line: "export LC_ALL={{ locale }}" }
+    - { line: "export LANG={{ locale }}" }
+    - { line: "export LC_TYPE={{ locale }}" }
 
 - name: prepare locale info
   command: "{{ item }}"
   with_items:
-    - echo locales locales/locales_to_be_generated multiselect     de_DE ISO-8859-1, de_DE.UTF-8 UTF-8, de_DE@euro ISO-8859-15, en_GB ISO-8859-1, en_GB.ISO-8859-15 ISO-8859-15, en_GB.UTF-8 UTF-8, en_US ISO-8859-1, en_US.ISO-8859-15 ISO-8859-15, en_US.UTF-8 UTF-8 en_AU.UTF-8 UTF-8 | debconf-set-selections
-    - echo locales locales/default_environment_locale      select  en_AU.UTF-8 | debconf-set-selections
+    - "echo locales locales/locales_to_be_generated multiselect {{ locale }} | debconf-set-selections"
+    - "echo locales locales/default_environment_locale      select {{ locale }} | debconf-set-selections"
     - dpkg-reconfigure locales -f noninteractive
     - touch /root/.locales-updated
   when: ansible_distribution == 'Debian'
