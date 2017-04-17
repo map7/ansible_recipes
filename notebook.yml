@@ -14,17 +14,17 @@
   vars:
     repo: testing
     gituser: drej2k
-    monitor_1: "HDMI2"
-    monitor_2: "eDP1"
-    monitor_orientation: "--left-of"
-    output_mode: "--auto"
-    emacs_user_config_github: 'https://github.com/map7/emacs-config.git'
+    exwm:
+      monitor_1: "HDMI2"
+      monitor_2: "eDP1"
+      monitor_orientation: "--left-of"
+      output_mode: "--auto"
+    emacs:
+      user_config_github: 'https://github.com/map7/emacs-config.git'
     oh_my_zsh:
       theme: robbyrussell
       plugins: git
       update_days: 13
-    locale: 
-      locale: "en_AU.UTF-8"
       case_sensitive: true
       hyphen_insensitive: true
       disable_update_prompt: true
@@ -34,6 +34,18 @@
       disable_untracked_files_dirty: true
       disable_correction: true
       completion_waiting_dots: false
+    locale: 
+      locale: "en_AU.UTF-8"
+      language: "en_AU:en"
+      numeric: "en_AU.UTF-8"
+      time: "en_AU.UTF-8"
+      monetary: "en_AU.UTF-8"
+      paper: "en_AU.UTF-8"
+      identification: "en_AU.UTF-8"
+      name: "en_AU.UTF-8"
+      address: "en_AU.UTF-8"
+      telephone: "en_AU.UTF-8"
+      measurement: "en_AU.UTF-8"
 
   vars_files:
     - "vars/defaults.yml"
