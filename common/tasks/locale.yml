@@ -43,16 +43,7 @@
     line: "{{ item.line }}"
     state: "{{ item.state }}"
   with_items:
-    # - { regexp: '^#? ?de_DE ISO-8859-1', line: 'de_DE ISO-8859-1', state: present }
-    # - { regexp: '^#? ?de_DE.UTF-8 UTF-8', line: 'de_DE.UTF-8 UTF-8', state: present }
-    # - { regexp: '^#? ?de_DE@euro ISO-8859-15', line: 'de_DE@euro ISO-8859-15', state: present }
-    # - { regexp: '^#? ?en_GB ISO-8859-1', line: 'en_GB ISO-8859-1', state: present }
-    # - { regexp: '^#? ?en_GB.ISO-8859-15 ISO-8859-15', line: 'en_GB.ISO-8859-15 ISO-8859-15', state: present }
-    # - { regexp: '^#? ?en_GB.UTF-8 UTF-8', line: 'en_GB.UTF-8 UTF-8', state: present }
-    # - { regexp: '^#? ?en_US ISO-8859-1', line: 'en_US ISO-8859-1', state: present }
-    # - { regexp: '^#? ?en_US.ISO-8859-15 ISO-8859-15', line: 'en_US.ISO-8859-15 ISO-8859-15', state: present }
-    # - { regexp: '^#? ?en_US.UTF-8 UTF-8', line: 'en_US.UTF-8 UTF-8', state: present }
-    - { regexp: '^#? ?en_AU.UTF-8 UTF-8', line: 'en_AU.UTF-8 UTF-8', state: present }
+    - { regexp: "^#? ?{{ locale }} UTF-8", line: "{{ locale }} UTF-8", state: present }
   when: ansible_os_family == "Debian"
   notify: generate locales
   
