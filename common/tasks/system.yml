@@ -25,7 +25,7 @@
   action: command update-command-not-found creates=/var/cache/apt/apt-file
   when: ansible_os_family == "Debian"
 
-- include: common/tasks/postgresql.yml
+- include: postgresql.yml
   become: yes
-- include: common/tasks/locale.yml
-- include: common/tasks/lvm.yml
+- include: locale.yml
+- include: lvm.yml
