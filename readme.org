@@ -1,7 +1,7 @@
 * Ansible Recipes
 ** Version tested
 
-Written for ansible 1.8
+Written for ansible 2.2
 
 ** Target (Server in need of configuration)
 
@@ -28,7 +28,7 @@ Note: This is optional if you are using the -b then there is no need for this.
 
 ** Source (Your development box)
 
-Ansible 1.8 (currently the HEAD branch when you clone).
+Ansible 2.2 (currently the HEAD branch when you clone).
 : sudo apt-get install python-yaml python-jinja2 python-paramiko
 : git clone https://github.com/ansible/ansible.git
 : cd ansible
@@ -59,11 +59,23 @@ Create passwordless access (server to client)
 
 Now you can run with this command (on the development machine)
 
+For server boxes
 : ansible-playbook media_center.yml -b -v
 | -b | become sudo |
 | -v | verbose     |
 
-*NOTE* With mysql I leave the password blank for the root user until I've finished setup, then manually assign a new password using the following;
+For dev (non server) boxes
+: ansible-playbook dev.yml -K -v
+| -K | ask for sudo password and pass |
+| -v | verbose                        |
+
+
+*NOTES* 
+1. For an encypted ssh key file with password, to prevent always being asked for password
+: eval `ssh-agent`
+: ssh-add /home/user/.ssh/id_rsa
+
+2. With mysql I leave the password blank for the root user until I've finished setup, then manually assign a new password using the following;
 : mysqladmin -u root password 'newpassword'
 
 ** Custom variables
@@ -82,15 +94,54 @@ Place it at the bottom of your vars list to override the defaults I've set.
 | ltsp_thin    | Thin client server                    |
 | ltsp_fat     | Fat client server                     |
 | webserver    | Ruby on Rails server                  |
+
 ** DONE Update to 1.9
 
 - [X] [[https://github.com/ansible/ansible/blob/devel/CHANGELOG.md][Look at changes from 1.2 to 1.5 and optimise]]
 
 - [X] Update any 'cp' command to using the copy module. Since ansible 1.4 the copy module allows recursive copy.
 
-** TODO Update to 2.0
+** TODO Update to 2.2 [62%]
    :PROPERTIES:
    :CREATED:  [2015-04-10 Fri 11:48]
    :END:
 
-- [ ] Change all $var to {{ var }}
+*** DONE Change all $var to {{ var }}
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:04]
+    :END:
+
+*** DONE Add oh_my_zsh install
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:04]
+    :END:
+
+*** DONE Pull oh_my_zsh config from github
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:05]
+    :END:
+
+*** TODO Add multi language switching support
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:05]
+    :END:
+
+*** TODO Ensure Rbenv installs to latest version
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:05]
+    :END:
+
+*** TODO Remove all force=yes and replace with
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:07]
+    :END:
+
+*** DONE Update locale & ensure locale works correctly
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:06]
+    :END:
+
+*** DONE Determine if we need phantomJS
+    :PROPERTIES:
+    :CREATED:  [2017-04-12 Wed 19:06]
+    :END:
