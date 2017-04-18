@@ -2,15 +2,16 @@
 #
 # Programming tools and configuration
 #  
-- name: Install git
-  apt: pkg=git state=installed
-
-- include: emacs.yml
+- include: node-dev-machine.yml
+- include: zsh.yml
+- include: yarn.yml
+- include: ruby.yml # Install a system ruby used with backup
 - include: rbenv.yml
-- include: node.yml
 - include: rails.yml
+- include: emacs.yml
+- include: exwm-config.yml
 - include: phantomjs.yml
-     
+
 - name: Install programming tools
   action: apt pkg={{ item }} state=installed force=yes
   with_items:
@@ -21,8 +22,4 @@
     - ghex
     - geany
     - pgadmin3
-
-- name: Install cheat
-  action: command bash -c "/usr/local/bin/gem install cheat" creates=/usr/local/rbenv/versions/$ruby_version/bin/cheat
-
-  
+    - git
