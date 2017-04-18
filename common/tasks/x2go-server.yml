@@ -1,0 +1,69 @@
+---
+#
+# X2Go allows remote access amoungst other things (PXE boot)
+#
+# I only use X2Go for remote access at the moment.
+#
+
+  #  Add X2Go key
+- apt_key:
+    keyserver: keys.gnupg.net
+    id: E1F958385BFE2B6E
+  # when: ansible_os_family == "Debian"
+
+- file:
+    path: /etc/apt/sources.list.d/x2go.list
+    state: touch
+    mode: 0644
+
+- name: Add X2go Source to list file
+  lineinfile:
+    dest: "/etc/apt/sources.list.d/x2go.list"
+    state: present
+    line: "{{ item.line }}"
+  with_items:
+    - { line: "# X2Go Repository (release builds)" }
+    - { line: "deb http://packages.x2go.org/debian testing main" }
+    - { line: "# X2Go Repository (sources of release builds)" }
+    - { line: "deb-src http://packages.x2go.org/debian testing main" }
+    - { line: "# X2Go Repository (nightly builds)" }
+    - { line: "#deb http://packages.x2go.org/debian testing heuler" }
+    - { line: "# X2Go Repository (sources of nightly builds)" }
+    - { line: "#deb-src http://packages.x2go.org/debian testing" }
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Install x2go-keyring
+  apt:
+    pkg: x2go-keyring
+    state: present
+  when: ansible_os_family == "Debian"
+  
+- name: Install x2goserver
+  apt: pkg={{ item }} state=present
+  with_items:
+    - x2goserver
+    - x2goserver-xsession
+    - x2goserver-fmbindings
+
+- name: Setup SSH to be compatible with x2go
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    backrefs: yes
+    regexp: "^HostKey /etc/ssh/ssh_host_ecdsa_key"
+    line: "#HostKey /etc/ssh/ssh_host_ecdsa_key"
+    backup: yes
+    state: present
+  notify: restart ssh
+  when: ansible_os_family == "Debian"
+
+  # - name: Add X2Go repository
+#   apt_repository:
+#     repo: 'deb http://packages.x2go.org/debian {{ repo }} main'
+#   when: ansible_os_family == "Debian"
+
+# - name: Add X2Go repository for Ubuntu based distros
+#   apt_repository: repo='ppa:x2go/stable' update_cache=yes
+#   when: ansible_os_family == "Ubuntu" or ansible_os_family == "Linuxmint"
