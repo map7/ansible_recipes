@@ -1,0 +1,52 @@
+---
+#
+# Configure System Locale
+#
+
+- name: Setup locale in zsh
+  lineinfile:
+    dest: "/home/{{ ansible_ssh_user }}/.zshenv"
+    state: present
+    line: "{{ item.line }}"
+  with_items:
+    - { line: "export LANGUAGE={{ locale.locale }}" }
+    - { line: "export LC_ALL={{ locale.locale }}" }
+    - { line: "export LANG={{ locale.locale }}" }
+    - { line: "export LC_TYPE={{ locale.locale }}" }
+
+- name: prepare locales info
+  command: "{{ item }}"
+  with_items:
+    - "echo locales locales/locales_to_be_generated multiselect {{ locale.locale }} | debconf-set-selections"
+    - "echo locales locales/default_environment_locale      select {{ locale.locale }} | debconf-set-selections"
+    - dpkg-reconfigure locales -f noninteractive
+    - touch /root/.locales-updated
+  when: ansible_distribution == 'Debian'
+  args:
+    creates: /root/.locales-updated
+
+- name: set locales
+  lineinfile:
+    dest: /etc/locale.gen
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: "{{ item.state }}"
+  with_items:
+    - { regexp: "^#? ?{{ locale.locale }} UTF-8", line: "{{ locale.locale }} UTF-8", state: present }
+  when: ansible_os_family == "Debian"
+  notify: generate locales
+  
+# Undesirable as it overrides the locale.gen file and we loose other locales
+# tasks file for locale 
+# - name: set locale-gen file
+#   template: src=locale-gen.j2 dest=/etc/locale.gen
+#   when: ansible_os_family == "Debian"
+#   notify: generate locales
+
+- name: set locale
+  become: yes
+  template:
+    src: common/templates/default-locale.j2
+    dest: /etc/default/locale
+  when: ansible_os_family == "Debian"
+  notify: rebuild locales

@@ -1,0 +1,35 @@
+# {{ ansible_managed }}
+LANG="{{ locale.locale | default(locale) }}"
+{% if locale.locale_all is defined %}
+LC_ALL="{{ locale.locale_all }}"
+{% endif %}
+{% if locale.language | default(locale_language) is defined %}
+LANGUAGE="{{ locale.language | default(locale_language) }}"
+{% endif %}
+{% if locale.numeric | default(locale_numeric) is defined %}
+LC_NUMERIC="{{ locale.numeric | default(locale_numeric) }}"
+{% endif %}
+{% if locale.time | default(locale_time) is defined %}
+LC_TIME="{{ locale.time | default(locale_time) }}"
+{% endif %}
+{% if locale.monetary | default(locale_monetary) is defined %}
+LC_MONETARY="{{ locale.monetary | default(locale_monetary) }}"
+{% endif %}
+{% if locale.paper | default(locale_paper) is defined %}
+LC_PAPER="{{ locale.paper | default(locale_paper) }}"
+{% endif %}
+{% if locale.identification | default(locale_identification) is defined %}
+LC_IDENTIFICATION="{{ locale.identification | default(locale_identification) }}"
+{% endif %}
+{% if locale.name | default(locale_name) is defined %}
+LC_NAME="{{ locale.name | default(locale_name) }}"
+{% endif %}
+{% if locale.address | default(locale_address) is defined %}
+LC_ADDRESS="{{ locale.address | default(locale_address) }}"
+{% endif %}
+{% if locale.telephone | default(locale_telephone) is defined %}
+LC_TELEPHONE="{{ locale.telephone | default(locale_telephone) }}"
+{% endif %}
+{% if locale.measurement | default(locale_measurement) is defined %}
+LC_MEASUREMENT="{{ locale.measurement | default(locale_measurement) }}"
+{% endif %}
