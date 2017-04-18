@@ -1,0 +1,73 @@
+---
+#
+# Webserver for running Ruby on Rails with postgresql & node.
+#
+# Run
+# ansible-playbook webserver.yml -b -v
+# -b become sudo
+# -v verbose
+
+- hosts: dev-notebook
+  user: dev
+  become: yes
+  connection: ssh # or paramiko
+  vars:
+    repo: testing
+    gituser: drej2k
+    exwm:
+      monitor_1: "HDMI2"
+      monitor_2: "eDP1"
+      monitor_orientation: "--left-of"
+      output_mode: "--auto"
+    emacs:
+      user_config_github: 'https://github.com/map7/emacs-config.git'
+    oh_my_zsh:
+      theme: robbyrussell
+      plugins: git
+      update_days: 13
+      case_sensitive: true
+      hyphen_insensitive: true
+      disable_update_prompt: true
+      disable_auto_update: true
+      disable_ls_colors: true
+      disable_auto_title: true
+      disable_untracked_files_dirty: true
+      disable_correction: true
+      completion_waiting_dots: false
+    locale: 
+      locale: "en_AU.UTF-8"
+      language: "en_AU:en"
+      numeric: "en_AU.UTF-8"
+      time: "en_AU.UTF-8"
+      monetary: "en_AU.UTF-8"
+      paper: "en_AU.UTF-8"
+      identification: "en_AU.UTF-8"
+      name: "en_AU.UTF-8"
+      address: "en_AU.UTF-8"
+      telephone: "en_AU.UTF-8"
+      measurement: "en_AU.UTF-8"
+
+  vars_files:
+    - "vars/defaults.yml"
+    - "vars/{{ ansible_distribution }}-{{ ansible_architecture }}.yml"
+    - "vars/{{ ansible_distribution }}.yml"
+
+  pre_tasks:
+    - include: common/tasks/add_repositories.yml
+      become: yes
+    - include: common/tasks/compression-tools.yml
+
+  tasks:
+    - include: common/tasks/system.yml
+      become: yes
+    - include: common/tasks/email-server.yml
+      become: yes
+    - include: common/tasks/programming.yml 
+    - include: common/tasks/backup.yml
+    - include: common/tasks/office.yml 
+    - include: common/tasks/custom-software.yml      
+    # - include: common/tasks/kvm.yml
+
+  handlers:
+    - include: common/handlers/handlers.yml
+
