@@ -16,7 +16,7 @@
   become: yes
 
 #    
-# Test that we can install gems
+# Test that we can install gems using ruby system install
 #
 - name: install cheat
   gem: name=cheat state=present user_install=no
