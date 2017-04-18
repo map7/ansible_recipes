@@ -17,26 +17,17 @@
     - molly-guard       # Save people from rebooting the wrong server.
     - expect            # Required for some installation scripts
     - mg                # emacs lite
+    - pulseaudio-module-bluetooth # allows bluetooth connection via cmd line
     - git
-
+    - flashplugin-nonfree
+    
 - name: Update command-not-found
-  action: command update-command-not-found creates=/var/cache/apt/apt-file
+  command: update-command-not-found
+  args:
+    creates: /var/cache/apt/apt-file
   when: ansible_os_family == "Debian"
 
-  # Move the following
-  
-    # Source building tools
-    # - build-essential   # Build tools like gcc.
-    
-    # Zsh (& oh-my-shell)
-    # - zsh
-
-    # Debian package helpers
-    # - command-not-found # Package suggestion utility
-
-    # Monitoring tools
-    # - nethogs
-    # - bwm-ng            # bandwidth monitor for network & disk
-
-    # Firmware
-    # - firmware-linux-nonfree
+- include: postgresql.yml
+  become: yes
+- include: locale.yml
+- include: lvm.yml
