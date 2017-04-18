@@ -1,0 +1,15 @@
+---
+#
+# Monitoring Tools
+#
+
+- name: Install linux monitoring tools
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    default_release: testing
+  with_items:
+    - nethogs
+    - bmw-ng                             # bandwidth monitor for network & disk
+  when: ansible_os_family == 'Debian'  
+
