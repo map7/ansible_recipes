@@ -8,23 +8,25 @@
   with_items:
     - xclip
     - pdfshuffler
-    - xchm
+    - xchm                      # Read microsoft help files
     - okular                    # PDF reader of choice
     - inkscape
+    - krita                     # Photo editing
     - gimp
-    - gthumb                    # Picture viewer & basic editor
+    #- gthumb                    # Picture viewer & basic editor
     - keepassx
     - gwakeonlan                # Turn computers on around the office
     - ktorrent
     - wireshark
     - gparted
-    - audacity
+    #- audacity
+    - audacity                  # Modify mp3 or wave files
     - filezilla
     - chromium
     - wine
-    - simple-scan
-    - gkrellm
-    - backintime-gnome          # Backup
+    - simple-scan               # Self configures usb scanners
+    - gkrellm                   # System stats program
+    - backintime-gnome          # Backup 
     - fsarchiver                # Backup system tool
     - file-roller               # Better integration with nautilus
     - cheese                    # camera shot
@@ -49,3 +51,5 @@
   apt: pkg=flashplugin-nonfree
   when: ansible_os_family == "Debian"
 
+- include: common/tasks/x2go.yml      
+- include: common/tasks/virtual-box.yml
