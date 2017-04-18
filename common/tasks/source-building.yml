@@ -1,0 +1,18 @@
+---
+#
+# Libraries and tools required for source building
+#
+
+- name: Install libs & tools for source building
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    default_release: testing
+  with_items:
+    - build-essential
+    - autoconf
+    - automake
+    - fakeroot
+    - devscripts
+  when: ansible_os_family == 'Debian'  
+
