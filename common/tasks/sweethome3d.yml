@@ -2,7 +2,7 @@
 ####
 # Install sweethome3d
 ####  
-- name: Custom Software
+- name: Install sweethome3d
   apt:
     pkg: "{{ item }}"
     state: present
