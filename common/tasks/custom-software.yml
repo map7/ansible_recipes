@@ -48,6 +48,8 @@
     - ./configure --prefix=/opt/homebank
     - make -j4
     - make install
+    - make clean
+    - make distclean
   args:
     chdir: "/home/{{ ansible_ssh_user }}/homebank-5.1.4"
     creates: /opt/homebank/bin/homebank
@@ -57,8 +59,3 @@
     link: /usr/bin/homebank
     name: homebank
     path: /opt/homebank/bin/homebank
-
-    #You can remove the program binaries and object files from the
-    #source code directory by typing `make clean'.  To also remove the
-    #files that `configure' created (so you can compile the package for
-    #a different kind of computer), type `make distclean'
