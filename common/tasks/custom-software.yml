@@ -1,7 +1,7 @@
 ---
 
 ####
-# Install Homebank
+# Install Homebank from source because pkg ver bank import doesnt work
 ####
 
 - name: "Create tmp directory if it doesn't exist"
