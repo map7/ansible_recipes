@@ -16,13 +16,6 @@
   get_url:
     url: "http://homebank.free.fr/public/homebank-5.1.4.tar.gz"
     dest: "/home/{{ ansible_ssh_user }}/tmp"
-
-# - file:
-#     path: "/home/{{ ansible_ssh_user }}/homebank-5.1.4"
-#     state: directory
-#     owner: "{{ ansible_ssh_user }}"
-#     group: "{{ ansible_ssh_user }}"
-#     mode: 0755
     
 - unarchive:
     src: "/home/{{ ansible_ssh_user }}/tmp/homebank-5.1.4.tar.gz"
