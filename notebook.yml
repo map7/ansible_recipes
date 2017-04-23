@@ -51,12 +51,12 @@
       env: user
       version: v1.1.0
       default_ruby: 2.3.3
-      default_gems_file: common/files/default-gems
       rubies:
         - version: 2.2.5
         - version: 2.3.3
           env:
             RUBY_CONFIGURE_OPTS: "--enable-shared"
+    default_gems_file: common/files/default-gems
 
   roles:
     - role: zzet.rbenv
