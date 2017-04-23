@@ -61,7 +61,7 @@
   roles:
     - role: zzet.rbenv
       rbenv_users:
-        - user
+        - "{{ ansible_user }}"
         
   vars_files:
     - "vars/defaults.yml"
