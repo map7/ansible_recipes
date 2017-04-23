@@ -49,7 +49,7 @@
       measurement: "en_AU.UTF-8"
     rbenv:
       env: user
-      version: v1.0.0
+      version: v1.1.0
       default_ruby: 2.3.3
       default_gems_file: common/files/default-gems
       rubies:
