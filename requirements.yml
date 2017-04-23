@@ -9,5 +9,5 @@
 - src: Heroqu.nodejs4x
 
 # rbenv
-- name: rbenv
+- name: zzet.rbenv
   src: https://github.com/zzet/ansible-rbenv-role
