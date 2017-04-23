@@ -1,7 +1,7 @@
 # Install ansible-galaxy roles using this file
 #
 # Run
-# ansible-galaxy install -r requirements.yml
+# sudo ansible-galaxy install -r requirements.yml
 #
 # Ref: https://docs.ansible.com/ansible/galaxy.html#installing-multiple-roles-from-a-file
 
