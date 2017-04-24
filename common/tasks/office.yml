@@ -54,3 +54,4 @@
 - include: common/tasks/x2go.yml      
 - include: common/tasks/virtual-box.yml
 - include: common/tasks/email-server.yml
+  become: yes
