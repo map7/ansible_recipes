@@ -67,6 +67,8 @@
     - ./configure --prefix=/opt/emacs
     - "make bootstrap -j{{ ansible_processor_vcpus }}"
     - make install
+    - make distclean
+
   args:
     chdir: "/home/{{ ansible_ssh_user }}/emacs"
     creates: /opt/emacs/bin/emacs-25.2
