@@ -65,7 +65,7 @@
     - ./autogen.sh
     - ./autogen.sh git
     - ./configure --prefix=/opt/emacs
-    - make bootstrap -j4
+    - "make bootstrap -j{{ ansible_processor_vcpus }}"
     - make install
   args:
     chdir: "/home/{{ ansible_ssh_user }}/emacs"
