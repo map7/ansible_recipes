@@ -6,8 +6,10 @@
 - name: Install exim4
   apt: pkg=exim4 state=installed
 
-#Setup exim4
+# Setup exim4
 - name: Configure exim4
-  action: copy src=update-exim4.conf.conf dest=/etc/exim4/update-exim4.conf.conf
+  copy:
+    src: common/files/update-exim4.conf.conf
+    dest: /etc/exim4/update-exim4.conf.conf
   notify:
     - restart exim4
