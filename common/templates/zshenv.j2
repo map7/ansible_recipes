@@ -1,0 +1,107 @@
+alias -g L="|less"
+
+# Suffix aliases (Type a file as a command and this program will launch)
+alias -s jpg=gthumb
+alias -s png=gthumb
+alias -s pdf=okular
+alias -s html=firefox
+alias -s ogg=mplayer
+
+# No correct
+alias music="nocorrect music"
+alias xdotool='nocorrect xdotool'
+alias heroku='nocorrect heroku'
+alias cap='nocorrect cap'
+alias lg='nocorrect lg'
+alias gitg='nocorrect gitg'
+
+# aptitude related
+alias apt='sudo aptitude'
+alias i='sudo aptitude install'
+alias ibp='sudo aptitude -t wheezy-backports install'
+alias bplist="aptitude search -F\"%p %I %d\" '~Awheezy-backports!~Astable'"
+alias bpilist="aptitude search '?narrow(?installed, !?archive(stable))'"
+
+# Directory aliases (~down)
+hash -d down=~/Downloads
+hash -d soak=~/SpiderOak\ Hive
+
+# some more ls aliases
+alias ll='ls -l --color'
+alias la='ls -A --color'
+alias l='ls -CF --color'
+
+alias dus='du -m -s * | sort -k1,1nr'
+alias h='fc -l'
+alias j='jobs'
+alias m='more'
+alias task='sudo at now + 1 minute'
+
+# Environement variables
+
+alias wdmesg="nocorrect watch -n0.1 'dmesg | tail -30'"
+
+umask 002
+
+# LV related
+alias snap='sudo lvcreate -L10G -s -n snap /dev/vg.lvm.sol/root'
+alias rmsnap='sudo lvremove /dev/vg.lvm.sol/snap'
+
+# Emacs shortcuts
+export EDITOR='emacs -nw -q'
+export GIT_EDITOR='emacsclient'
+alias e='emacs -nw -q'
+alias se='sudo emacs -nw -q'
+
+# KVM stuff
+export LIBVIRT_DEFAULT_URI="qemu:///system"
+
+# LTSP
+alias ltspbak='cd /opt/ltsp;sudo ./backup-chroot-ltsp.rb'
+alias ltspbuild='cd /opt/ltsp;sudo ./build_and_update.rb'
+alias ltsp-chroot='sudo /usr/sbin/ltsp-chroot -m bash'
+
+# git
+alias g='git'
+alias git_empty='for i in $(find . -type d -regex ``./[^.].*'' -empty); do touch $i"/.gitignore"; done;'
+alias rm_svn_dirs='find . -name ".svn" -type d -exec rm -rf {} \;'
+alias gc='git checkout '
+alias gca='git commit -a '    # Git Commit -a
+alias gclean='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
+
+# Programming
+alias webserver='adsf -p 3030'
+alias be="bundle exec "
+alias dstage='cap deploy;cap deploy:migrate'
+alias dprod='cap production deploy;cap production deploy:migrate'
+export RSPEC_PORT='4280'
+
+# Tests
+alias ks='rake karma:start'
+alias rps='rake parallel:spec'
+alias irsp='LIVE=true rspec spec/integration'
+alias tp='bundle exec rake db:test:prepare; bundle exec rake parallel:prepare'
+alias replicate='cap production postgres:replicate; rake db:migrate' # pull production database
+#alias kse='karma start karma-e2e.conf.js' # Use protractor instead
+
+alias psuite='p -- --suite'
+alias p='bundle exec rake protractor:spec'
+alias pc='bundle exec rake protractor:cleanup'
+alias pf='pc;p;be rake db:test:prepare'
+
+# Full test, run all the tests resetting the database & seeding it appropriately
+#alias ft='pc;p;zdbm;zeus test spec;zr karma:run'
+alias ft='pc;p;rdbm;be rake test spec;be rake karma:run'
+
+# Protractor browser debugger
+alias elementexplorer='/usr/local/lib/node_modules/protractor/bin/elementexplorer.js'
+
+# Ruby
+alias updaterbenv='cd $RBENV_ROOT;git pull;cd $OLDPWD;cd $RBENV_ROOT/plugins/ruby-build;git pull;cd $OLDPWD'
+
+# Backup
+alias ltspbk='/usr/local/rbenv/shims/backup perform -t backup_scripts,data,home --tmp-path /media/backup/.tmp'
+alias copybk='/usr/local/rbenv/shims/backup perform -t copy_to_usb --tmp-path /media/backup/.tmp'
+
+# Headless
+export XVFB_DISPLAY='300'
