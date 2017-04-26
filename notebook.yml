@@ -66,6 +66,7 @@
     - include: common/tasks/backup.yml
     - include: common/tasks/office.yml 
     - include: common/tasks/sweethome3d.yml      
+    - include: common/tasks/homebank.yml      
     # - include: common/tasks/kvm.yml
 
   handlers:

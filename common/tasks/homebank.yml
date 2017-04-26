@@ -1,0 +1,54 @@
+---
+
+####
+# Install Homebank from source because pkg ver bank import doesnt work
+####
+
+- name: "Create tmp directory if it doesn't exist"
+  file:
+    path: "/home/{{ ansible_ssh_user }}/tmp"
+    state: directory
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    mode: 0755
+
+- name: Download Homebank tgz file
+  get_url:
+    url: "http://homebank.free.fr/public/homebank-5.1.4.tar.gz"
+    dest: "/home/{{ ansible_ssh_user }}/tmp"
+    
+- unarchive:
+    src: "/home/{{ ansible_ssh_user }}/tmp/homebank-5.1.4.tar.gz"
+    dest: "/home/{{ ansible_ssh_user }}"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    remote_src: yes
+
+- name: Install libraries required for Configuring Homebank
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+    - intltool
+    - libgtk-3-dev
+    - libgtk2.0-dev
+    - libperl-dev
+    - libsoup2.4-dev
+
+- name: Configure, Make & Install Homebank
+  shell: "{{ item }}"
+  with_items:
+    - ./configure --prefix=/opt/homebank
+    - make -j4
+    - make install
+    - make clean
+    - make distclean
+  args:
+    chdir: "/home/{{ ansible_ssh_user }}/homebank-5.1.4"
+    creates: /opt/homebank/bin/homebank
+
+- name: 'Update alternative: homebank'
+  alternatives:
+    link: /usr/bin/homebank
+    name: homebank
+    path: /opt/homebank/bin/homebank
