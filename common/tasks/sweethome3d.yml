@@ -1,0 +1,11 @@
+---
+####
+# Install sweethome3d
+####  
+- name: Install sweethome3d
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    default_release: testing
+  with_items:
+    - sweethome3d
