@@ -51,7 +51,7 @@
     - include: common/tasks/add_repositories.yml
     - include: common/tasks/system.yml
       become: yes
-    - include: common/tasks/email.yml
+    - include: common/tasks/email-server.yml
       become: yes
     - include: common/tasks/ruby.yml
     - include: common/tasks/rails.yml
