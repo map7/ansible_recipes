@@ -21,7 +21,7 @@
 - name: Make & Install n
   shell: "{{ item }}"
   with_items:
-    - make -j4
+    - "make -j{{ ansible_processor_vcpus }}"
     - make install
   args:
     chdir: "/home/{{ ansible_ssh_user }}/n"
