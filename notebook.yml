@@ -65,7 +65,7 @@
     - include: common/tasks/programming.yml 
     - include: common/tasks/backup.yml
     - include: common/tasks/office.yml 
-    - include: common/tasks/custom-software.yml      
+    - include: common/tasks/homebank.yml      
     # - include: common/tasks/kvm.yml
 
   handlers:
