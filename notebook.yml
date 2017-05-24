@@ -76,8 +76,6 @@
   tasks:
     - include: common/tasks/system.yml
       become: yes
-    - include: common/tasks/email-server.yml
-      become: yes
     - include: common/tasks/programming.yml 
     - include: common/tasks/backup.yml
     - include: common/tasks/office.yml 
