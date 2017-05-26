@@ -38,9 +38,9 @@
       rbenv_users:
         - "{{ ansible_user }}"
     # Install passenger & apache
-    # - role: mtpereira.passenger
-    #   passenger_webserver: apache
-    #   become: yes
+    - role: mtpereira.passenger
+      passenger_webserver: apache
+      become: yes
       
   vars_files:
     - "vars/defaults.yml"
