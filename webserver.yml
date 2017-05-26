@@ -48,22 +48,10 @@
     - "vars/{{ ansible_distribution }}.yml"
 
   pre_tasks:
-    # Required on Debian 8 minimum install
-    - name: install python-apt
-      command: >
-        apt-get install python-apt -y -q
-        creates=/usr/share/doc/python-apt
-      sudo: yes
-
-    
-  roles:
-    # Install passenger & apache
-    - role: mtpereira.passenger
-      passenger_webserver: apache
-      sudo: yes
-    - role: Heroqu.nodejs4x
-      sudo: yes
-    
+    # - include: common/tasks/add_repositories.yml
+    #   become: yes
+    # - include: common/tasks/compression-tools.yml
+      
     # --------------------------------------------------------------------------------
     # Broken roles
     # --------------------------------------------------------------------------------
