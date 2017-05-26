@@ -9,6 +9,39 @@
 
 - hosts: webservers
   user: deploy
+  vars:
+    locale: 
+      locale: "en_AU.UTF-8"
+      language: "en_AU:en"
+      numeric: "en_AU.UTF-8"
+      time: "en_AU.UTF-8"
+      monetary: "en_AU.UTF-8"
+      paper: "en_AU.UTF-8"
+      identification: "en_AU.UTF-8"
+      name: "en_AU.UTF-8"
+      address: "en_AU.UTF-8"
+      telephone: "en_AU.UTF-8"
+      measurement: "en_AU.UTF-8"
+    rbenv:
+      env: system
+      version: v1.1.0
+      default_ruby: 2.2.5
+      rubies:
+        - version: 2.2.5
+        - version: 2.3.3
+          env:
+            RUBY_CONFIGURE_OPTS: "--enable-shared"
+    default_gems_file: common/files/default-gems
+
+  roles:
+    - role: zzet.rbenv
+      rbenv_users:
+        - "{{ ansible_user }}"
+    # Install passenger & apache
+    # - role: mtpereira.passenger
+    #   passenger_webserver: apache
+    #   become: yes
+      
   vars_files:
     - "vars/defaults.yml"
     - "vars/{{ ansible_distribution }}-{{ ansible_architecture }}.yml"
