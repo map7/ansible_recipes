@@ -26,8 +26,17 @@
   args:
     chdir: "/home/{{ ansible_ssh_user }}/n"
 
+- stat:
+    path: /home/{{ ansible_ssh_user }}/.zshrc
+  register: path
+  
 - name: Add n to zsh
   command: echo "N_PREFIX=$HOME" >> ~/.zshrc && . ~/.zshrc
+  when: path.stat.exists == true
+
+- name: Add n to .bashrc
+  command: echo "N_PREFIX=$HOME" >> ~/.bashrc
+  when: path.stat.exists == false
   
 - name: Install the latest stable version of node
   command: n stable && . ~/.profile
