@@ -5,6 +5,9 @@
 #
 # Ref: https://docs.ansible.com/ansible/galaxy.html#installing-multiple-roles-from-a-file
 
+# Passenger
+- src: mtpereira.passenger
+
 # NodeJS
 - src: Heroqu.nodejs4x
 
