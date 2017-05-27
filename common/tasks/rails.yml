@@ -6,8 +6,13 @@
 #
 
 - name: Install rails
-  gem: name=rails state=present user_install=no
+  gem:
+    name: rails
+    version: 3.2.22.2
+    state: present
+    user_install: no
   become: yes
+
 
 #
 # Setup web apps area
