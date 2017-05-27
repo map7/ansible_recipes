@@ -1,0 +1,34 @@
+---
+#
+# System related tasks and tools
+#
+
+- name: Install system tools
+  action: apt pkg={{ item }} state=installed force=yes
+  with_items:
+    - htop
+    - pwgen
+    - screen
+    - openssh-server
+    - sysstat
+    - ncdu              # Check disk usage per directory
+    - mosh              # Awesome mobile ssh server/client
+    - safe-rm           # Stop people typing 'rm -fr /'
+    - molly-guard       # Save people from rebooting the wrong server.
+    - expect            # Required for some installation scripts
+    - mg                # emacs lite
+    - git
+    - command-not-found
+    - apt-file
+    # - flashplugin-nonfree
+    
+- name: Update command-not-found
+  command: update-command-not-found
+  args:
+    creates: /var/cache/apt/apt-file
+  when: ansible_os_family == "Debian"
+
+- include: postgresql.yml
+  become: yes
+- include: locale.yml
+- include: lvm.yml
