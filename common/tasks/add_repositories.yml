@@ -19,7 +19,7 @@
   apt:
     name: python3-software-properties
     state: latest
-    default_release: testing
+    # default_release: testing
 
   when: ansible_os_family == "Debian"
   notify: Update apt-get
@@ -113,5 +113,5 @@
   apt:
     name: deb-multimedia-keyring
     state: latest
-    default_release: testing
+    # default_release: testing
     force: yes
