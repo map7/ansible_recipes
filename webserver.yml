@@ -48,6 +48,7 @@
     - "vars/{{ ansible_distribution }}.yml"
 
   pre_tasks:
+    - include: common/tasks/setup_deployment_user.yml
     - include: common/tasks/add_repositories.yml
       become: yes
     - include: common/tasks/compression-tools.yml
