@@ -13,13 +13,12 @@
     - inkscape
     - krita                     # Photo editing
     - gimp
-    #- gthumb                    # Picture viewer & basic editor
+    - gthumb                    # Picture viewer & basic editor
     - keepassx
     - gwakeonlan                # Turn computers on around the office
-    - ktorrent
+    - qbittorrent
     - wireshark
     - gparted
-    #- audacity
     - audacity                  # Modify mp3 or wave files
     - filezilla
     - chromium
@@ -47,9 +46,4 @@
     - xz-utils
     - dar
 
-- name: Install flash
-  apt: pkg=flashplugin-nonfree
-  when: ansible_os_family == "Debian"
-
 - include: x2go.yml      
-- include: virtual-box.yml
