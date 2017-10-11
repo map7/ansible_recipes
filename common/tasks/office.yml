@@ -51,5 +51,5 @@
   apt: pkg=flashplugin-nonfree
   when: ansible_os_family == "Debian"
 
-- include: common/tasks/x2go.yml      
-- include: common/tasks/virtual-box.yml
+- include: x2go.yml      
+- include: virtual-box.yml
