@@ -21,7 +21,6 @@
     - git
     - firmware-linux
     - pavucontrol               # Pulse audio utils
-    - blueman                   # bluetooth control
     - strace                    # Diags
     
 - name: Update command-not-found
