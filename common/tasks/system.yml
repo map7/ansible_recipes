@@ -30,7 +30,5 @@
     creates: /var/cache/apt/apt-file
   when: ansible_os_family == "Debian"
 
-- include: postgresql.yml
-  become: yes
 - include: locale.yml
 - include: lvm.yml
