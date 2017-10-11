@@ -20,6 +20,10 @@
     - pulseaudio-module-bluetooth # allows bluetooth connection via cmd line
     - git
     - flashplugin-nonfree
+    - firmware-linux
+    - pavucontrol               # Pulse audio utils
+    - blueman                   # bluetooth control
+    - strace                    # Diags
     
 - name: Update command-not-found
   command: update-command-not-found
