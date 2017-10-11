@@ -12,3 +12,7 @@
   command: ltsp-config nbd-server
   notify: restart nbd
 
+# Copy sources.list from server to LTSP
+- name: Copy sources.list
+  command: cp /etc/apt/sources.list /opt/ltsp/amd64/etc/apt/sources.list
+
