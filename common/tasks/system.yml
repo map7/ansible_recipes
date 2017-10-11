@@ -19,7 +19,6 @@
     - mg                # emacs lite
     - pulseaudio-module-bluetooth # allows bluetooth connection via cmd line
     - git
-    - flashplugin-nonfree
     - firmware-linux
     - pavucontrol               # Pulse audio utils
     - blueman                   # bluetooth control
