@@ -1,8 +1,8 @@
 ---
 #
 # Media center
-# Tested on: Debian 8.6 Jessie
-# Updated & tested: 12/10/2016
+# Tested on: Debian 9 Stretch
+# Updated & tested: 11/07/2017
 #
 # This builds a media center using Kodi, tvheadend & LTSP. At the end you should have the following
 # - Main server with Kodi and lots of software for work, rest and play
