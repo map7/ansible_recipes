@@ -12,7 +12,6 @@
   action: apt pkg={{ item }}
   with_items:
     - libcurl4-openssl-dev
-    - apache2-prefork-dev
     - libapr1-dev
     - libaprutil1-dev
 
