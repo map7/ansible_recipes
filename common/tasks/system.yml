@@ -10,6 +10,7 @@
     - pwgen
     - screen
     - openssh-server
+    - nmap                      # Handy network scanner
     - sysstat
     - ncdu              # Check disk usage per directory
     - mosh              # Awesome mobile ssh server/client
