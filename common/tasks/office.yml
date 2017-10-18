@@ -31,6 +31,7 @@
     - cheese                    # camera shot
     - firefox-esr
     - icedove
+    - libreoffice
       
 - name: Install compression tools
   action: apt pkg={{ item }} state=installed force=yes
