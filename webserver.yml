@@ -9,48 +9,54 @@
 
 - hosts: webservers
   user: deploy
-  vars_files:
-    - "vars/defaults.yml"
-    - "vars/$ansible_distribution-$ansible_architecture.yml"
-    - "vars/$ansible_distribution.yml"
+  vars:
+    locale: 
+      locale: "en_AU.UTF-8"
+      language: "en_AU:en"
+      numeric: "en_AU.UTF-8"
+      time: "en_AU.UTF-8"
+      monetary: "en_AU.UTF-8"
+      paper: "en_AU.UTF-8"
+      identification: "en_AU.UTF-8"
+      name: "en_AU.UTF-8"
+      address: "en_AU.UTF-8"
+      telephone: "en_AU.UTF-8"
+      measurement: "en_AU.UTF-8"
+    rbenv:
+      env: system
+      version: v1.1.0
+      default_ruby: 2.2.5
+      rubies:
+        - version: 2.2.5
+        - version: 2.3.3
+          env:
+            RUBY_CONFIGURE_OPTS: "--enable-shared"
+    default_gems_file: common/files/default-gems
 
-  pre_tasks:
-    # Required on Debian 8 minimum install
-    - name: install python-apt
-      command: >
-        apt-get install python-apt -y -q
-        creates=/usr/share/doc/python-apt
-      sudo: yes
-
-    
   roles:
+    - role: zzet.rbenv
+      rbenv_users:
+        - "{{ ansible_user }}"
     # Install passenger & apache
     - role: mtpereira.passenger
       passenger_webserver: apache
-      sudo: yes
-    - role: Heroqu.nodejs4x
-      sudo: yes
-    
-    # --------------------------------------------------------------------------------
-    # Broken roles
-    # --------------------------------------------------------------------------------
-    # # Issues: https://github.com/William-Yeh/ansible-nodejs/issues/4
-    # - role: williamyeh.nodejs
-    #   nodejs_version: "5"
-    #   become: yes
-    
-    # # Issues: https://github.com/SamyRoad/ansible-rbenv/issues/1
-    # - role: mmacia.rbenv
-    #   rbenv_env: user
-    #   rbenv_ruby_version: 2.1.8
-    #   rbenv_users:
-    #     - map7
-    #   become: yes
-    
-  tasks:
-    - include: common/tasks/add_repositories.yml
-    - include: common/tasks/system.yml
       become: yes
+      
+  vars_files:
+    - "vars/defaults.yml"
+    - "vars/{{ ansible_distribution }}-{{ ansible_architecture }}.yml"
+    - "vars/{{ ansible_distribution }}.yml"
+
+  pre_tasks:
+    - include: common/tasks/setup_deployment_user.yml
+    - include: common/tasks/add_repositories.yml
+      become: yes
+    - include: common/tasks/compression-tools.yml
+          
+  tasks:
+    - include: common/tasks/system-webserver.yml
+      become: yes
+    - include: common/tasks/node-dev-machine.yml
     - include: common/tasks/email-server.yml
       become: yes
     - include: common/tasks/ruby.yml

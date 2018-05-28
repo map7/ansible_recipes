@@ -3,6 +3,10 @@
 # Configure System Locale
 #
 
+- stat:
+    path: /home/{{ ansible_ssh_user }}/.zshenv
+  register: path
+
 - name: Setup locale in zsh
   lineinfile:
     dest: "/home/{{ ansible_ssh_user }}/.zshenv"
@@ -13,7 +17,38 @@
     - { line: "export LC_ALL={{ locale.locale }}" }
     - { line: "export LANG={{ locale.locale }}" }
     - { line: "export LC_TYPE={{ locale.locale }}" }
+  when: path.stat.exists == true
 
+- name: Remove LC_ALL in .bashrc
+  lineinfile:
+    dest: "/home/{{ ansible_ssh_user }}/.bashrc"
+    regexp: "^LC_ALL="
+    state: absent
+
+- name: Remove LANG in .bashrc
+  lineinfile:
+    dest: "/home/{{ ansible_ssh_user }}/.bashrc"
+    regexp: "^LANG="
+    state: absent
+
+- name: Remove LANGUAGE in .bashrc
+  lineinfile:
+    dest: "/home/{{ ansible_ssh_user }}/.bashrc"
+    regexp: "^LANGUAGE="
+    state: absent
+
+- name: Add LC_ALL/LANGUAGE/LANG/LC_TYPE to .bashrc
+  lineinfile:
+    dest: "/home/{{ ansible_ssh_user }}/.bashrc"
+    state: present
+    line: "{{ item.line }}"
+  with_items:
+    - { line: "export LANGUAGE={{ locale.locale }}" }
+    - { line: "export LC_ALL={{ locale.locale }}" }
+    - { line: "export LANG={{ locale.locale }}" }
+    - { line: "export LC_TYPE={{ locale.locale }}" }
+  when: path.stat.exists == false
+  
 - name: prepare locales info
   command: "{{ item }}"
   with_items:
