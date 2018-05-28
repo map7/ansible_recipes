@@ -5,14 +5,15 @@
 # This will be used on servers so keep this list of extra gems to a minimum.
 #
 
-- name: Install rails
-  gem:
-    name: rails
-    version: 3.2.22.2
-    state: present
-    user_install: no
-  become: yes
+# Done through bundle for the project instead of here
 
+# - name: Install rails
+#   gem:
+#     name: rails
+#     version: 5.2.0
+#     state: present
+#     user_install: no
+#   become: yes
 
 #
 # Setup web apps area

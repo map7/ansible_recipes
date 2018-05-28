@@ -58,11 +58,11 @@
     - include: common/tasks/email-server.yml
       become: yes
     - include: common/tasks/ruby.yml
-    - include: common/tasks/rails.yml
     - include: common/tasks/postgresql.yml
       become: yes
     - include: common/tasks/backup.yml
     - include: common/tasks/node.yml
+    - include: common/tasks/rails-dependencies.yml
 
   handlers:
     - include: common/handlers/handlers.yml
