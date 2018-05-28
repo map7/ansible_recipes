@@ -14,16 +14,16 @@
     apt-get install python-apt -y -q
     creates=/usr/share/doc/python-apt
   become: yes
-      
-- name: Add python3-software-properties
-  apt:
-    name: python3-software-properties
-    state: latest
-    # default_release: testing
 
-  when: ansible_os_family == "Debian"
-  notify: Update apt-get
+# - name: Add python3-software-properties
+#   apt:
+#     name: python3-software-properties
+#     state: latest
+#     # default_release: testing
 
+#   when: ansible_os_family == "Debian"
+#   notify: Update apt-get
+    
 - name: Remove cdrom source
   lineinfile:
     dest=/etc/apt/sources.list
@@ -31,10 +31,13 @@
     regexp='^deb cdrom'
     line='#deb cdrom[device for cdrom] [distro] main contrib non-free'
   notify: Update apt-get
-  
-- name: Add multimedia repository
-  apt_repository: repo="deb http://www.deb-multimedia.org {{ ansible_distribution_release }} main non-free"
-  when: ansible_os_family == "Debian"
+
+# - name: Add multimedia repository
+#   lineinfile:
+#     dest: /etc/apt/sources.list
+#     line: "deb http://www.deb-multimedia.org {{ ansible_distribution_release }} main non-free"
+#     state: present
+#   when: ansible_os_family == "Debian"
 
 - name: Add contrib & non-free to main
   lineinfile:
@@ -102,16 +105,16 @@
     state=present
   when: ansible_os_family == "Debian"
 
-- name: Add backports for virtual box
-  lineinfile:
-    dest=/etc/apt/sources.list
-    regexp='deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib$'
-    line='deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib'
-  when: ansible_os_family == "Debian"
+# - name: Add backports for virtual box
+#   lineinfile:
+#     dest=/etc/apt/sources.list
+#     regexp='deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib$'
+#     line='deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib'
+#   when: ansible_os_family == "Debian"
   
-- name: install deb-multimedia-keyring
-  apt:
-    name: deb-multimedia-keyring
-    state: latest
-    # default_release: testing
-    force: yes
+# - name: install deb-multimedia-keyring
+#   apt:
+#     name: deb-multimedia-keyring
+#     state: latest
+#     # default_release: testing
+#     force: yes
