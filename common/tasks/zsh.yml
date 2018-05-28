@@ -1,0 +1,51 @@
+---
+
+# Install Oh-my-ZSH dependencies
+- name: Installing packages
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+    - zsh
+    - git
+
+- name: Installing oh-my-zsh for user
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "/home/{{ ansible_ssh_user }}/.oh-my-zsh"
+    update: "{{ users_oh_my_zsh_update }}"
+  with_items: "{{ ansible_ssh_user }}"
+
+- name: Setting permissions per user
+  file:
+    path: "/home/{{ ansible_ssh_user }}/.oh-my-zsh"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    recurse: yes
+  with_items: "{{ ansible_ssh_user }}"
+
+- name: Setting default shell per user
+  user:
+    name: "{{ ansible_ssh_user }}"
+    shell: /bin/zsh
+  with_items: "{{ ansible_ssh_user }}"
+
+- name: Configure .zshrc
+  template:
+    src: common/templates/zshrc.j2
+    dest: "/home/{{ ansible_ssh_user }}/.zshrc"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    backup: yes
+    mode: "0644"
+  with_items: "{{ ansible_ssh_user }}"
+
+- name: Copy .zshenv
+  template:
+    src: common/templates/zshenv.j2
+    dest: "/home/{{ ansible_ssh_user }}/.zshenv"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    backup: yes
+    mode: "0644"
+  with_items: "{{ ansible_ssh_user }}"

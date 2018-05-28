@@ -1,0 +1,14 @@
+---
+#
+# Debian Package helpers
+#
+
+- name: Install debian package helpers
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    default_release: testing
+  with_items:
+    - command-not-found                  # Package suggestion utility
+  when: ansible_os_family == 'Debian'  
+

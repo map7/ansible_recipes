@@ -6,7 +6,7 @@
 #
 # Install ruby & ruby headers
 #
-- name: Install ruby
+- name: Install ruby & linux libraries needed for ruby
   action: apt pkg={{item}} state=installed
   with_items:
     - ruby
@@ -16,8 +16,12 @@
   become: yes
 
 #    
-# Test that we can install gems
+# Test that we can install gems using ruby system install
 #
 - name: install cheat
-  gem: name=cheat state=present user_install=no
+  gem:
+    name: cheat
+    state: present
+    user_install: no
   become: yes
+

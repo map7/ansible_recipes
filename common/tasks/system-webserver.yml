@@ -10,7 +10,6 @@
     - pwgen
     - screen
     - openssh-server
-    - nmap                      # Handy network scanner
     - sysstat
     - ncdu              # Check disk usage per directory
     - mosh              # Awesome mobile ssh server/client
@@ -18,12 +17,10 @@
     - molly-guard       # Save people from rebooting the wrong server.
     - expect            # Required for some installation scripts
     - mg                # emacs lite
-    - pulseaudio-module-bluetooth # allows bluetooth connection via cmd line
     - git
-    - firmware-linux
-    - pavucontrol               # Pulse audio utils
-    - inxi                      # Print basic information about a computer look at -v7 flag.
-    - strace                    # Diags
+    - command-not-found
+    - apt-file
+    # - flashplugin-nonfree
     
 - name: Update command-not-found
   command: update-command-not-found
@@ -31,5 +28,7 @@
     creates: /var/cache/apt/apt-file
   when: ansible_os_family == "Debian"
 
-#- include: locale.yml
+- include: postgresql.yml
+  become: yes
+- include: locale.yml
 - include: lvm.yml

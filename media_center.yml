@@ -1,8 +1,8 @@
 ---
 #
 # Media center
-# Tested on: Debian 8.6 Jessie
-# Updated & tested: 12/10/2016
+# Tested on: Debian 9 Stretch
+# Updated & tested: 11/07/2017
 #
 # This builds a media center using Kodi, tvheadend & LTSP. At the end you should have the following
 # - Main server with Kodi and lots of software for work, rest and play
@@ -44,10 +44,5 @@
     - include: common/tasks/office.yml 
     - include: common/tasks/x2go.yml
 
-    # Copy sources.list from server to LTSP
-    # This is not always required, but in the multimedia servers I like to do it.
-    - name: Copy sources.list
-      command: cp /etc/apt/sources.list /opt/ltsp/amd64/etc/apt/sources.list
-      
   handlers:
     - include: common/handlers/handlers.yml

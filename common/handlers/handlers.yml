@@ -35,3 +35,12 @@
   action: service name=mdm state=restarted
   become: yes
 
+# LOCALES
+- name: rebuild locales
+  command: /usr/sbin/locale-gen
+  become: yes
+
+# handlers file for locale.gen
+- name: generate locales
+  command: locale-gen
+  become: yes

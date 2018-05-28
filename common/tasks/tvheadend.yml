@@ -10,8 +10,8 @@
 #
 
 - name: Add tvheadend repository
-  apt_repository: repo="deb https://dl.bintray.com/tvheadend/deb jessie amd64"
-  when: (ansible_distribution == "Debian" and ansible_distribution_release == "jessie")
+  apt_repository: repo="deb https://dl.bintray.com/tvheadend/deb {{ ansible_distribution_release }} amd64"
+  when: ansible_distribution == "Debian"
   
 - name: Install TVHeadend
   apt: pkg=tvheadend update_cache=yes

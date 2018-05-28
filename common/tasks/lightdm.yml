@@ -1,0 +1,19 @@
+---
+# --------------------------------------------------------------------------------
+# Autostart login and start kodi for kodi user
+# --------------------------------------------------------------------------------
+# - name: Autologin
+#   lineinfile:
+#     dest=/etc/lightdm/lightdm.conf
+#     regexp="^#autologin-user="
+#     line="autologin-user={{ ansible_ssh_user }}"
+
+# - name: Autologin
+#   lineinfile:
+#     dest=/etc/lightdm/lightdm.conf
+#     regexp="^#autologin-user-timeout=0"
+#     line="autologin-user-timeout=0"
+
+## Copy a pre-configured lightdm setup
+- name: Setup lightdm.conf
+  copy: src=common/files/lightdm.conf dest=/etc/lightdm/lightdm.conf

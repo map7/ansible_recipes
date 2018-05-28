@@ -13,76 +13,96 @@
 #  - texlive-latex-base, texlive-latex-recommended, texlive-latex-extra
 #
 
-- name: Install git
-  apt: pkg=git-core
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
 
-- name: Install emacs
-  apt: name=emacs24
-
-- name: Install cask
-  git: repo=https://github.com/cask/cask.git dest=/home/map7/.cask
-
-- name: Set permissions
-  file: path=/home/map7/.cask owner=map7 group=map7
-
-- name: Add cask bin PATH to Bash profile
-  lineinfile:
-    dest=/etc/profile
-    regexp=".cask\/bin"
-    line='export PATH="/home/map7/.cask/bin:$PATH"'
-    state=present    
-
-- name: Copy my setup across
-  git: repo=https://github.com/map7/emacs-config.git dest=/home/map7/.emacs.d update=no
-
-- name: Compile my plugins
-  command: /home/map7/.cask/bin/cask chdir=/home/map7/.emacs.d
-
-- name: Set permissions
-  file: path=/home/map7/.emacs.d owner=map7 group=map7 recurse=yes state=directory
-
-# OLD Way
-
-
-# - name: Install emacs graphics libraries
-#   action: apt pkg={{ item }} state=installed
+- name: Install Emacs dependencies
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    default_release: testing
+  with_items:
+    - libxaw7-dev
+    - libxpm-dev
+    - libpng-dev
+    - libtiff5-dev
+    - libgif-dev
+    - libjpeg-dev
+    - libgtk2.0-dev
+    - libncurses5-dev
+    - libdbus-1-dev
+    - libxft-dev
+    - gnutls-bin # needed to automatically bootstrap install of emacs 
+    
+# - name: Install requirements for emacs widgets to work
+#   apt:
+#     pkg: "{{ item }}"
+#     state: present
 #   with_items:
-#     - libxaw7-dev
-#     - libxpm-dev
-#     - libpng12-dev
-#     - libtiff5-dev
-#     - libgif-dev
-#     - libjpeg8-dev
-#     - libgtk2.0-dev
-#     - libncurses5-dev
+#     - libwebkitgtk-3.0-0
+#     - libwebkitgtk-3.0-dev
 
-# - name: Install GNU-Autotools
-#   action: apt pkg={{ item }} state=installed
-#   with_items:
-#     - autoconf
-#     - automake
-#     - texinfo
+- name: Clone Emacs from git master using tag
+  git:
+    repo: https://github.com/emacs-mirror/emacs.git
+    dest: "/home/{{ ansible_ssh_user }}/emacs"
+    version: emacs-25.2-rc2
+    depth: 1
+    update: no
 
-# - name: Download latest stable release 24.3 from March 2013
-#   command: wget http://gnu.mirror.uber.com.au/emacs/emacs-24.3.tar.gz chdir=/tmp creates=/usr/local/bin/emacs
+- name: Set permissions for Emacs Git Clone
+  file:
+    path: "/home/{{ ansible_ssh_user }}/emacs"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    recurse: yes
+  with_items: "{{ ansible_ssh_user }}"
 
-# - name: Untar image
-#   shell: tar xvf emacs-24.3.tar.gz chdir=/tmp creates=/usr/local/bin/emacs
+- name: Compile, Configure, Make & Install Emacs
+  shell: "{{ item }}"
+  with_items:
+    - ./autogen.sh
+    - ./autogen.sh git
+    - ./configure --prefix=/opt/emacs
+    - "make bootstrap -j{{ ansible_processor_vcpus }}"
+    - make install
+    - make distclean
 
-# - name: Generate emacs config
-#   action: command ./autogen.sh chdir=/tmp/emacs-24.3 creates=/tmp/emacs-24.3/configure
+  args:
+    chdir: "/home/{{ ansible_ssh_user }}/emacs"
+    creates: /opt/emacs/bin/emacs-25.2
+    
+- name: 'Update alternative: emacs'
+  alternatives:
+    link: /usr/bin/emacs
+    name: emacs
+    path: /opt/emacs/bin/emacs-25.2
 
-# - name: Run emacs configure
-#   action: command ./configure --prefix=/opt/emacs24 chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
+- name: 'Update alternative: emacsclient'
+  alternatives:
+    link: /usr/bin/emacsclient
+    name: emacsclient
+    path: /opt/emacs/bin/emacsclient
+    priority: 100 #only works in ansible 2.2
 
-# - name: Compile emacs24
-#   command: make -j $ansible_processor_cores chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
+- name: Link the alternatives
+  command: "{{ item }}"
+  become: yes
+  with_items:
+    - 'update-alternatives --config emacs'
+    - 'update-alternatives --config emacsclient'
 
-# - name: Install emacs24
-#   command: make install chdir=/tmp/emacs-24.3 creates=/usr/local/bin/emacs
+- name: Copy Emacs User Config From Github
+  git:
+    repo: "{{ emacs.user_config_github }}"
+    dest: "/home/{{ ansible_ssh_user }}/.emacs.d"
+    update: no
 
-# - name: Link emacs24
-#   command: ln -s /opt/emacs24/bin/emacs /usr/local/bin/emacs creates=/usr/local/bin/emacs
-
-# - name: Install window control
-#   apt: pkg=wmctrl state=present
+- name: Set permissions for Emacs User Config
+  file:
+    path: "/home/{{ ansible_ssh_user }}/.emacs.d"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    recurse: yes
+  with_items: "{{ ansible_ssh_user }}"

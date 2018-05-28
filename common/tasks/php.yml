@@ -6,7 +6,8 @@
 - name: Install PHP
   action: apt pkg={{ item }} state=installed force=yes
   with_items:
-    - php5-common
-    - libapache2-mod-php5
-    - php5-cli
+    - php7.0-common
+    - libapache2-mod-php7.0
+    - php7.0-cli
+    - php7.0-xml
   notify: restart apache

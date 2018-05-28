@@ -2,12 +2,60 @@
 #
 # Override these settings in custom.yml
 #
-locale: "en_AU.UTF-8"
+
 jvm_folder: "/opt"
 gems_version: "2.1.0"
-ruby_version: "2.1.4"
+ruby_version: "2.2.5"
 passenger_version: "4.0.37"
 db_user: 'vps'       # This should be the same as your user
 db_passwd: 'secret'  # Change this to something more secure
 custom_ntp_server: ''
 xbmc_spotify: 'http://azkotoki.org/download-file/28/script-audio-spotimc-1-0-beta5'
+
+###
+# Locale
+###
+# locale_all: "en_AU.UTF-8" # should only be used for testing
+# locale: "en_AU.UTF-8"
+locale_language: "en_AU:en"
+locale_numeric: "en_AU.UTF-8"
+locale_time: "en_AU.UTF-8"
+locale_monetary: "en_AU.UTF-8"
+locale_paper: "en_AU.UTF-8"
+locale_identification: "en_AU.UTF-8"
+locale_name: "en_AU.UTF-8"
+locale_address: "en_AU.UTF-8"
+locale_telephone: "en_AU.UTF-8"
+locale_measurement: "en_AU.UTF-8"
+
+####
+# Oh_my_ZSH
+####
+# default theme
+users_oh_my_zsh_theme: robbyrussell
+# update git repo on config run
+users_oh_my_zsh_update: no
+# default plugins
+users_oh_my_zsh_plugins: git
+# Use case-sensitive completion
+users_oh_my_zsh_case_sensitive: false
+# Use hyphen-insensitive completion. Case sensitive
+# completion must be off. _ and - will be interchangeable.
+users_oh_my_zsh_hyphen_insensitive: false
+# Disable update prompt
+users_oh_my_zsh_disable_update_prompt: false
+# Disable bi-weekly auto-update checks
+users_oh_my_zsh_disable_auto_update: true
+# How often before auto-updates occur? (in days)
+users_oh_my_zsh_update_days: 13
+# If you want to disable colors in ls
+users_oh_my_zsh_disable_ls_colors: false
+# If you want to disable autosetting terminal title.
+users_oh_my_zsh_disable_auto_title: false
+# If you want to disable marking untracked files under VCS as dirty.
+# This makes repository status check for large repositories much, much faster.
+users_oh_my_zsh_disable_untracked_files_dirty: false
+# If you want to disable command autocorrection
+users_oh_my_zsh_disable_correction: true
+# If you want red dots to be displayed while waiting for completion
+users_oh_my_zsh_completion_waiting_dots: false

@@ -3,8 +3,24 @@
 #
 # Add commonly used repositories
 #
-- name: Add python-software-properties
-  apt: pkg=python-software-properties force=yes state=installed
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+# Required on Debian 8 minimum install
+- name: install python-apt
+  command: >
+    apt-get install python-apt -y -q
+    creates=/usr/share/doc/python-apt
+  become: yes
+      
+- name: Add python3-software-properties
+  apt:
+    name: python3-software-properties
+    state: latest
+    # default_release: testing
+
   when: ansible_os_family == "Debian"
   notify: Update apt-get
 
@@ -77,15 +93,25 @@
     state=present
   when: ansible_os_family == "Debian"
 
-- name: Add backports
+
+- name: Add backports for debian
   lineinfile:
     dest=/etc/apt/sources.list
     regexp='deb-src http://ftp.au.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free$'
     line='deb-src http://ftp.au.debian.org/debian {{ ansible_distribution_release }}-backports main contrib non-free'
     state=present
   when: ansible_os_family == "Debian"
-  
-- name: Add multimedia keyring
-  apt: pkg=deb-multimedia-keyring force=yes
+
+- name: Add backports for virtual box
+  lineinfile:
+    dest=/etc/apt/sources.list
+    regexp='deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib$'
+    line='deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib'
   when: ansible_os_family == "Debian"
-  notify: Update apt-get
+  
+- name: install deb-multimedia-keyring
+  apt:
+    name: deb-multimedia-keyring
+    state: latest
+    # default_release: testing
+    force: yes

@@ -1,9 +1,16 @@
 # Install ansible-galaxy roles using this file
 #
 # Run
-# ansible-galaxy install -r requirements.yml
+# sudo ansible-galaxy install -r requirements.yml
 #
 # Ref: https://docs.ansible.com/ansible/galaxy.html#installing-multiple-roles-from-a-file
 
+# Passenger
+- src: mtpereira.passenger
+
 # NodeJS
 - src: Heroqu.nodejs4x
+
+# rbenv
+- name: zzet.rbenv
+  src: https://github.com/zzet/ansible-rbenv-role

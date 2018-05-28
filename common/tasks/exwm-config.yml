@@ -1,0 +1,52 @@
+
+---
+
+#
+# EXWM (already added through emacs install, just configure autostart here)
+# Also configures other programs to autostart such as volti, network maanger, udiskie...  
+#
+
+- name: Copy the xinitrc.sample to ~/.xinitrc
+  copy:
+    remote_src: true
+    src: "/home/{{ ansible_ssh_user }}/.emacs.d/xinitrc.sample"
+    dest: "/home/{{ ansible_ssh_user }}/.xinitrc"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    mode: 0644
+
+- name: Link .xinit to .xsession to set EXWM as default windows manager
+  file:
+    src: "/home/{{ ansible_ssh_user }}/.xinitrc" 
+    dest: "/home/{{ ansible_ssh_user }}/.xsession"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    state: link
+
+- name: Autostart GUI apps
+  file:
+    dest: "/home/{{ ansible_ssh_user }}/.emacs.autostart.el"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    state: touch
+    
+- name: Populate .emacs.autostart.el
+  lineinfile:
+    dest: "/home/{{ ansible_ssh_user }}/.emacs.autostart.el"
+    state: present
+    line: "{{ item.line }}"
+  with_items:
+    - { line: ";;Autostart Dropbox" }
+    - { line: "(call-process-shell-command \"(sleep 10s && ~/.dropbox-dist/dropboxd) &\" nil 0)" }
+
+- name: Multiple Screens
+  file:
+    dest: "/home/{{ ansible_ssh_user }}/.emacs.randr.el"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    state: touch
+
+- name: Populate .emacs.randr.el
+  template:
+    src: "common/templates/.emacs.randr.el.j2"
+    dest: "/home/{{ ansible_ssh_user }}/.emacs.randr.el"

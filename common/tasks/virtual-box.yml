@@ -1,0 +1,26 @@
+---
+###
+# VIRTUAL BOX
+###
+
+- name: Add apt signing key
+  apt_key:
+    url: "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
+    state: present
+  
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    
+- name: Install virtualbox
+  apt:
+    name: virtualbox-5.1
+    state: present
+    default_release: testing
+  when: ansible_os_family == "Debian"
+
+- name: Cleanup (remove) virtualbox download
+  file:
+    state: absent
+    path: /home/{{ ansible_ssh_user }}/oracle_vbox_2016.asc

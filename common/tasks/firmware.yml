@@ -1,0 +1,14 @@
+---
+#
+# Firmware Tools
+#
+
+- name: Install linux firmware tools
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    default_release: testing
+  with_items:
+    - firmware-linux-nonfree
+  when: ansible_os_family == 'Debian'  
+
