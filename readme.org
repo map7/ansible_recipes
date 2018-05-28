@@ -18,7 +18,7 @@ Add a deploy user & set a password
 : adduser deploy
 
 Add your user to the 'sudo' group within /etc/group
-: sudo:x:27:deploy
+: adduser deploy sudo
 
 Don't ask for a password when using sudo, *risky* (optional)
 Note: This is optional if you are using the -b then there is no need for this.
@@ -27,6 +27,11 @@ Note: This is optional if you are using the -b then there is no need for this.
 : %sudo   ALL= (postgres) NOPASSWD: ALL
 
 ** Source (Your development box)
+
+Create passwordless access (server to client)
+: ssh-copy-id deploy@<target ip>
+
+<Optionally take a snapshot here of your server>
 
 Ansible 2.2 (currently the HEAD branch when you clone).
 : sudo apt-get install python-yaml python-jinja2 python-paramiko
@@ -46,10 +51,6 @@ Install the roles
 Add target's IP to /etc/ansible/hosts file under the top ungrouped section
 EG:
 : 192.168.0.100
-
-Create passwordless access (server to client)
-: ssh-copy-id deploy@<target ip>
-
 
 ** Install required roles
 
