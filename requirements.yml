@@ -8,9 +8,6 @@
 # Passenger
 - src: mtpereira.passenger
 
-# NodeJS
-- src: Heroqu.nodejs4x
-
 # rbenv
 - name: zzet.rbenv
   src: https://github.com/zzet/ansible-rbenv-role
