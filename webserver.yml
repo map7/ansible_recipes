@@ -55,7 +55,6 @@
   tasks:
     - include: common/tasks/system-webserver.yml
       become: yes
-    - include: common/tasks/node-dev-machine.yml
     - include: common/tasks/email-server.yml
       become: yes
     - include: common/tasks/ruby.yml
@@ -63,6 +62,7 @@
     - include: common/tasks/postgresql.yml
       become: yes
     - include: common/tasks/backup.yml
+    - include: common/tasks/node.yml
 
   handlers:
     - include: common/handlers/handlers.yml
