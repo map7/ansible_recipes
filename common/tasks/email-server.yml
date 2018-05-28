@@ -4,7 +4,9 @@
 #
 
 - name: Install exim4
-  apt: pkg=exim4 state=installed
+  package:
+    name: exim4
+    state: present
 
 # Setup exim4
 - name: Configure exim4
