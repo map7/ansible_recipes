@@ -8,10 +8,11 @@
 #
 # Setup web apps area
 #
+
 - name: add deploy to www-data group
   user:
     name: "{{ ansible_user }}"
-    group: www-data
+    groups: www-data
     append: yes
   become: yes
     
