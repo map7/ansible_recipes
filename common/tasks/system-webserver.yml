@@ -19,7 +19,8 @@
     - mg                # emacs lite
     - git               # version control
     - command-not-found # helper for apt
-    - apt-file          # 
+    - apt-file          #
+    - locate            # locate files
     
 - name: Update command-not-found
   command: update-command-not-found
