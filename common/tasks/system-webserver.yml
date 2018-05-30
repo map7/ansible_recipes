@@ -21,6 +21,8 @@
     - command-not-found # helper for apt
     - apt-file          #
     - locate            # locate files
+    - inxi              # Print basic information about a computer look at -v7 flag.
+    - strace            # Diags
     
 - name: Update command-not-found
   command: update-command-not-found
