@@ -43,3 +43,8 @@
   apt: name=libsqlite3-dev state=present
   become: yes
 
+# Install bunder
+- name: Install bundler using rbenv
+  command: /usr/local/rbenv/shims/gem install bundler
+  become: yes
+  
