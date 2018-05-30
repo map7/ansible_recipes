@@ -30,7 +30,7 @@
         - version: 2.5.1
           env:
             RUBY_CONFIGURE_OPTS: "--enable-shared"
-    default_gems_file: common/files/default-gems
+      default_gems_file: common/files/default-gems
 
   roles:
     - role: zzet.rbenv
@@ -62,6 +62,11 @@
     - include: common/tasks/rails-dependencies.yml
     - include: common/tasks/postgresql.yml
       become: yes
+    - include: common/tasks/monit.yml
+      become: yes
+    - include: common/tasks/yarn.yml
+      become: yes
+      tags: focus
     - include: common/tasks/backup.yml
 
   handlers:
