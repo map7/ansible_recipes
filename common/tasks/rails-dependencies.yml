@@ -5,27 +5,23 @@
 # This will be used on servers so keep this list of extra gems to a minimum.
 #
 
-# Done through bundle for the project instead of here
-
-# - name: Install rails
-#   gem:
-#     name: rails
-#     version: 5.2.0
-#     state: present
-#     user_install: no
-#   become: yes
-
 #
 # Setup web apps area
 #
-- name: Set permissions on /var/www
-  file: path=/var/www owner=root group=www-data mode=2775 state=directory
+- name: add deploy to www-data group
+  user:
+    name: "{{ ansible_user }}"
+    group: www-data
+    append: yes
   become: yes
-
-- name: Add main user to www-data group
-  user: name={{ansible_ssh_user}} append=yes groups=www-data
+    
+- name: change group & permission of /srv directory 
+  file:
+    path: /srv
+    group: www-data
+    mode: 2775
   become: yes
-  
+ 
 #
 # Extra rails projects requirements
 # 
