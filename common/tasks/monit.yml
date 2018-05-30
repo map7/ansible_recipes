@@ -1,0 +1,11 @@
+---
+#
+# Monit
+#
+
+- name: Install monit
+  apt:
+    name: monit
+    state: present
+  when: ansible_os_family == 'Debian'  
+
