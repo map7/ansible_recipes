@@ -17,10 +17,7 @@
   become: yes
     
 - name: change group & permission of /srv directory 
-  file:
-    path: /srv
-    group: www-data
-    mode: 2775
+  file: path=/srv owner=root group=www-data mode=2775 state=directory
   become: yes
  
 #
