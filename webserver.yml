@@ -66,8 +66,11 @@
       become: yes
     - include: common/tasks/yarn.yml
       become: yes
-      tags: focus
     - include: common/tasks/backup.yml
+
+    # Fixes
+    - include: common/tasks/mtpereira.passenger_fix.yml
+      become: yes
 
   handlers:
     - include: common/handlers/handlers.yml
