@@ -65,6 +65,7 @@
       become: yes
     - include: common/tasks/yarn.yml
       become: yes
+    - include: common/tasks/redis.yml
     - include: common/tasks/backup.yml
 
     # Fixes

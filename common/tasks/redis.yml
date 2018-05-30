@@ -1,0 +1,9 @@
+---
+#
+# Redis database used by background jobs usually, eg: sidekiq
+#
+- name: Redis DB
+  apt:
+    name: redis-server
+    state: present
+  become: yes
