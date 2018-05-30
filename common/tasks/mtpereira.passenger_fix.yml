@@ -1,0 +1,45 @@
+---
+#
+# Fix mtpereira.passenger to work with Debian
+#
+
+- name: Create apache2.service.d
+  file: path=/etc/systemd/system/apache2.service.d state=directory
+  when: ansible_distribution_release == 'stretch'
+
+- name: Install passenger setup to Apache2
+  copy:
+    src=common/files/passenger-instance-reg.conf
+    dest=/etc/systemd/system/apache2.service.d
+    owner=root
+    group=root
+    mode=644
+  when: ansible_distribution_release == 'stretch'
+  
+- name: Add passenger instance registry dir to apache setup
+  lineinfile:
+    dest: /etc/apache2/apache2.conf
+    regexp: 'PassengerInstanceRegistryDir'
+    line: 'PassengerInstanceRegistryDir /run/passenger'
+    state: present
+  when: ansible_distribution_release == 'stretch'
+
+- name: Add passenger instance registry dir to environement
+  lineinfile:
+    dest: /etc/environment
+    regexp: 'PASSENGER_INSTANCE_REGISTRY_DIR'
+    line: 'PASSENGER_INSTANCE_REGISTRY_DIR=/run/passenger'
+    state: present
+  when: ansible_distribution_release == 'stretch'
+
+- name: Reload daemon
+  command: systemctl daemon-reload
+  when: ansible_distribution_release == 'stretch'
+
+- name: Restart apache2
+  service:
+    name: apache2
+    state: restarted
+  when: ansible_distribution_release == 'stretch'
+
+  
