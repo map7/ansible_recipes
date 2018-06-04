@@ -3,34 +3,57 @@
 # Fix mtpereira.passenger to work with Debian
 #
 
-- name: Create apache2.service.d
-  file: path=/etc/systemd/system/apache2.service.d state=directory
-  when: ansible_distribution_release == 'stretch'
+# # Workaround #1
+# # 
+# # Disable PrivateTmp
+# # 
 
-- name: Install passenger setup to Apache2
+- name: Disable PrivateTmp
   copy:
-    src=common/files/passenger-instance-reg.conf
-    dest=/etc/systemd/system/apache2.service.d
+    src=common/files/apache2.service
+    dest=/etc/systemd/system/apache2.service
     owner=root
     group=root
     mode=644
   when: ansible_distribution_release == 'stretch'
-  
-- name: Add passenger instance registry dir to apache setup
-  lineinfile:
-    dest: /etc/apache2/apache2.conf
-    regexp: 'PassengerInstanceRegistryDir'
-    line: 'PassengerInstanceRegistryDir /run/passenger'
-    state: present
-  when: ansible_distribution_release == 'stretch'
 
-- name: Add passenger instance registry dir to environement
-  lineinfile:
-    dest: /etc/environment
-    regexp: 'PASSENGER_INSTANCE_REGISTRY_DIR'
-    line: 'PASSENGER_INSTANCE_REGISTRY_DIR=/run/passenger'
-    state: present
-  when: ansible_distribution_release == 'stretch'
+# # Workaround #2
+# #
+# # This has problems in permissions
+# #
+
+# - name: Create apache2.service.d
+#   file: path=/etc/systemd/system/apache2.service.d state=directory
+#   when: ansible_distribution_release == 'stretch'
+
+# - name: Install passenger setup to Apache2
+#   copy:
+#     src=common/files/passenger-instance-reg.conf
+#     dest=/etc/systemd/system/apache2.service.d
+#     owner=root
+#     group=root
+#     mode=644
+#   when: ansible_distribution_release == 'stretch'
+  
+# - name: Add passenger instance registry dir to apache setup
+#   lineinfile:
+#     dest: /etc/apache2/apache2.conf
+#     regexp: 'PassengerInstanceRegistryDir'
+#     line: 'PassengerInstanceRegistryDir /run/passenger'
+#     state: present
+#   when: ansible_distribution_release == 'stretch'
+
+# - name: Add passenger instance registry dir to environement
+#   lineinfile:
+#     dest: /etc/environment
+#     regexp: 'PASSENGER_INSTANCE_REGISTRY_DIR'
+#     line: 'PASSENGER_INSTANCE_REGISTRY_DIR=/run/passenger'
+#     state: present
+#   when: ansible_distribution_release == 'stretch'
+
+# --------------------------------------------------------------------------------
+# Reload & restart apache2
+# --------------------------------------------------------------------------------
 
 - name: Reload daemon
   command: systemctl daemon-reload
