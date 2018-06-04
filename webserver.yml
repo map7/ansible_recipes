@@ -47,6 +47,10 @@
     - "vars/{{ ansible_distribution }}.yml"
 
   pre_tasks:
+    - name: Ensure a locale exists
+      locale_gen:
+        name: en_AU.UTF-8
+        state: present
     - include: common/tasks/add_repositories.yml
       become: yes
     - include: common/tasks/compression-tools.yml
