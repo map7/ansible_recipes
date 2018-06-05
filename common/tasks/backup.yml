@@ -3,6 +3,12 @@
 # Install Ruby backup utililty
 #
 
+- name: Install rsync
+  apt:
+    name: rsync
+    state: present
+  become: yes
+
 - name: Install backup gem
   gem:
     name: backup
