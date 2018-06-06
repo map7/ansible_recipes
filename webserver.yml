@@ -71,6 +71,8 @@
       become: yes
     - include: common/tasks/redis.yml
     - include: common/tasks/backup.yml
+    - include: common/tasks/letsencrypt.yml
+      become: yes
 
     # Fixes
     - include: common/tasks/mtpereira.passenger_fix.yml

@@ -1,0 +1,19 @@
+---
+#
+# Install letsencrypt
+#
+# Manually run;
+# sudo certbot --authenticator webroot --installer apache
+#
+- name: Install certbot for apache
+  apt:
+    name: python-certbot-apache
+    state: present
+
+- name: Add automatic renewal
+  lineinfile:
+    dest: /etc/crontab
+    regexp: 'certbot renew'
+    line: '00 00 * * * root	/usr/bin/certbot renew -q'
+    state: present
+  when: ansible_distribution_release == 'stretch'
