@@ -1,0 +1,9 @@
+---
+#
+# Install common fonts
+#
+#
+- name: Install fonts liberation
+  apt:
+    name: fonts-liberation
+    state: present
