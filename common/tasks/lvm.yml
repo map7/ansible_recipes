@@ -4,3 +4,4 @@
 
 - name: Install LVM tools
   apt: pkg=system-config-lvm state=installed
+  when: ansible_distribution == "Debian"
