@@ -5,6 +5,11 @@
 # Install latest stable version of node
 #
 
+- name: Remove old n dir
+  file:
+    state: absent
+    path: "/home/{{ ansible_ssh_user }}/n"
+
 - name: Download n from github
   git:
     repo: "https://github.com/tj/n.git"
