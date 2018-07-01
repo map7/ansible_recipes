@@ -20,19 +20,19 @@
 
 - name: Add X2Go repository
   apt_repository: repo='deb http://packages.x2go.org/debian {{ ansible_distribution_release }} main'
-  when: ansible_os_family == "Debian" and ansible_distribution_release != "stretch/sid"
+  when: ansible_distribution == "Debian" and ansible_distribution_release != "stretch/sid"
 
 - name: Add X2Go repository
   apt_repository: repo='deb http://packages.x2go.org/debian testing main'
-  when: ansible_os_family == "Debian" and ansible_distribution_release == "stretch/sid"
+  when: ansible_distribution == "Debian" and ansible_distribution_release == "stretch/sid"
 
 - name: Install x2go-keyring
   apt: pkg=x2go-keyring update_cache=yes state=present
-  when: ansible_os_family == "Debian" and ansible_distribution_release != "stretch/sid"
+  when: ansible_distribution == "Debian" and ansible_distribution_release != "stretch/sid"
 
-- name: Add X2Go repository for Ubuntu based distros
-  apt_repository: repo='ppa:x2go/stable' update_cache=yes
-  when: ansible_os_family == "Ubuntu" or ansible_os_family == "Linuxmint"
+# - name: Add X2Go repository for Ubuntu based distros
+#   apt_repository: repo='ppa:x2go/stable' update_cache=yes
+#   when: ansible_distribution == "Ubuntu" or ansible_distribution == "Linuxmint"
 
 - name: Install x2goserver
   apt: pkg={{ item }} state=present
@@ -54,5 +54,4 @@
     state=present
   notify: restart ssh
   when: ansible_os_family == "Debian"
-
   
