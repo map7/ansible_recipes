@@ -39,6 +39,7 @@
     backup: yes
     mode: "0644"
   with_items: "{{ ansible_ssh_user }}"
+  creates: "/home/{{ ansible_ssh_user }}/.zshrc"
 
 - name: Copy .zshenv
   template:
@@ -49,3 +50,4 @@
     backup: yes
     mode: "0644"
   with_items: "{{ ansible_ssh_user }}"
+  creates: "/home/{{ ansible_ssh_user }}/.zshenv"
