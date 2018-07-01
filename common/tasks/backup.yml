@@ -9,12 +9,15 @@
     state: present
   become: yes
 
-- name: Install backup gem
-  gem:
-    name: backup
-    state: present
-    user_install: no
-  become: yes
+# # Issues with installing
+# - name: Install backup gem
+#   shell: |
+#     export RBENV_VERSION=2.3.7
+#     {{ rbenv_root }}/shims/gem install backup
+#   args:
+#     creates: "{{ rbenv_root }}/shims/backup"
+#   tags: focus
+
 
   # Doesn't work, some permissions problem
 # - name: Generate a model

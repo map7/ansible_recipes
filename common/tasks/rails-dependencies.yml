@@ -38,7 +38,7 @@
   become: yes
 
 # Install bunder
-- name: Install bundler using rbenv
-  command: /usr/local/rbenv/shims/gem install bundler
-  become: yes
+#- name: Install bundler using rbenv
+#  command: /usr/local/rbenv/shims/gem install bundler
+#  become: yes
   
