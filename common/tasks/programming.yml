@@ -2,15 +2,15 @@
 #
 # Programming tools and configuration
 #  
-- include: node-dev-machine.yml
+- include: node.yml
 - include: zsh.yml
 - include: yarn.yml
 - include: ruby.yml # Install a system ruby used with backup
-- include: rbenv.yml
-- include: rails.yml
+#- include: rbenv.yml
+- include: rails-dependencies.yml
 - include: emacs.yml
 - include: exwm-config.yml
-- include: phantomjs.yml
+#- include: phantomjs.yml
 
 - name: Install programming tools
   action: apt pkg={{ item }} state=installed force=yes
