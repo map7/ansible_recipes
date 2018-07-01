@@ -1,0 +1,99 @@
+---
+#
+# Development notebook running Pop!_OS (Ubuntu derivitive)
+#
+# Before
+# sudo ansible-galaxy install zzet.rbenv
+#
+# Run
+# ansible-playbook michael_notebook.yml -b -v
+# -b become sudo
+# -v verbose
+
+- hosts: dev-notebook
+  user: map7
+  become: yes
+  connection: ssh # or paramiko
+  vars:
+    gather_facts: true # https://github.com/zzet/ansible-rbenv-role/issues/37
+    gituser: map7
+    exwm:
+      monitor_1: "HDMI2"
+      monitor_2: "eDP1"
+      monitor_orientation: "--left-of"
+      output_mode: "--auto"
+    emacs:
+      user_config_github: 'https://github.com/map7/emacs-config.git'
+    oh_my_zsh:
+      theme: robbyrussell
+      plugins: git
+      update_days: 13
+      case_sensitive: true
+      hyphen_insensitive: true
+      disable_update_prompt: true
+      disable_auto_update: true
+      disable_ls_colors: true
+      disable_auto_title: true
+      disable_untracked_files_dirty: true
+      disable_correction: true
+      completion_waiting_dots: false
+    locale: 
+      locale: "en_AU.UTF-8"
+      language: "en_AU:en"
+      numeric: "en_AU.UTF-8"
+      time: "en_AU.UTF-8"
+      monetary: "en_AU.UTF-8"
+      paper: "en_AU.UTF-8"
+      identification: "en_AU.UTF-8"
+      name: "en_AU.UTF-8"
+      address: "en_AU.UTF-8"
+      telephone: "en_AU.UTF-8"
+      measurement: "en_AU.UTF-8"
+    rbenv:
+      env: user
+      version: v1.1.0
+      default_ruby: 2.5.1
+      rubies:
+        - version: 2.3.7
+        - version: 2.5.1
+          env:
+            RUBY_CONFIGURE_OPTS: "--enable-shared"
+    rbenv_plugins:
+      - { name: "ruby-build",
+          repo: "https://github.com/rbenv/ruby-build.git",
+          version: "master" }
+
+      - { name: "rbenv-default-gems",
+          repo: "https://github.com/rbenv/rbenv-default-gems.git",
+          version: "master" }
+
+      - { name: "rbenv-update",
+          repo: "https://github.com/rkh/rbenv-update.git",
+          version: "master" }
+    rbenv_extra_depends:
+      - libssl1.0-dev
+  roles:
+    - role: zzet.rbenv
+      rbenv_users:
+        - "{{ ansible_user }}"
+        
+  vars_files:
+    - "vars/defaults.yml"
+    - "vars/{{ ansible_distribution }}-{{ ansible_architecture }}.yml"
+    - "vars/{{ ansible_distribution }}.yml"
+
+  pre_tasks:
+    - include: common/tasks/compression-tools.yml
+
+  tasks:
+    - include: common/tasks/system.yml
+      become: yes
+    - include: common/tasks/system-gui.yml      
+    - include: common/tasks/programming.yml 
+    - include: common/tasks/backup.yml
+    - include: common/tasks/office.yml
+    - include: common/tasks/sweethome3d.yml      
+    - include: common/tasks/syncthing.yml
+
+  handlers:
+    - include: common/handlers/handlers.yml
