@@ -2,9 +2,10 @@
 #
 # Main office applications
 #
-
+- include: x2go.yml
+  
 - name: Install office applications
-  action: apt pkg={{ item }} state=installed force=yes
+  action: apt pkg={{ item }} state=present force=yes
   with_items:
     - xclip
     - pdfshuffler
@@ -21,17 +22,31 @@
     - gparted
     - audacity                  # Modify mp3 or wave files
     - filezilla
-    - chromium
-    - wine
     - simple-scan               # Self configures usb scanners
     - gkrellm                   # System stats program
     - backintime-gnome          # Backup 
     - fsarchiver                # Backup system tool
     - file-roller               # Better integration with nautilus
     - cheese                    # camera shot
-    - firefox-esr
-    - icedove
     - libreoffice
+
+- name: Install office applications (Debian)
+  action: apt pkg={{ item }} state=present force=yes
+  with_items:
+    - wine
+    - firefox-esr
+    - chromium
+    - icedove
+  when: ansible_distribution == "Debian"
+      
+- name: Install office applications (Ubuntu)
+  action: apt pkg={{ item }} state=present force=yes
+  with_items:
+    - wine64
+    - firefox
+    - chromium-browser
+    - thunderbird
+  when: ansible_distribution == "Ubuntu"
       
 - name: Install compression tools
   action: apt pkg={{ item }} state=installed force=yes
@@ -47,4 +62,4 @@
     - xz-utils
     - dar
 
-- include: x2go.yml      
+
