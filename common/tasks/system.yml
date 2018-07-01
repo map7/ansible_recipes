@@ -20,16 +20,21 @@
     - mg                # emacs lite
     - pulseaudio-module-bluetooth # allows bluetooth connection via cmd line
     - git
-    - firmware-linux
     - pavucontrol               # Pulse audio utils
     - inxi                      # Print basic information about a computer look at -v7 flag.
     - strace                    # Diags
-    
+
+- name: Firmware
+  action: apt pkg={{ item }} state=installed
+  with_items:    
+    - firmware-linux
+  when: ansible_distribution == "Debian"
+
 - name: Update command-not-found
   command: update-command-not-found
   args:
     creates: /var/cache/apt/apt-file
-  when: ansible_os_family == "Debian"
+  when: ansible_distribution == "Debian"
 
 #- include: locale.yml
 - include: lvm.yml
