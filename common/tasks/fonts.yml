@@ -7,3 +7,9 @@
   apt:
     name: fonts-liberation
     state: present
+
+- name: Install xfonts
+  action: apt pkg={{ item }} state=present force=yes
+  with_items:
+    - xfonts-base
+    - xfonts-75dpi
