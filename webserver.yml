@@ -75,11 +75,9 @@
       become: yes
     - include: common/tasks/fonts.yml
       become: yes
-
-    # # Issues with running wkhtmltopdf on the system, use wkhtmltopdf-binary gem instead
-    # - include: common/tasks/wkhtmltopdf.yml
-    #   become: yes
-    #   tags: focus
+    - include: common/tasks/wkhtmltopdf.yml
+      become: yes
+      tags: focus
 
     # Fixes
     - include: common/tasks/mtpereira.passenger_fix.yml
