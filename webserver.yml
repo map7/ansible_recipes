@@ -8,7 +8,7 @@
 # -v verbose
 
 - hosts: webservers
-  user: deploy
+  user: michael_dtcorp_com_au
   vars:
     locale: 
       locale: "en_AU.UTF-8"
@@ -75,6 +75,9 @@
       become: yes
     - include: common/tasks/fonts.yml
       become: yes
+    - include: common/tasks/wkhtmltopdf.yml
+      become: yes
+      tags: focus
 
     # Fixes
     - include: common/tasks/mtpereira.passenger_fix.yml

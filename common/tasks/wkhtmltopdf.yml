@@ -1,16 +1,19 @@
 ---
 #
 # HTML to PDF commandline tool
-#
+# (Tested on: Debian Stretch)
+
+- name: Install wkhtmltopdf fonts
+  action: apt pkg={{ item }} state=present force=yes
+  with_items:
+    - xfonts-base
+    - xfonts-75dpi
 
 - name: Download wkhtmltopdf
-  command: wget {{wkhtmltopdf_download}} chdir=/tmp creates=/usr/local/bin/wkhtmltopdf
+  command: wget {{wkhtmltopdf_download}}{{wkhtmltopdf_deb}} chdir=/tmp creates=/usr/local/bin/wkhtmltopdf
 
-- name: Untar wkhtmltopdf
-  shell: tar xvf wkhtmltopdf*bz2 chdir=/tmp creates=/usr/local/bin/wkhtmltopdf
+- name: Install from deb
+  shell: dpkg -i /tmp/{{wkhtmltopdf_deb}}
 
-- name: Remove tar
-  shell: rm -fr /tmp/wkhtmltopdf*bz* creates=/usr/local/bin/wkhtmltopdf
-
-- name: Move to /usr/local/bin
-  shell: mv /tmp/wkhtmltopdf* /usr/local/bin/wkhtmltopdf creates=/usr/local/bin/wkhtmltopdf
+- name: Remove deb
+  shell: rm -fr /tmp/wkhtmltopdf*deb creates=/usr/local/bin/wkhtmltopdf
