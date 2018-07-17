@@ -90,7 +90,10 @@
       become: yes
     - include: common/tasks/system-gui.yml      
     - include: common/tasks/programming.yml 
-    - include: common/tasks/postgresql.yml 
+    - include: common/tasks/postgresql.yml
+    - include: common/tasks/redis.yml
+    - include: common/tasks/wkhtmltopdf.yml
+      tags: focus
     - include: common/tasks/backup.yml
     - include: common/tasks/office.yml
     - include: common/tasks/sweethome3d.yml      
