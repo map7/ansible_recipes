@@ -1,0 +1,11 @@
+---
+#
+# Add all filesystems so we can mount stuff!
+#
+
+- name: NFS
+  apt: pkg=nfs-common state=present
+
+- name: exfat
+  apt: pkg=exfat-utils state=present
+  
