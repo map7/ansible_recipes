@@ -7,11 +7,13 @@
   apt_key:
     url: https://syncthing.net/release-key.txt
     state: present
+  when: ansible_distribution == "Debian" 
 
 - apt_repository:
     repo: deb https://apt.syncthing.net/ syncthing stable
     state: present
     update_cache: yes
+  when: ansible_distribution == "Debian" 
 
 - name: Install syncthing
   apt:
