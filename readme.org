@@ -1,7 +1,8 @@
 * Ansible Recipes
 ** Version tested
 
-Written for ansible 2.2
+| ansible |         2.2 |
+| debian  | 9 "stretch" |
 
 ** Target (Server in need of configuration)
 
