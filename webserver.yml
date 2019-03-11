@@ -8,7 +8,7 @@
 # -v verbose
 
 - hosts: webservers
-  user: michael_dtcorp_com_au
+  user: deploy
   vars:
     locale: 
       locale: "en_AU.UTF-8"
