@@ -13,7 +13,7 @@
   command: wget {{wkhtmltopdf_download}}{{wkhtmltopdf_deb}} chdir=/tmp creates=/usr/local/bin/wkhtmltopdf
 
 - name: Install from deb
-  shell: dpkg -i /tmp/{{wkhtmltopdf_deb}}
+  shell: dpkg -i /tmp/{{wkhtmltopdf_deb}} creates=/usr/local/bin/wkhtmltopdf
 
 - name: Remove deb
   shell: rm -fr /tmp/wkhtmltopdf*deb creates=/usr/local/bin/wkhtmltopdf
