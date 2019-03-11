@@ -47,6 +47,9 @@
     - "vars/{{ ansible_distribution }}.yml"
 
   pre_tasks:
+    - name: Install ca-certificates for git to work
+      apt: pkg=ca-certificates state=installed
+      
     - name: Ensure a locale exists
       locale_gen:
         name: en_AU.UTF-8
