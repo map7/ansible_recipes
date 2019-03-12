@@ -55,7 +55,7 @@ EG:
 
 ** Install required roles
 
-: ansible-galaxy install -r requirements.yml
+: sudo ansible-galaxy install -r requirements.yml --roles-path /etc/ansible/roles --force
 
 ** Running
 
