@@ -21,3 +21,4 @@
     - font-manager
     - ttf-mscorefonts-installer
     - devilspie                 # Save window placement
+    - terminator
