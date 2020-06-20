@@ -8,7 +8,7 @@
 # -v verbose
 
 - hosts: webservers
-  user: michael_dtcorp_com_au
+  user: deploy
   vars:
     locale: 
       locale: "en_AU.UTF-8"
@@ -25,9 +25,9 @@
     rbenv:
       env: system
       version: v1.1.0
-      default_ruby: 2.5.1
+      default_ruby: 2.6.1
       rubies:
-        - version: 2.5.1
+        - version: 2.6.1
           env:
             RUBY_CONFIGURE_OPTS: "--enable-shared"
       default_gems_file: common/files/default-gems
@@ -36,10 +36,12 @@
     - role: zzet.rbenv
       rbenv_users:
         - "{{ ansible_user }}"
-    # Install passenger & apache
-    - role: mtpereira.passenger
-      passenger_webserver: apache
-      become: yes
+    # # Install passenger & apache
+    # # 12/03/2019 - Issue with installation, using apt package instead
+    # - role: mtpereira.passenger
+    #   passenger_webserver: apache
+    #   passenger_pkgs_state: installed
+    #   become: yes
       
   vars_files:
     - "vars/defaults.yml"
@@ -47,6 +49,9 @@
     - "vars/{{ ansible_distribution }}.yml"
 
   pre_tasks:
+    - name: Install ca-certificates for git to work
+      apt: pkg=ca-certificates state=installed
+      
     - name: Ensure a locale exists
       locale_gen:
         name: en_AU.UTF-8
@@ -56,6 +61,10 @@
     - include: common/tasks/compression-tools.yml
           
   tasks:
+    - include: common/tasks/apache.yml
+      become: yes
+    - include: common/tasks/passenger.yml
+      become: yes
     - include: common/tasks/system-webserver.yml
       become: yes
     - include: common/tasks/node.yml

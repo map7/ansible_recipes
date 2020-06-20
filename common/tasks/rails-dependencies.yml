@@ -15,11 +15,17 @@
     groups: www-data
     append: yes
   become: yes
-    
-- name: change group & permission of /srv directory 
-  file: path=/srv owner=root group=www-data mode=2775 state=directory
+
+# Setup permissions on /var/www directory where projects will be deployed.  
+- name: change group & permission of /var/www directory 
+  file: path=/var/www owner={{ ansible_user }} group=www-data mode=2775 state=directory
   become: yes
- 
+
+# Setup permissions on /usr/local/rbenv dir to the user
+- name: change group & permission of /usr/local/rbenv directory 
+  file: path=/usr/local/rbenv owner={{ ansible_user }} group=staff recurse=yes state=directory
+  become: yes
+
 #
 # Extra rails projects requirements
 # 

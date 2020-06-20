@@ -9,6 +9,7 @@
   apt:
     name: python-certbot-apache
     state: present
+  when: ansible_distribution_release != 'jessie'
 
 - name: Add automatic renewal
   lineinfile:
@@ -16,4 +17,4 @@
     regexp: 'certbot renew'
     line: '00 00 * * * root	/usr/bin/certbot renew -q'
     state: present
-  when: ansible_distribution_release == 'stretch'
+  when: ansible_distribution_release != 'jessie'

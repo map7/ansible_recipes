@@ -11,6 +11,7 @@
 - name: Install required packages
   action: apt pkg={{ item }}
   with_items:
+    - apache2-dev
     - libcurl4-openssl-dev
     - libapr1-dev
     - libaprutil1-dev
