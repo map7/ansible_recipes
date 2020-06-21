@@ -18,7 +18,7 @@
 # Note without this old versions of ruby (2.3 & older) will not install  
 - name: Install libSSL
   apt: pkg=libssl1.0-dev update_cache=yes state=present
-  when: ansible_distribution_release != 'jessie'
+  when: ansible_distribution_release == 'stretch'
   
 #    
 # Test that we can install gems using ruby system install
