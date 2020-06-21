@@ -25,9 +25,9 @@
     rbenv:
       env: system
       version: v1.1.0
-      default_ruby: 2.6.1
+      default_ruby: 2.7.1
       rubies:
-        - version: 2.6.1
+        - version: 2.7.1
           env:
             RUBY_CONFIGURE_OPTS: "--enable-shared"
       default_gems_file: common/files/default-gems
