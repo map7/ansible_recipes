@@ -10,7 +10,8 @@
 - hosts: webservers
   user: deploy
   vars:
-    locale: 
+    ansible_ssh_user: deploy
+    locale:
       locale: "en_AU.UTF-8"
       language: "en_AU:en"
       numeric: "en_AU.UTF-8"
