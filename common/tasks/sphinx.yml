@@ -4,4 +4,4 @@
 #
 
 - name: Install Sphinx
-  apt: pkg=sphinxsearch state=installed
+  apt: pkg=sphinxsearch state=latest

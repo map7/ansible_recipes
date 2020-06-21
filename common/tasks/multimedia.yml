@@ -3,26 +3,26 @@
 # Multimedia tools/applications
 #
 - name: Install HDHomeRun GUI
-  apt: pkg=hdhomerun-config state=installed
+  apt: pkg=hdhomerun-config state=latest
 
 - name: Install DVD lib
-  apt: pkg=libdvdcss2 state=installed
+  apt: pkg=libdvdcss2 state=latest
 
 - name: Install W64 codecs
-  apt: pkg=w64codecs state=installed
+  apt: pkg=w64codecs state=latest
 
 - name: Install mpv (mplayer replacement)
-  apt: pkg=mpv state=installed
+  apt: pkg=mpv state=latest
 
 - name: Install vlc
-  apt: pkg=vlc state=installed
+  apt: pkg=vlc state=latest
 
 - name: Install Handbrake (DVD ripper & video transcoder)
-  apt: pkg=handbrake-gtk state=installed
+  apt: pkg=handbrake-gtk state=latest
 
 # Not currently available in Debian Testing (07/01/2015)
 #- name: Install miro
-#  apt: pkg=miro state=installed
+#  apt: pkg=miro state=latest
 
 - name: Install mdp controller
-  apt: pkg=sonata state=installed
+  apt: pkg=sonata state=latest

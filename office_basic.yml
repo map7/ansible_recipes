@@ -24,10 +24,10 @@
     # - include: common/tasks/samba.yml
       
     # - name: Install LVM tools
-    #   apt: pkg=system-config-lvm state=installed
+    #   apt: pkg=system-config-lvm state=latest
 
     - name: Install samba
-      apt: pkg=cifs-utils state=installed
+      apt: pkg=cifs-utils state=latest
 
     
 

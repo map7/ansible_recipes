@@ -4,7 +4,7 @@
 # Add commonly used repositories
 #
 - name: Add python-software-properties
-  apt: pkg=python3-software-properties force=yes state=installed
+  apt: pkg=python3-software-properties force=yes state=latest
   when: ansible_os_family == "Debian"
   notify: Update apt-get
 

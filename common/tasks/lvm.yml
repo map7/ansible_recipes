@@ -3,5 +3,5 @@
 #
 
 - name: Install LVM tools
-  apt: pkg=system-config-lvm state=installed
+  apt: pkg=system-config-lvm state=latest
   when: ansible_distribution == "Debian"

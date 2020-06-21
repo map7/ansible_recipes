@@ -1,13 +1,13 @@
 ---
 
 # - name: Install nvidia
-#   apt: pkg=libvdpau1 state=installed
-#   apt: pkg=nvidia-vdpau-driver state=installed
+#   apt: pkg=libvdpau1 state=latest
+#   apt: pkg=nvidia-vdpau-driver state=latest
 
 
 # installed nvidia-xconfig nvidia-glx
 - name: Install nvidia
-  apt: pkg={{ item }} state=installed
+  apt: pkg={{ item }} state=latest
   with_items:
     - nvidia-xconfig
     - nvidia-glx

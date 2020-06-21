@@ -32,8 +32,8 @@
 # Dropbox only works with nautilus file manager
 #
 - name: Install nautilus
-  apt: pkg=nautilus update_cache=yes state=installed
+  apt: pkg=nautilus update_cache=yes state=latest
 
 - name: Install nautilus-dropbox
-  apt: pkg=nautilus-dropbox update_cache=yes state=installed
+  apt: pkg=nautilus-dropbox update_cache=yes state=latest
 

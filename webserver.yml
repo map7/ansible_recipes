@@ -50,7 +50,7 @@
 
   pre_tasks:
     - name: Install ca-certificates for git to work
-      apt: pkg=ca-certificates state=installed
+      apt: pkg=ca-certificates state=latest
       
     - name: Ensure a locale exists
       locale_gen:

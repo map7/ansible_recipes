@@ -4,7 +4,7 @@
 #
 
 - name: Install system tools
-  action: apt pkg={{ item }} state=installed force=yes
+  action: apt pkg={{ item }} state=latest force=yes
   with_items:
     - htop
     - pwgen
@@ -25,7 +25,7 @@
     - strace                    # Diags
 
 - name: Firmware
-  action: apt pkg={{ item }} state=installed
+  action: apt pkg={{ item }} state=latest
   with_items:    
     - firmware-linux
   when: ansible_distribution == "Debian"

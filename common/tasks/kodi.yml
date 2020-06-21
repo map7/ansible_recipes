@@ -5,7 +5,7 @@
 # NOTE: If you want thin/fat clients then this is setup in ltsp-fat-client.yml
 #
 - name: Install kodi
-  apt: pkg=kodi state=installed force=yes update_cache=yes 
+  apt: pkg=kodi state=latest force=yes update_cache=yes 
 
 # --------------------------------------------------------------------------------
 # Setup shared KODI library
@@ -13,7 +13,7 @@
 
 # Setting up MySQL for shared library
 - name: Install MySQL 
-  apt: pkg=mysql-server force=yes state=installed
+  apt: pkg=mysql-server force=yes state=latest
 
 - name: Change the bind-address to servers static IP
   lineinfile:
@@ -29,7 +29,7 @@
   service: name=mysql state=started
   
 - name: Install python mysql module
-  apt: pkg=python-mysqldb force=yes state=installed
+  apt: pkg=python-mysqldb force=yes state=latest
 
 # host as '%' means anyone on the current network can login as this user
 - name: Create mysql user 'kodi'

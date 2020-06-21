@@ -7,7 +7,7 @@
 # Install ruby & ruby headers
 #
 - name: Install ruby & linux libraries needed for ruby
-  action: apt pkg={{item}} state=installed
+  action: apt pkg={{item}} state=latest
   with_items:
     - ruby
     - ruby-dev

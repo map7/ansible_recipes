@@ -15,7 +15,7 @@
     - icedtea-6-plugin
 
 - name: Install wget package (Debian based)
-  action: apt pkg='wget' state=installed
+  action: apt pkg='wget' state=latest
   #only_if: "'$ansible_pkg_mgr' == 'apt'"
 
 - name: Copy download JDK7 script

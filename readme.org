@@ -13,13 +13,13 @@ Login as root
 
 Install sudo & python
 : apt-get update
-: apt-get install sudo python
+: apt-get install sudo python ssh mg
 
 Add a deploy user & set a password
 : /sbin/adduser deploy
 
 Add your user to the 'sudo' group within /etc/group
-: /sbin/adduser deploy sudo
+: /sbin/adduser deploy sudo 
 
 Don't ask for a password when using sudo, *risky* (optional)
 Note: This is optional if you are using the -b then there is no need for this.

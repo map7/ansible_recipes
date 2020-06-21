@@ -4,7 +4,7 @@
 #
 
 - name: Install PHP
-  action: apt pkg={{ item }} state=installed force=yes
+  action: apt pkg={{ item }} state=latest force=yes
   with_items:
     - php7.0-common
     - libapache2-mod-php7.0

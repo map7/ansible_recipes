@@ -6,7 +6,7 @@
 #
 
 - name: Install Apache2
-  apt: pkg=apache2 state=installed
+  apt: pkg=apache2 state=latest
 
 - name: Install required packages
   action: apt pkg={{ item }}

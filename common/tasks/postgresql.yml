@@ -3,7 +3,7 @@
 # Install PostgreSQL
 #
 - name: Install postgresql requirements
-  action: apt pkg={{ item }} force=yes state=installed
+  action: apt pkg={{ item }} force=yes state=latest
   with_items:
     - python-psycopg2
     - libpq-dev

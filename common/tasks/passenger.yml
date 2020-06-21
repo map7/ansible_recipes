@@ -4,7 +4,7 @@
 #
 
 - name: Install Passenger
-  apt: pkg=libapache2-mod-passenger state=installed
+  apt: pkg=libapache2-mod-passenger state=latest
 
 - name: Enable passenger apache module
   action: command a2enmod passenger
