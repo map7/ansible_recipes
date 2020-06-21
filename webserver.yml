@@ -28,6 +28,9 @@
       version: v1.1.0
       default_ruby: 2.7.1
       rubies:
+        - version: 2.4.10
+        - version: 2.5.8
+        - version: 2.6.6
         - version: 2.7.1
           env:
             RUBY_CONFIGURE_OPTS: "--enable-shared"
